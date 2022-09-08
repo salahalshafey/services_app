@@ -1,0 +1,63 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../controllers/chat.dart';
+import '../../../../controllers/my_account.dart';
+
+import '../../../general_custom_widgets/custom_alret_dialoge.dart';
+
+class TextSender extends StatelessWidget {
+  const TextSender(
+    this.orderId,
+    this.sendButtonLoadingState,
+    this.changeTextDirectionToLtr,
+    this.controller,
+    this.slideController, {
+    Key? key,
+  }) : super(key: key);
+
+  final String orderId;
+  final void Function(bool state) sendButtonLoadingState;
+  final void Function() changeTextDirectionToLtr;
+  final TextEditingController controller;
+  final AnimationController slideController;
+
+  Future<void> _sendTextMessage(BuildContext context) async {
+    final currentUser = Provider.of<MyAccount>(context, listen: false);
+    try {
+      sendButtonLoadingState(true);
+      await Chat.sendTextMessage(
+        orderId,
+        controller.text,
+        currentUser.id,
+      );
+    } catch (error) {
+      sendButtonLoadingState(false);
+      showCustomAlretDialog(
+        context: context,
+        title: 'Error',
+        titleColor: Colors.red,
+        content: error.toString(),
+      );
+      return;
+    }
+
+    sendButtonLoadingState(false);
+    changeTextDirectionToLtr();
+    controller.clear();
+    slideController.reverse();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () => _sendTextMessage(context),
+      child: const Icon(Icons.send),
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all(const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(50)))),
+        minimumSize: MaterialStateProperty.all(const Size(55, 55)),
+      ),
+    );
+  }
+}
