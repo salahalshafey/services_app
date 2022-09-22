@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../controllers/my_account.dart';
-
-import '../profile_view/profile_screen.dart';
 import 'image_container.dart';
 
 class MainDrawer extends StatelessWidget {

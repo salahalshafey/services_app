@@ -11,8 +11,8 @@ import 'package:share_plus/share_plus.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'custom_snack_bar.dart';
-import 'general_functions.dart';
+import '../builders/custom_snack_bar.dart';
+import '../functions/general_functions.dart';
 import 'linkify_text.dart';
 
 class ImageContainer extends StatefulWidget {
