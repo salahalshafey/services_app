@@ -1,6 +1,8 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
+import 'features/services/presentation/pages/services_screen.dart';
+
 class MainScreen extends StatefulWidget {
   static const routName = '/main';
 
@@ -27,9 +29,9 @@ class _MainScreenState extends State<MainScreen>
   }
 
   static const List<Widget> _screenOptions = <Widget>[
-    /*  ServiceScreen(key: PageStorageKey('ServiceScreen')),
+    ServiceScreen(key: PageStorageKey('ServiceScreen')),
     PreviousOrdersScreen(key: PageStorageKey('PreviousOrdersScreen')),
-    CurrentOrdersScreen(key: PageStorageKey('CurrentOrdersScreen')),*/
+    CurrentOrdersScreen(key: PageStorageKey('CurrentOrdersScreen')),
   ];
 
   void _onPageScrolled(int index) {

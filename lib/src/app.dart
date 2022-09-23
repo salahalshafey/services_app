@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:services_app/src/core/network/network_info.dart';
+import 'package:services_app/src/features/services/data/repositories/service_repository_impl.dart';
+import 'package:services_app/src/features/services/domain/usecases/get_all_sevices.dart';
 
+import 'features/services/data/datasources/service_remote_data_source.dart';
+import 'features/services/presentation/providers/services.dart';
 import 'main_screen.dart';
 
 class MyApp extends StatelessWidget {
@@ -13,10 +18,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        /*ChangeNotifierProvider(create: (ctx) => Services()),
+        ChangeNotifierProvider(
+          create: (ctx) => Services(
+            ////////// use get_it to handle dependency injection ///////////////////////
+            getAllServices: GetAllServicesUsecase(
+              ServicesRepositoryImpl(
+                networkInfo: NetworkInfoImpl(),
+                remoteDataSource: FirestoreDataSource(),
+              ),
+            ),
+          ),
+        ),
         ChangeNotifierProvider(create: (ctx) => ServicesGivers()),
         ChangeNotifierProvider(create: (ctx) => Orders()),
-        ChangeNotifierProvider(create: (ctx) => MyAccount()),*/
+        ChangeNotifierProvider(create: (ctx) => MyAccount()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -77,13 +92,13 @@ class MyApp extends StatelessWidget {
         ),
         home: const MainScreen(),
         routes: {
-          /*  ServiceGiversScreen.routName: (ctx) => const ServiceGiversScreen(),
+          ServiceGiversScreen.routName: (ctx) => const ServiceGiversScreen(),
           RequestServiceScreen.routName: (ctx) => const RequestServiceScreen(),
           ProfileScreen.routName: (ctx) => const ProfileScreen(),
           PreviousOrderDetailScreen.routName: (ctx) =>
               const PreviousOrderDetailScreen(),
           CurrentOrderDetailScreen.routName: (ctx) =>
-              const CurrentOrderDetailScreen(),*/
+              const CurrentOrderDetailScreen(),
         },
       ),
     );
