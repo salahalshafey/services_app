@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:services_app/src/core/util/widgets/image_container.dart';
 
 import '../../../../core/util/builders/custom_alret_dialoge.dart';
 import '../../../../core/util/builders/custom_snack_bar.dart';
@@ -27,7 +28,9 @@ class RequestServiceForm extends StatefulWidget {
 class _RequestServiceFormState extends State<RequestServiceForm> {
   final _formKey = GlobalKey<FormState>();
   final _descriptionFocusNode = FocusNode();
+  final descriptionController = TextEditingController();
   var _textDirection = TextDirection.ltr;
+
   XFile? _image;
   var _editedorder = Order(
     id: '',
@@ -58,6 +61,7 @@ class _RequestServiceFormState extends State<RequestServiceForm> {
   @override
   void dispose() {
     _descriptionFocusNode.dispose();
+    descriptionController.dispose();
     super.dispose();
   }
 
@@ -173,8 +177,9 @@ class _RequestServiceFormState extends State<RequestServiceForm> {
             keyboardType: TextInputType.multiline,
             focusNode: _descriptionFocusNode,
             textDirection: _textDirection,
-            onChanged: (value) {
-              if (firstCharIsArabic(value)) {
+            controller: descriptionController,
+            onChanged: (description) {
+              if (firstCharIsArabic(description)) {
                 setState(() {
                   _textDirection = TextDirection.rtl;
                 });
@@ -209,11 +214,24 @@ class _RequestServiceFormState extends State<RequestServiceForm> {
                       MaterialStateProperty.all<Size>(const Size(150, 40)),
                 ),
           ),
+          const SizedBox(height: 10),
           Align(
-            child: SizedBox(
-                height: 200,
-                child: _image == null ? null : Image.file(File(_image!.path))),
-          ), // this for the image
+            child: _image == null
+                ? const SizedBox(height: 200)
+                : ImageContainer(
+                    image: _image!.path,
+                    imageSource: From.file,
+                    radius: 100,
+                    showImageScreen: true,
+                    showHighlight: true,
+                    imageTitle: 'Image of the problem',
+                    imageCaption: descriptionController.text.isEmpty
+                        ? null
+                        : descriptionController.text,
+                  ),
+          ),
+          // this for the image
+          const SizedBox(height: 10),
           _isLoading
               ? const Center(child: CircularProgressIndicator())
               : ElevatedButton(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/error/exceptions.dart';
 
+import '../../data/models/order_model.dart';
 import '../../domain/entities/order.dart';
 
 import '../../domain/usecases/add_order.dart';
@@ -45,7 +46,9 @@ class Orders with ChangeNotifier {
     } on OfflineException {
       throw Error('You are currently offline.');
     } on ServerException {
-      throw Error('Something Went Wrong!!!');
+      throw Error('Something went wrong, please try again later.');
+    } catch (error) {
+      throw Error('An unexpected error happened.');
     }
   }
 
@@ -59,15 +62,17 @@ class Orders with ChangeNotifier {
     try {
       order = await addUserOrder(order, image);
 
-      _orders.insert(0, order);
+      _orders.insert(0, OrderModel.fromOrder(order));
       notifyListeners();
+
+      return order.id;
     } on OfflineException {
       throw Error('You are currently offline.');
     } on ServerException {
-      throw Error('Something Went Wrong!!!');
+      throw Error('Something went wrong, please try again later.');
+    } catch (error) {
+      throw Error('An unexpected error happened.');
     }
-
-    return order.id;
   }
 
   Future<void> cancelOrder(String orderId, String reasonOfCancel) async {
@@ -76,16 +81,19 @@ class Orders with ChangeNotifier {
       await canceUserOrder(orderId, reasonOfCancel, currentDate);
 
       final orderIndex = _orders.indexWhere((order) => order.id == orderId);
-      _orders[orderIndex] = _orders[orderIndex].copyWith(
+      final canceledOrder = _orders[orderIndex].copyWith(
         status: 'canceled',
         reasonIfCanceled: reasonOfCancel,
         dateOfFinishedOrCanceled: currentDate,
       );
+      _orders[orderIndex] = OrderModel.fromOrder(canceledOrder);
       notifyListeners();
     } on OfflineException {
       throw Error('You are currently offline.');
     } on ServerException {
-      throw Error('Something Went Wrong!!!');
+      throw Error('Something went wrong, please try again later.');
+    } catch (error) {
+      throw Error('An unexpected error happened.');
     }
   }
 
@@ -102,6 +110,8 @@ class Orders with ChangeNotifier {
       throw Error('You are currently offline, order did not get deleted!!!');
     } on ServerException {
       throw Error('Something Went Wrong, order did not get deleted!!!');
+    } catch (error) {
+      throw Error('An unexpected error happened.');
     }
   }
 }

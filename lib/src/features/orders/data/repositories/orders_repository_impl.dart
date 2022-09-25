@@ -37,17 +37,14 @@ class OrdersRepositoryImpl implements OrdersRepository {
     }
 
     try {
-      final docId = await remoteDataSource.addOrder(
-        OrderModel.fromOrder(order),
-      );
-      order.copyWith(id: docId);
+      final docId =
+          await remoteDataSource.addOrder(OrderModel.fromOrder(order));
 
       final downloadURL = await remoteStorage.upload(docId, image);
-      order = order.copyWith(image: downloadURL);
 
       await remoteDataSource.updateImage(docId, downloadURL);
 
-      return order;
+      return order.copyWith(id: docId, image: downloadURL);
     } catch (error) {
       rethrow;
     }
