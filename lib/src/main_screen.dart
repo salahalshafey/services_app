@@ -1,6 +1,8 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
+import 'features/orders/presentation/pages/current_orders_screen.dart';
+import 'features/orders/presentation/pages/previous_orders_screen.dart';
 import 'features/services/presentation/pages/services_screen.dart';
 
 class MainScreen extends StatefulWidget {

@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
-import '../../backend_services/location_service.dart';
-
+import '../../location/location_service.dart';
 import 'custom_snack_bar.dart';
 
 /////// Don't forget to get google_maps_flutter package https://pub.dev/packages/google_maps_flutter ///////
@@ -59,7 +58,7 @@ Future<LatLng?> myLocationPicker({
   LatLng? theLocation;
   if (currentLocationChoice) {
     _showLoadingState(loadingState, true);
-    theLocation = (await LocationService.currentLocation)?.toLatLng();
+    theLocation = (await LocationServiceImpl().currentLocation)?.toLatLng();
     if (theLocation == null) {
       showCustomSnackBar(
         context: context,

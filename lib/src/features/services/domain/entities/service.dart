@@ -8,5 +8,5 @@ class Service extends Equatable {
   final String image;
 
   @override
-  List<Object?> get props => [id, name, image];
+  List<Object?> get props => [id];
 }

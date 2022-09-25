@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../core/util/widgets/custom_card.dart';
 import '../../../../core/util/widgets/image_container.dart';
 
+import '../../../services_givers/presentation/pages/service_givers_screen.dart';
+
 class ServicesItem extends StatelessWidget {
   const ServicesItem(this.id, this.name, this.image, {Key? key})
       : super(key: key);

@@ -7,8 +7,8 @@ abstract class ServiceRemoteDataSource {
   Future<List<ServiceModel>> getAllServices();
 }
 
-class FirestoreDataSource implements ServiceRemoteDataSource {
-  FirestoreDataSource();
+class ServiceFirestoreImpl implements ServiceRemoteDataSource {
+  ServiceFirestoreImpl();
 
   @override
   Future<List<ServiceModel>> getAllServices() async {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../features/account/presentation/pages/account_screen.dart';
+import '../../../features/account/presentation/providers/account.dart';
 import 'image_container.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -8,7 +10,7 @@ class MainDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentUser = Provider.of<MyAccount>(context);
+    final currentUser = Provider.of<Account>(context);
 
     return Drawer(
       key: const PageStorageKey('Drawer'),
@@ -109,13 +111,13 @@ class MyDrawerHeader extends StatelessWidget {
             border: Border.all(color: Colors.white, width: 2.0),
             showHighlight: true,
             onTap: () =>
-                Navigator.of(context).popAndPushNamed(ProfileScreen.routName),
+                Navigator.of(context).popAndPushNamed(AccountScreen.routName),
           ),
 
           //////////// User Name ///////////////////////////
           TextButton(
             onPressed: () =>
-                Navigator.of(context).popAndPushNamed(ProfileScreen.routName),
+                Navigator.of(context).popAndPushNamed(AccountScreen.routName),
             child: Text(
               userName,
               style: const TextStyle(
