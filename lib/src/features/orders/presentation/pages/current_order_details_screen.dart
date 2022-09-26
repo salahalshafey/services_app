@@ -8,6 +8,7 @@ import '../providers/orders.dart';
 import '../../../../core/util/builders/custom_snack_bar.dart';
 import '../../../../core/util/widgets/image_container.dart';
 
+import '../../../chat/presentation/pages/chat_screen.dart';
 import '../widgets/cancel_the_order_button.dart';
 import '../widgets/custom_text_button.dart';
 import '../widgets/order_cost.dart';
@@ -20,7 +21,7 @@ class CurrentOrderDetailScreen extends StatelessWidget {
   const CurrentOrderDetailScreen({Key? key}) : super(key: key);
 
   void _goToChatScreen(BuildContext context, Order order) {
-    /* Navigator.of(context).push(
+    Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => ChatScreen(
           orderId: order.id,
@@ -30,7 +31,7 @@ class CurrentOrderDetailScreen extends StatelessWidget {
           readOnly: false,
         ),
       ),
-    );*/
+    );
   }
 
   @override

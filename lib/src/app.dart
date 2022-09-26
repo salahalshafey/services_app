@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:services_app/src/core/network/network_info.dart';
 import 'package:services_app/src/features/account/presentation/pages/account_screen.dart';
+import 'package:services_app/src/features/chat/data/datasources/chat_remote_data_source.dart';
+import 'package:services_app/src/features/chat/data/datasources/chat_remote_storage.dart';
+import 'package:services_app/src/features/chat/data/datasources/maps_servcice.dart';
+import 'package:services_app/src/features/chat/data/repositories/chat_repository_impl.dart';
+import 'package:services_app/src/features/chat/domain/usecases/get_chat_with_one_time_read.dart';
+import 'package:services_app/src/features/chat/presentation/providers/chat.dart';
 import 'package:services_app/src/features/orders/data/datasources/order_remote_data_source.dart';
 import 'package:services_app/src/features/orders/data/datasources/order_remote_storage.dart';
 import 'package:services_app/src/features/orders/data/repositories/orders_repository_impl.dart';
@@ -14,6 +20,10 @@ import 'package:services_app/src/features/services/domain/usecases/get_all_sevic
 import 'package:services_app/src/features/services_givers/data/datasources/service_giver_remote_data_source.dart';
 
 import 'features/account/presentation/providers/account.dart';
+import 'features/chat/domain/usecases/get_chat_with_real_time_changes.dart';
+import 'features/chat/domain/usecases/send_file_message.dart';
+import 'features/chat/domain/usecases/send_location_message.dart';
+import 'features/chat/domain/usecases/send_text_message.dart';
 import 'features/orders/presentation/pages/current_order_details_screen.dart';
 import 'features/orders/presentation/pages/previous_order_details_screen.dart';
 import 'features/orders/presentation/pages/request_service_screen.dart';
@@ -87,6 +97,50 @@ class MyApp extends StatelessWidget {
                 networkInfo: NetworkInfoImpl(),
                 remoteDataSource: OrderFirestoreImpl(),
                 remoteStorage: OrderFirebaseStorageImpl(),
+              ),
+            ),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => Chat(
+            getChatStream: GetChatWithRealTimeChangesUsecase(
+              ChatRepositoryImpl(
+                remoteDataSource: ChatFirestoreImpl(),
+                remoteStorage: ChatFirebaseStorageImpl(),
+                mapsService: GoogleMapsPlatform(),
+                networkInfo: NetworkInfoImpl(),
+              ),
+            ),
+            getChatOnce: GetChatWithOneTimeReadUsecase(
+              ChatRepositoryImpl(
+                remoteDataSource: ChatFirestoreImpl(),
+                remoteStorage: ChatFirebaseStorageImpl(),
+                mapsService: GoogleMapsPlatform(),
+                networkInfo: NetworkInfoImpl(),
+              ),
+            ),
+            sentUserTextMessage: SendTextMessageUsecase(
+              ChatRepositoryImpl(
+                remoteDataSource: ChatFirestoreImpl(),
+                remoteStorage: ChatFirebaseStorageImpl(),
+                mapsService: GoogleMapsPlatform(),
+                networkInfo: NetworkInfoImpl(),
+              ),
+            ),
+            sendUserFileMessage: SendFileMessageUsecase(
+              ChatRepositoryImpl(
+                remoteDataSource: ChatFirestoreImpl(),
+                remoteStorage: ChatFirebaseStorageImpl(),
+                mapsService: GoogleMapsPlatform(),
+                networkInfo: NetworkInfoImpl(),
+              ),
+            ),
+            sendUserLocationMessage: SendLocationMessageUsecase(
+              ChatRepositoryImpl(
+                remoteDataSource: ChatFirestoreImpl(),
+                remoteStorage: ChatFirebaseStorageImpl(),
+                mapsService: GoogleMapsPlatform(),
+                networkInfo: NetworkInfoImpl(),
               ),
             ),
           ),
