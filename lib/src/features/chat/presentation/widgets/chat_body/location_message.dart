@@ -63,7 +63,7 @@ class LocationMessage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ImageContainer(
-            image: GoogleMapsPlatform().getImagePreview(location),
+            image: ChatGoogleMapsImpl().getImagePreview(location),
             imageSource: From.network,
             radius: 125,
             borderRadius: borderRadiusBuilder(isMe: isMe),

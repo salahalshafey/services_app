@@ -3,14 +3,14 @@ import 'dart:convert';
 import 'package:flutter_config/flutter_config.dart';
 import 'package:http/http.dart' as http;
 
-abstract class MapsService {
+abstract class ChatMapsService {
   String getImagePreview(String location);
   Future<String?> getGeoCodingData(String location);
 }
 
 final googleMapsAPIkey = FlutterConfig.get('google_maps_API_key');
 
-class GoogleMapsPlatform implements MapsService {
+class ChatGoogleMapsImpl implements ChatMapsService {
   @override
   String getImagePreview(String location) =>
       "https://maps.googleapis.com/maps/api/staticmap?"

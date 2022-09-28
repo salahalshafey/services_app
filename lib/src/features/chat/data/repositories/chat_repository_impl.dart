@@ -16,7 +16,7 @@ import '../datasources/maps_servcice.dart';
 class ChatRepositoryImpl implements ChatRepository {
   final ChatRemoteDataSource remoteDataSource;
   final ChatRemoteStorage remoteStorage;
-  final MapsService mapsService;
+  final ChatMapsService mapsService;
   final NetworkInfo networkInfo;
 
   ChatRepositoryImpl({

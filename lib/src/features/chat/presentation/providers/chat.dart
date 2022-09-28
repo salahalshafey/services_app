@@ -17,14 +17,14 @@ class Chat with ChangeNotifier {
   Chat({
     required this.getChatStream,
     required this.getChatOnce,
-    required this.sentUserTextMessage,
+    required this.sendUserTextMessage,
     required this.sendUserFileMessage,
     required this.sendUserLocationMessage,
   });
 
   final GetChatWithRealTimeChangesUsecase getChatStream;
   final GetChatWithOneTimeReadUsecase getChatOnce;
-  final SendTextMessageUsecase sentUserTextMessage;
+  final SendTextMessageUsecase sendUserTextMessage;
   final SendFileMessageUsecase sendUserFileMessage;
   final SendLocationMessageUsecase sendUserLocationMessage;
 
@@ -57,7 +57,7 @@ class Chat with ChangeNotifier {
   Future<void> sendTextMessage(
       String orderId, String textMessage, String senderId) async {
     try {
-      await sentUserTextMessage(orderId, textMessage, senderId);
+      await sendUserTextMessage(orderId, textMessage, senderId);
     } on OfflineException {
       throw Error('You are currently offline.');
     } on ServerException {
@@ -101,5 +101,5 @@ class Chat with ChangeNotifier {
 
   // special case it will be changed later (make it a use case)
   String getLocationImagePreview(String location) =>
-      GoogleMapsPlatform().getImagePreview(location);
+      ChatGoogleMapsImpl().getImagePreview(location);
 }
