@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../tracking/presentation/widgets/service_giver_location_button.dart';
 import '../../domain/entities/order.dart';
 
 import '../providers/orders.dart';
 
-import '../../../../core/util/builders/custom_snack_bar.dart';
 import '../../../../core/util/widgets/image_container.dart';
 
 import '../../../chat/presentation/pages/chat_screen.dart';
 import '../widgets/cancel_the_order_button.dart';
-import '../widgets/custom_text_button.dart';
+import '../../../../core/util/widgets/custom_text_button.dart';
 import '../widgets/order_cost.dart';
 import '../widgets/order_description.dart';
 import '../widgets/order_details_header.dart';
@@ -73,15 +73,9 @@ class CurrentOrderDetailScreen extends StatelessWidget {
             iconDeActive: Icons.chat_bubble_outline_rounded,
             onPressed: () => _goToChatScreen(context, order),
           ),
-          CustomTextButton(
-            text: // first name
-                'See Where is ${order.serviceGiverName.split(RegExp(r' +')).first} On The Map',
-            iconActive: Icons.location_on,
-            iconDeActive: Icons.location_off,
-            onPressed: () {
-              showCustomSnackBar(context: context, content: 'content');
-            },
-            isActive: true,
+          ServiceGiverLocationButton(
+            orderId: orderId,
+            serviceGiverName: order.serviceGiverName,
           ),
           const SizedBox(height: 30),
           OrderCost(order.cost),

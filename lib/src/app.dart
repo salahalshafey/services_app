@@ -16,6 +16,9 @@ import 'features/orders/presentation/providers/orders.dart';
 
 import 'features/chat/presentation/providers/chat.dart';
 
+import 'features/tracking/presentation/pages/tracking_screen.dart';
+import 'features/tracking/presentation/providers/tracking.dart';
+
 import 'main_screen.dart';
 import 'injection_container.dart' as di;
 
@@ -33,6 +36,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => di.sl<ServicesGivers>()),
         ChangeNotifierProvider(create: (ctx) => di.sl<Orders>()),
         ChangeNotifierProvider(create: (ctx) => di.sl<Chat>()),
+        ChangeNotifierProvider(create: (ctx) => di.sl<Tracking>()),
         ChangeNotifierProvider(create: (ctx) => Account()),
       ],
       child: MaterialApp(
@@ -101,6 +105,7 @@ class MyApp extends StatelessWidget {
               const PreviousOrderDetailScreen(),
           CurrentOrderDetailScreen.routName: (ctx) =>
               const CurrentOrderDetailScreen(),
+          TrackingScreen.routName: (ctx) => const TrackingScreen(),
         },
       ),
     );
