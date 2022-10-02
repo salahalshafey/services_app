@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class CustomCard extends StatefulWidget {
   const CustomCard({
     required this.child,
+    this.color,
     this.borderRadius = BorderRadius.zero,
     this.side = BorderSide.none,
     this.padding = EdgeInsets.zero,
@@ -13,6 +14,7 @@ class CustomCard extends StatefulWidget {
   }) : super(key: key);
 
   final Widget child;
+  final Color? color;
   final BorderRadius borderRadius;
   final BorderSide side;
   final EdgeInsetsGeometry padding;
@@ -48,6 +50,7 @@ class _CustomCardState extends State<CustomCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: widget.color,
       shape: RoundedRectangleBorder(
         borderRadius: widget.borderRadius,
         side: widget.side,

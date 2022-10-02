@@ -21,7 +21,7 @@ class LocationInfoModel extends LocationInfo {
     return LocationInfoModel(
       latitude: json['latitude'],
       longitude: json['longitude'],
-      speed: json['speed'],
+      speed: (json['speed'] as num).toDouble(),
       time: (json['time'] as Timestamp).toDate(),
       heading: json['heading'],
     );
