@@ -131,7 +131,6 @@ String pastOrFutureTimeFromNow(DateTime dateTime) {
   return 'just now';
 }
 
-// ignore: unused_element
 String? _res(int d, String timeName) {
   if (d > 0) {
     return '$d $timeName${_s(d)} ago';
