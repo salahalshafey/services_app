@@ -36,7 +36,7 @@ class LastSeenLocationButton extends StatelessWidget {
             Icons.location_on,
             color: Colors.black54,
           ),
-          tooltip: 'go to ${getFirstName(serviceGiverName)} current location',
+          tooltip: 'go to ${getFirstName(serviceGiverName)} last seen location',
           onPressed: () async {
             await controller()
                 .animateCamera(CameraUpdate.newLatLng(lastSeenLocation));

@@ -49,6 +49,7 @@ class CurrentOrderDetailScreen extends StatelessWidget {
             order.serviceGiverName,
             order.serviceName,
             order.serviceGiverPhoneNumber,
+            canCallOtherPerson: true,
           ),
           const SizedBox(height: 30),
           ImageContainer(

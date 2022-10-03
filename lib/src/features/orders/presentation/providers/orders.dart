@@ -26,6 +26,8 @@ class Orders with ChangeNotifier {
   final RemoveOrderUsecase removeOrder;
 
   List<Order> _orders = [];
+  //  List<Order> _currentOrders = [];
+  //  List<Order> _previousOrders = [];
   bool _dataFetchedFromBackend = false;
 
   Future<void> getAndFetchUserOrdersOnce(String userId) async {

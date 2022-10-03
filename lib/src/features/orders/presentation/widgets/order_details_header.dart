@@ -9,6 +9,7 @@ class OrderDetailsHeader extends StatelessWidget {
     this.serviceGiverName,
     this.serviceName,
     this.serviceGiverPhoneNumber, {
+    required this.canCallOtherPerson,
     Key? key,
   }) : super(key: key);
 
@@ -16,6 +17,7 @@ class OrderDetailsHeader extends StatelessWidget {
   final String serviceGiverName;
   final String serviceName;
   final String serviceGiverPhoneNumber;
+  final bool canCallOtherPerson;
 
   @override
   Widget build(BuildContext context) {
@@ -62,13 +64,16 @@ class OrderDetailsHeader extends StatelessWidget {
           ],
         ),
         IconButton(
-          tooltip: 'Call $serviceGiverName',
-          onPressed: () {
-            launchUrl(Uri.parse('tel:$serviceGiverPhoneNumber'));
-          },
+          tooltip: '${can(canCallOtherPerson)}Call $serviceGiverName',
+          onPressed: !canCallOtherPerson
+              ? null
+              : () {
+                  launchUrl(Uri.parse('tel:$serviceGiverPhoneNumber'));
+                },
+          color: Colors.green,
+          disabledColor: Colors.grey,
           icon: const Icon(
             Icons.call,
-            color: Colors.green,
             size: 30,
           ),
         )
@@ -76,3 +81,5 @@ class OrderDetailsHeader extends StatelessWidget {
     );
   }
 }
+
+String can(bool canCall) => canCall ? '' : "Can't ";
