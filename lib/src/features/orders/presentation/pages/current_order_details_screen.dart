@@ -12,7 +12,7 @@ import '../../../chat/presentation/pages/chat_screen.dart';
 import '../widgets/cancel_the_order_button.dart';
 import '../../../../core/util/widgets/custom_text_button.dart';
 import '../widgets/order_cost.dart';
-import '../widgets/order_description.dart';
+import '../widgets/description.dart';
 import '../widgets/order_details_header.dart';
 
 class CurrentOrderDetailScreen extends StatelessWidget {
@@ -66,7 +66,15 @@ class CurrentOrderDetailScreen extends StatelessWidget {
             showLoadingIndicator: true,
           ),
           const SizedBox(height: 30),
-          OrderDescription(order.description),
+          Description(
+            icon: const Icon(
+              Icons.description,
+              size: 40,
+              color: Colors.green,
+            ),
+            title: 'Description Of The Problem',
+            description: order.description,
+          ),
           const SizedBox(height: 30),
           CustomTextButton(
             text: 'Chat With ${order.serviceGiverName}',

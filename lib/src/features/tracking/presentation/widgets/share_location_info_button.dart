@@ -52,7 +52,7 @@ class ShareLocationInfoButton extends StatelessWidget {
             color: Colors.black54,
           ),
           tooltip:
-              'share ${getFirstName(serviceGiverName)} last seen location info',
+              'share ${firstName(serviceGiverName)} last seen location info',
           onPressed: () => _share(context, sharingText),
         ),
       ),

@@ -5,12 +5,16 @@ import '../../../../core/util/functions/general_functions.dart';
 import '../../../../core/util/widgets/custom_card.dart';
 import '../../../../core/util/widgets/linkify_text.dart';
 
-class OrderDescription extends StatelessWidget {
-  const OrderDescription(
-    this.description, {
+class Description extends StatelessWidget {
+  const Description({
+    required this.icon,
+    required this.title,
+    required this.description,
     Key? key,
   }) : super(key: key);
 
+  final Icon icon;
+  final String title;
   final String description;
 
   @override
@@ -24,16 +28,13 @@ class OrderDescription extends StatelessWidget {
         children: [
           Row(
             // textDirection: TextDirection.rtl, // for arabic languge
-            children: const [
-              Icon(
-                Icons.description,
-                size: 40,
-                color: Colors.green,
-              ),
-              SizedBox(width: 10),
+            children: [
+              icon,
+              const SizedBox(width: 10),
               Text(
-                'Description Of The Problem',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                title,
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ],
           ),

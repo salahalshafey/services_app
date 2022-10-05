@@ -36,7 +36,7 @@ class LastSeenLocationButton extends StatelessWidget {
             Icons.location_on,
             color: Colors.black54,
           ),
-          tooltip: 'go to ${getFirstName(serviceGiverName)} last seen location',
+          tooltip: 'go to ${firstName(serviceGiverName)} last seen location',
           onPressed: () async {
             await controller()
                 .animateCamera(CameraUpdate.newLatLng(lastSeenLocation));
@@ -46,7 +46,7 @@ class LastSeenLocationButton extends StatelessWidget {
             if (!isSharingLocation) {
               showCustomSnackBar(
                 context: context,
-                content: '${getFirstName(serviceGiverName)} '
+                content: '${firstName(serviceGiverName)} '
                     'is not currently sharing his location!!!',
               );
             }

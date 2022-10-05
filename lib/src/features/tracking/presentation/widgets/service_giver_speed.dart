@@ -18,7 +18,7 @@ class ServiceGiverSpeed extends StatelessWidget {
       bottom: 120,
       right: 10,
       child: FloatingActionButton(
-        tooltip: 'last seen ${getFirstName(name)} speed',
+        tooltip: 'last seen ${firstName(name)} speed',
         onPressed: null,
         backgroundColor: Colors.white.withOpacity(0.85),
         foregroundColor: Colors.black54,

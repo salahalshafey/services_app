@@ -28,7 +28,7 @@ class TrackingScreen extends StatelessWidget {
       appBar: AppBar(
         title: FittedBox(
           child: Text(
-            '${getFirstName(serviceGiverName)} is'
+            '${firstName(serviceGiverName)} is'
             '${not(trackingInfo.isServiceGiverSharingLocation)}'
             'currently sharing his location',
           ),

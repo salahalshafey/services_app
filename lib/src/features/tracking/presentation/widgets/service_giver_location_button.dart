@@ -33,8 +33,8 @@ class ServiceGiverLocationButton extends StatelessWidget {
 
           return CustomTextButton(
             text: snapshot.hasError
-                ? "Couldn't get ${getFirstName(serviceGiverName)} location, ${snapshot.error}"
-                : 'See Where is ${getFirstName(serviceGiverName)} On The Map',
+                ? "Couldn't get ${firstName(serviceGiverName)} location, ${snapshot.error}"
+                : 'See Where is ${firstName(serviceGiverName)} On The Map',
             iconActive: Icons.location_on,
             iconDeActive: Icons.location_off,
             onPressed: () {

@@ -11,7 +11,13 @@ String wellFormatedString(String str) {
           .join(' ');
 }
 
-String getFirstName(String fullName) => fullName.split(RegExp(r' +')).first;
+String firstName(String fullName) => fullName.split(RegExp(r' +')).first;
+
+String wellFormattedDateTime(DateTime date) {
+  return formatedDate(date) +
+      '\n' +
+      time24To12HoursFormat(date.hour, date.minute);
+}
 
 String time24To12HoursFormat(int hours, int minuts) {
   String minut = minuts.toString();

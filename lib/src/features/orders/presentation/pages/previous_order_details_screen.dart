@@ -3,15 +3,17 @@ import 'package:provider/provider.dart';
 
 import '../../domain/entities/order.dart';
 
+import '../providers/orders.dart';
+
+import '../../../../core/util/functions/general_functions.dart';
 import '../../../../core/util/widgets/custom_text_button.dart';
 import '../../../../core/util/widgets/image_container.dart';
 
-import '../providers/orders.dart';
-
 import '../../../chat/presentation/pages/chat_screen.dart';
-import '../widgets/order_cost.dart';
-import '../widgets/order_description.dart';
+
 import '../widgets/order_details_header.dart';
+import '../widgets/description.dart';
+import '../widgets/order_details.dart';
 
 class PreviousOrderDetailScreen extends StatelessWidget {
   static const routName = '/previous-order-details-screen';
@@ -38,7 +40,17 @@ class PreviousOrderDetailScreen extends StatelessWidget {
     final order = Provider.of<Orders>(context).getOrderById(orderId);
 
     return Scaffold(
-      appBar: AppBar(title: Text('Order is ${order.status}')),
+      appBar: AppBar(
+        title: Row(
+          children: [
+            Text('Order is ${wellFormatedString(order.status)}'),
+            const SizedBox(width: 10),
+            order.status == 'finished'
+                ? const Icon(Icons.check_circle_outline, color: Colors.blue)
+                : const Icon(Icons.not_interested, color: Colors.red),
+          ],
+        ),
+      ),
       body: ListView(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
         children: [
@@ -64,7 +76,15 @@ class PreviousOrderDetailScreen extends StatelessWidget {
             showLoadingIndicator: true,
           ),
           const SizedBox(height: 30),
-          OrderDescription(order.description),
+          Description(
+            icon: const Icon(
+              Icons.description,
+              size: 40,
+              color: Colors.green,
+            ),
+            title: 'Description Of The Problem',
+            description: order.description,
+          ),
           const SizedBox(height: 30),
           CustomTextButton(
             text: 'See Chat With ${order.serviceGiverName}',
@@ -72,17 +92,21 @@ class PreviousOrderDetailScreen extends StatelessWidget {
             iconDeActive: Icons.chat_bubble_outline_rounded,
             onPressed: () => _goToChatScreen(context, order),
           ),
-          /* ServiceGiverLocationButton(
-            orderId: orderId,          //// put button that goes to previuos 
-                                       //// locations details screen
-            serviceGiverName: order.serviceGiverName,
-          ),*/
+          CustomTextButton(
+            text:
+                'See How ${firstName(order.serviceGiverName)} Came To You On The Map',
+            iconActive: Icons.timeline_outlined,
+            iconDeActive: Icons.timeline_outlined,
+            onPressed: () {},
+          ),
           const SizedBox(height: 30),
-          OrderCost(order.cost),
-          const SizedBox(height: 50),
-          //CancelTheOrderButton(orderId)
-          //// put info about the finished order
-          //// like date and reason if the order is canceld
+          OrderDetails(
+            cost: order.cost,
+            status: order.status,
+            date: order.date,
+            dateOfFinishedOrCanceled: order.dateOfFinishedOrCanceled!,
+            reasonIfCanceled: order.reasonIfCanceled,
+          ),
         ],
       ),
     );
