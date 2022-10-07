@@ -11,6 +11,7 @@ class LastSeenLocationButton extends StatelessWidget {
     required this.lastSeenLocation,
     required this.serviceGiverName,
     required this.controller,
+    required this.renderTheMap,
     Key? key,
   }) : super(key: key);
 
@@ -18,12 +19,28 @@ class LastSeenLocationButton extends StatelessWidget {
   final LatLng lastSeenLocation;
   final String serviceGiverName;
   final GoogleMapController Function() controller;
+  final void Function() renderTheMap;
 
   @override
   Widget build(BuildContext context) {
+    final isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
+
+    double? top, right, left;
+    if (isPortrait) {
+      top = 80;
+      right = 10;
+      left = null;
+    } else {
+      top = 40;
+      left = 10;
+      right = null;
+    }
+
     return Positioned(
-      top: 80,
-      right: 10,
+      top: top,
+      right: right,
+      left: left,
       width: 40,
       height: 40,
       child: CustomCard(
@@ -36,11 +53,12 @@ class LastSeenLocationButton extends StatelessWidget {
             Icons.location_on,
             color: Colors.black54,
           ),
-          tooltip: 'go to ${firstName(serviceGiverName)} last seen location',
+          tooltip: 'Go to ${firstName(serviceGiverName)} last seen location',
           onPressed: () async {
             await controller()
                 .animateCamera(CameraUpdate.newLatLng(lastSeenLocation));
 
+            renderTheMap();
             await controller().showMarkerInfoWindow(const MarkerId('marker1'));
 
             if (!isSharingLocation) {

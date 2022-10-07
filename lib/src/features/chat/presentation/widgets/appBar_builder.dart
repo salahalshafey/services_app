@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../core/util/widgets/back_button_with_image.dart';
+
 AppBar appBarBuilder(
   BuildContext context,
   String otherPersonName,
@@ -12,26 +14,7 @@ AppBar appBarBuilder(
 ) {
   return AppBar(
     leadingWidth: 80,
-    leading: Align(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 5),
-        child: ElevatedButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: Row(
-            children: [
-              const Icon(Icons.arrow_back),
-              CircleAvatar(backgroundImage: NetworkImage(otherPersonImage)),
-            ],
-          ),
-          style: ButtonStyle(
-            padding: MaterialStateProperty.all(const EdgeInsets.all(4)),
-            elevation: MaterialStateProperty.all(0),
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25))),
-          ),
-        ),
-      ),
-    ),
+    leading: BackButtonWithImage(networkImage: otherPersonImage),
     title: Text(otherPersonName),
     actions: [
       IconButton(

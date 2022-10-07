@@ -36,9 +36,24 @@ class ShareLocationInfoButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
+
+    double? top, right, left;
+    if (isPortrait) {
+      top = 150;
+      right = 10;
+      left = null;
+    } else {
+      top = 120;
+      left = 10;
+      right = null;
+    }
+
     return Positioned(
-      top: 150,
-      right: 10,
+      top: top,
+      right: right,
+      left: left,
       width: 40,
       height: 40,
       child: CustomCard(
@@ -52,7 +67,7 @@ class ShareLocationInfoButton extends StatelessWidget {
             color: Colors.black54,
           ),
           tooltip:
-              'share ${firstName(serviceGiverName)} last seen location info',
+              'Share ${firstName(serviceGiverName)} last seen location info',
           onPressed: () => _share(context, sharingText),
         ),
       ),
