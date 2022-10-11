@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/util/functions/general_functions.dart';
 import '../../../../core/util/widgets/back_button_with_image.dart';
 import '../../../orders/presentation/providers/orders.dart';
+import '../../domain/entities/location_info.dart';
 import '../providers/tracking.dart';
 
 import '../widgets/service_giver_location_map.dart';
@@ -11,6 +13,12 @@ class TrackingScreen extends StatelessWidget {
   const TrackingScreen({Key? key}) : super(key: key);
 
   static const routName = '/tracking-screen';
+
+  String lastSeen(LocationInfo? lastSeenLocation) {
+    return lastSeenLocation == null
+        ? 'unknown'
+        : wellFormattedDateTime2(lastSeenLocation.time);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +36,21 @@ class TrackingScreen extends StatelessWidget {
       appBar: AppBar(
         leadingWidth: 80,
         leading: BackButtonWithImage(networkImage: serviceGiverImage),
-        title: Text('$serviceGiverName ($serviceName)'),
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('$serviceGiverName ($serviceName)'),
+            const SizedBox(height: 5),
+            Text(
+              'last seen ${lastSeen(lastSeenLocation)}',
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+          ],
+        ),
         actions: [
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
