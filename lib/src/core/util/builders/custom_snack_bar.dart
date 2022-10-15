@@ -14,6 +14,8 @@ void showCustomSnackBar({
   final distanceFromLeftOrRight =
       (MediaQuery.of(context).size.width - _widthOfSnackBar(content)) / 2;
 
+  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
     duration: Duration(seconds: durationInSec),
     content: Text(
@@ -41,6 +43,8 @@ void showMySnackBar({
   int? durationInSec,
   SnackBarAction? action,
 }) {
+  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       duration: Duration(seconds: durationInSec ?? 4),

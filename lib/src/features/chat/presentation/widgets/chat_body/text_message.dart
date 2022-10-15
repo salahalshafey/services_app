@@ -17,7 +17,7 @@ class TextMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints(
-        minWidth: 120,
+        minWidth: 130,
         maxWidth: MediaQuery.of(context).size.width * 0.8,
       ),
       width: message.length + 100.0,

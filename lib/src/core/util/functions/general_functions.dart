@@ -95,6 +95,30 @@ String formatedDuration(Duration time) {
   return time.toString().substring(2, 7);
 }
 
+String wellFormatedDuration(Duration duration) {
+  int durationInSecond = duration.inSeconds;
+
+  final hours = durationInSecond ~/ 3600;
+  final hoursString = hours == 0 ? '' : '$hours hour${_s(hours)} ';
+  durationInSecond %= 3600;
+
+  final minutes = durationInSecond ~/ 60;
+  final minutesString = minutes == 0 ? '' : '$minutes minute${_s(minutes)} ';
+  durationInSecond %= 60;
+
+  final secondsString = '$durationInSecond second${_s(durationInSecond)}';
+
+  return hoursString + minutesString + secondsString;
+}
+
+String wellFormatedDistance(double distanceInMeter) {
+  if (distanceInMeter >= 1000) {
+    return (distanceInMeter / 1000).toStringAsFixed(1) + ' km';
+  }
+
+  return distanceInMeter.toStringAsFixed(0) + ' meter';
+}
+
 String fromMeterPerSecToKPerH(double speed) {
   return (speed * 3.6).toStringAsFixed(0);
 }

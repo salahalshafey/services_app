@@ -16,6 +16,7 @@ import 'features/orders/presentation/providers/orders.dart';
 
 import 'features/chat/presentation/providers/chat.dart';
 
+import 'features/tracking/presentation/pages/tracking_info_screen.dart';
 import 'features/tracking/presentation/pages/tracking_screen.dart';
 import 'features/tracking/presentation/providers/tracking.dart';
 
@@ -106,6 +107,7 @@ class MyApp extends StatelessWidget {
           CurrentOrderDetailScreen.routName: (ctx) =>
               const CurrentOrderDetailScreen(),
           TrackingScreen.routName: (ctx) => const TrackingScreen(),
+          TrackingInfoScreen.routName: (context) => const TrackingInfoScreen(),
         },
       ),
     );

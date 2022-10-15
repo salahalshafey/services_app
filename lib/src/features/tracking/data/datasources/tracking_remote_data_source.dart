@@ -5,6 +5,7 @@ import '../../../../core/error/exceptions.dart';
 
 abstract class TrackingRemoteDataSource {
   Stream<TrackingInfoModel> getTrackingLive(String orderId);
+  Future<TrackingInfoModel> getTrackingOnce(String orderId);
 }
 
 class TrackingFirestoreImpl extends TrackingRemoteDataSource {
@@ -33,24 +34,28 @@ class TrackingFirestoreImpl extends TrackingRemoteDataSource {
       throw ServerException();
     }
   }
-}
 
-/*Map<String, dynamic> m = {
-  'is_service_giver_sharing_location': false,
-  'previous_locations': [
-    {
-      'heading': 55.654,
-      'latitude': 30.811856,
-      'time': Timestamp(1664569064, 494000000),
-      'speed': 27.55687,
-      'longitude': 30.684204
+  @override
+  Future<TrackingInfoModel> getTrackingOnce(String orderId) async {
+    try {
+      final trackingDoc = await FirebaseFirestore.instance
+          .collection('orders')
+          .doc(orderId)
+          .collection('tracking')
+          .doc(orderId)
+          .get();
+
+      if (trackingDoc.exists && trackingDoc.data() != null) {
+        return TrackingInfoModel.fromJson(trackingDoc.data()!);
+      } else {
+        return const TrackingInfoModel(
+          isServiceGiverSharingLocation: false,
+          lastSeenLocation: null,
+          previousLocations: [],
+        );
+      }
+    } catch (error) {
+      throw ServerException();
     }
-  ],
-  'last_seen_location': {
-    'heading': 55.654,
-    'latitude': 30.811856,
-    'time': Timestamp(1664569064, 422000000),
-    'speed': 27.55687,
-    'longitude': 30.684204
   }
-};*/
+}

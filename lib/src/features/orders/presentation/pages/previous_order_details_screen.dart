@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../tracking/presentation/pages/tracking_info_screen.dart';
 import '../../domain/entities/order.dart';
 
 import '../providers/orders.dart';
@@ -97,7 +98,12 @@ class PreviousOrderDetailScreen extends StatelessWidget {
                 'See How ${firstName(order.serviceGiverName)} Came To You On The Map',
             iconActive: Icons.timeline_outlined,
             iconDeActive: Icons.timeline_outlined,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(
+                TrackingInfoScreen.routName,
+                arguments: orderId,
+              );
+            },
           ),
           const SizedBox(height: 30),
           OrderDetails(

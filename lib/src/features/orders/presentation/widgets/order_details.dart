@@ -88,7 +88,7 @@ class OrderInfo extends StatelessWidget {
             icon,
             const SizedBox(width: 10),
             SizedBox(
-              width: 100,
+              width: 110,
               child: Text(
                 info,
                 textAlign: TextAlign.center,

@@ -36,9 +36,11 @@ import 'features/chat/domain/usecases/send_location_message.dart';
 import 'features/chat/domain/usecases/send_text_message.dart';
 import 'features/chat/presentation/providers/chat.dart';
 
+import 'features/tracking/data/datasources/maps_servcice.dart';
 import 'features/tracking/data/datasources/tracking_remote_data_source.dart';
 import 'features/tracking/data/repositories/tracking_repository_impl.dart';
 import 'features/tracking/domain/repositories/tracking_repository.dart';
+import 'features/tracking/domain/usecases/get_previous_locations_info.dart';
 import 'features/tracking/domain/usecases/get_tracking_live.dart';
 import 'features/tracking/presentation/providers/tracking.dart';
 
@@ -165,23 +167,32 @@ Future<void> init() async {
 
 // Provider
 
-  sl.registerFactory(() => Tracking(getTrackingStream: sl()));
+  sl.registerFactory(() => Tracking(
+        getTrackingStream: sl(),
+        getPreviousLocationsInfo: sl(),
+      ));
 
 // Usecases
 
   sl.registerLazySingleton(() => GetTrackingLiveUsecase(sl()));
+  sl.registerLazySingleton(() => GetPreviousLocationsInfoUsecase(sl()));
 
 // Repository
 
   sl.registerLazySingleton<TrackingRepository>(() => TrackingRepositoryImpl(
         remoteDataSource: sl(),
+        mapsService: sl(),
         networkInfo: sl(),
       ));
 
 // Datasources
 
   sl.registerLazySingleton<TrackingRemoteDataSource>(
-      () => TrackingFirestoreImpl());
+    () => TrackingFirestoreImpl(),
+  );
+  sl.registerLazySingleton<TrackingMapsService>(
+    () => TrackingGoogleMapsImpl(),
+  );
 
 //////////////////////////////////////////////////// !!!! core !!!! ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
