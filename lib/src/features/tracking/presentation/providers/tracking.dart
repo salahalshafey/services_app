@@ -40,9 +40,13 @@ class Tracking with ChangeNotifier {
   }
 
   Future<PreviousLocationsInfo> getInfoAboutServiceGiverPreviousLocations(
-      String orderId) async {
+      String orderId,
+      {List<LocationInfo>? previousLocations}) async {
     try {
-      return await getPreviousLocationsInfo(orderId);
+      return await getPreviousLocationsInfo(
+        orderId,
+        previousLocations: previousLocations,
+      );
     } on OfflineException {
       throw Error('You are currently offline.');
     } on ServerException {

@@ -7,6 +7,7 @@ import '../../domain/entities/location_info.dart';
 
 import '../../../../core/util/functions/general_functions.dart';
 
+import '../pages/tracking_info_screen.dart';
 import 'change_map_type_button.dart';
 import 'last_seen_location_button.dart';
 import 'service_giver_speed.dart';
@@ -14,15 +15,19 @@ import 'share_location_info_button.dart';
 
 class ServiceGiverLocationMap extends StatefulWidget {
   const ServiceGiverLocationMap({
+    required this.orderId,
     required this.isSharingLocation,
     required this.lastSeenLocation,
+    required this.previousLocations,
     required this.serviceGiverName,
     this.onMapCreated,
     Key? key,
   }) : super(key: key);
 
+  final String orderId;
   final bool isSharingLocation;
   final LocationInfo lastSeenLocation;
+  final List<LocationInfo> previousLocations;
   final String serviceGiverName;
   final void Function(GoogleMapController)? onMapCreated;
 
@@ -98,7 +103,13 @@ class _ServiceGiverLocationMapState extends State<ServiceGiverLocationMap> {
               infoWindow: InfoWindow(
                 title: 'Last seen',
                 snippet: pastOrFutureTimeFromNow(widget.lastSeenLocation.time),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context)
+                      .pushNamed(TrackingInfoScreen.routName, arguments: {
+                    'orderId': widget.orderId,
+                    'previousLocations': widget.previousLocations,
+                  });
+                },
               ),
               onTap: () {
                 setState(() {});

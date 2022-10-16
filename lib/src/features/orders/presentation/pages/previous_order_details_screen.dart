@@ -101,7 +101,9 @@ class PreviousOrderDetailScreen extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).pushNamed(
                 TrackingInfoScreen.routName,
-                arguments: orderId,
+                arguments: {
+                  'orderId': orderId,
+                },
               );
             },
           ),

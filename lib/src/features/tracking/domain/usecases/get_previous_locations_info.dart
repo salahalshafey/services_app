@@ -1,3 +1,4 @@
+import '../entities/location_info.dart';
 import '../entities/previous_locations_info.dart';
 import '../repositories/tracking_repository.dart';
 
@@ -6,6 +7,12 @@ class GetPreviousLocationsInfoUsecase {
 
   GetPreviousLocationsInfoUsecase(this.repository);
 
-  Future<PreviousLocationsInfo> call(String orderId) =>
-      repository.getPreviousLocationsInfo(orderId);
+  Future<PreviousLocationsInfo> call(
+    String orderId, {
+    List<LocationInfo>? previousLocations,
+  }) =>
+      repository.getPreviousLocationsInfo(
+        orderId,
+        previousLocations: previousLocations,
+      );
 }

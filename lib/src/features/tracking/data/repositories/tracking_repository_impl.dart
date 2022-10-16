@@ -35,26 +35,29 @@ class TrackingRepositoryImpl implements TrackingRepository {
   }
 
   @override
-  Future<PreviousLocationsInfo> getPreviousLocationsInfo(String orderId) async {
+  Future<PreviousLocationsInfo> getPreviousLocationsInfo(
+    String orderId, {
+    List<LocationInfo>? previousLocations,
+  }) async {
     if (await networkInfo.isNotConnected) {
       throw OfflineException();
     }
 
     try {
-      final previousLocations =
+      final _previousLocations = previousLocations ??
           (await remoteDataSource.getTrackingOnce(orderId)).previousLocations;
-      if (previousLocations.isEmpty) {
+      if (_previousLocations.isEmpty) {
         throw EmptyDataException();
       }
 
-      final totatDistance = _totalDistanceInMeter(previousLocations);
+      final totatDistance = _totalDistanceInMeter(_previousLocations);
       final locationOfMidDistance =
-          _locationOfMidDistance(previousLocations, totatDistance);
-      final startTime = previousLocations.first.time;
-      final endTime = previousLocations.last.time;
+          _locationOfMidDistance(_previousLocations, totatDistance);
+      final startTime = _previousLocations.first.time;
+      final endTime = _previousLocations.last.time;
 
       List<List<LocationInfo>> locationsSections =
-          _breakPreviousLocationsIfGapsDetected(previousLocations);
+          _breakPreviousLocationsIfGapsDetected(_previousLocations);
 
       final roadsInitial = await Future.wait(
         locationsSections.map((locationsSection) =>

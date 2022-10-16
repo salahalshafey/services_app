@@ -95,20 +95,27 @@ String formatedDuration(Duration time) {
   return time.toString().substring(2, 7);
 }
 
-String wellFormatedDuration(Duration duration) {
+String wellFormatedDuration(Duration duration, {bool lineEach = false}) {
   int durationInSecond = duration.inSeconds;
 
   final hours = durationInSecond ~/ 3600;
-  final hoursString = hours == 0 ? '' : '$hours hour${_s(hours)} ';
+  final hoursString =
+      hours == 0 ? '' : '$hours hour${_s(hours)}${_lineOrSpace(lineEach)}';
   durationInSecond %= 3600;
 
   final minutes = durationInSecond ~/ 60;
-  final minutesString = minutes == 0 ? '' : '$minutes minute${_s(minutes)} ';
+  final minutesString = minutes == 0
+      ? ''
+      : '$minutes minute${_s(minutes)}${_lineOrSpace(lineEach)}';
   durationInSecond %= 60;
 
   final secondsString = '$durationInSecond second${_s(durationInSecond)}';
 
   return hoursString + minutesString + secondsString;
+}
+
+String _lineOrSpace(bool lineEach) {
+  return lineEach ? '\n' : ' ';
 }
 
 String wellFormatedDistance(double distanceInMeter) {

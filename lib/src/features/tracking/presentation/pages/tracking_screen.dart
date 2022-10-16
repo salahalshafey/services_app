@@ -15,15 +15,18 @@ class TrackingScreen extends StatelessWidget {
   static const routName = '/tracking-screen';
 
   String lastSeen(LocationInfo? lastSeenLocation) {
-    return lastSeenLocation == null
-        ? 'unknown'
-        : wellFormattedDateTime2(lastSeenLocation.time);
+    if (lastSeenLocation == null) {
+      return 'last seen unknown';
+    }
+
+    return 'last seen ${wellFormattedDateTime2(lastSeenLocation.time)}';
   }
 
   @override
   Widget build(BuildContext context) {
     final orderId = ModalRoute.of(context)!.settings.arguments as String;
-    final order = Provider.of<Orders>(context).getOrderById(orderId);
+    final order =
+        Provider.of<Orders>(context, listen: false).getOrderById(orderId);
 
     final serviceGiverName = order.serviceGiverName;
     final serviceName = order.serviceName;
@@ -43,7 +46,7 @@ class TrackingScreen extends StatelessWidget {
             Text('$serviceGiverName ($serviceName)'),
             const SizedBox(height: 5),
             Text(
-              'last seen ${lastSeen(lastSeenLocation)}',
+              lastSeen(lastSeenLocation),
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.normal,
@@ -77,8 +80,10 @@ class TrackingScreen extends StatelessWidget {
               ),
             )
           : ServiceGiverLocationMap(
+              orderId: orderId,
               isSharingLocation: trackingInfo.isServiceGiverSharingLocation,
               lastSeenLocation: lastSeenLocation,
+              previousLocations: trackingInfo.previousLocations,
               serviceGiverName: serviceGiverName,
             ),
     );

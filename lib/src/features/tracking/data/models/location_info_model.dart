@@ -23,7 +23,7 @@ class LocationInfoModel extends LocationInfo {
       longitude: json['longitude'],
       speed: (json['speed'] as num).toDouble(),
       time: (json['time'] as Timestamp).toDate(),
-      heading: json['heading'],
+      heading: (json['heading'] as num).toDouble(),
     );
   }
 

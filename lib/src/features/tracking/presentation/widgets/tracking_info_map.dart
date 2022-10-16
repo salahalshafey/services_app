@@ -3,13 +3,16 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:services_app/src/core/util/builders/custom_snack_bar.dart';
-import 'package:services_app/src/features/tracking/presentation/widgets/go_to_location_button.dart';
+import 'package:services_app/src/features/tracking/presentation/widgets/journey_info.dart';
 
-import '../../../../core/theme/map_styles.dart';
-import '../../../../core/util/functions/general_functions.dart';
 import '../../data/models/road_info_model.dart';
 import '../../domain/entities/previous_locations_info.dart';
+
+import '../../../../core/theme/map_styles.dart';
+import '../../../../core/util/builders/custom_snack_bar.dart';
+import '../../../../core/util/functions/general_functions.dart';
+
+import 'go_to_location_button.dart';
 
 class TrackingInfoMap extends StatefulWidget {
   const TrackingInfoMap({
@@ -77,6 +80,13 @@ class _TrackingInfoMapState extends State<TrackingInfoMap> {
 
     await Future.delayed(const Duration(milliseconds: 100));
     _controller.showMarkerInfoWindow(const MarkerId('midRoad'));
+  }
+
+  Duration get _totalDuration {
+    final previousLocationsInfo = widget.previousLocationsInfo;
+    return previousLocationsInfo.endTime.difference(
+      previousLocationsInfo.startTime,
+    );
   }
 
   @override
@@ -153,6 +163,10 @@ class _TrackingInfoMapState extends State<TrackingInfoMap> {
           controller: () => _controller,
           hideMidRoadMarker: _hidMideRoadMarker,
         ),
+        JourneyInfo(
+          totalDistance: totalDistance,
+          totalDuration: _totalDuration,
+        ),
       ],
     );
   }
@@ -188,6 +202,9 @@ double totalRoadDistance(List<LatLng> locations) {
 }
 
 double distanceInMeterToZoomLevel(double distanceInMeter) {
+  if (distanceInMeter == 0) {
+    return 19;
+  }
   return logBas2(80000000 / distanceInMeter);
 }
 
@@ -204,10 +221,12 @@ LatLng locationOfMidDistance(List<LatLng> locations, double totalDistance) {
     final currentLocation = locations[i];
     currentDistance +=
         distanceBetweenTwoCoordinate(lastLocation, currentLocation);
-    lastLocation = currentLocation;
+
     if (currentDistance >= halfDistance) {
       return lastLocation;
     }
+
+    lastLocation = currentLocation;
   }
 
   return lastLocation;
