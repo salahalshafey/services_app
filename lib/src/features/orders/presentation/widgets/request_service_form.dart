@@ -8,8 +8,8 @@ import 'package:services_app/src/core/util/widgets/image_container.dart';
 import '../../../../core/util/builders/custom_alret_dialoge.dart';
 import '../../../../core/util/builders/custom_snack_bar.dart';
 import '../../../../core/util/builders/image_picker.dart';
-import '../../../../core/util/functions/general_functions.dart';
 
+import '../../../../core/util/functions/string_manipulations_and_search.dart';
 import '../../../account/presentation/providers/account.dart';
 import '../../../services_givers/presentation/providers/services_givers.dart';
 

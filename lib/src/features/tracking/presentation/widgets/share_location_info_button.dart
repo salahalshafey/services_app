@@ -3,8 +3,11 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../domain/entities/location_info.dart';
 
+import '../../../../core/util/functions/date_time_and_duration.dart';
+import '../../../../core/util/functions/distance_and_speed.dart';
+import '../../../../core/util/functions/string_manipulations_and_search.dart';
+
 import '../../../../core/util/builders/custom_snack_bar.dart';
-import '../../../../core/util/functions/general_functions.dart';
 import '../../../../core/util/widgets/custom_card.dart';
 
 class ShareLocationInfoButton extends StatelessWidget {

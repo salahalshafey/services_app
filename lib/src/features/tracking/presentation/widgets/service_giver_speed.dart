@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/util/functions/general_functions.dart';
+import '../../../../core/util/functions/distance_and_speed.dart';
+import '../../../../core/util/functions/string_manipulations_and_search.dart';
 
 class ServiceGiverSpeed extends StatelessWidget {
   const ServiceGiverSpeed({

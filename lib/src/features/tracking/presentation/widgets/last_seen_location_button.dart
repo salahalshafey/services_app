@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../../core/util/builders/custom_snack_bar.dart';
-import '../../../../core/util/functions/general_functions.dart';
+
+import '../../../../core/util/functions/string_manipulations_and_search.dart';
 import '../../../../core/util/widgets/custom_card.dart';
 
 class LastSeenLocationButton extends StatelessWidget {

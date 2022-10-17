@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/util/functions/general_functions.dart';
+import '../../../../core/util/functions/date_time_and_duration.dart';
 import '../../../../core/util/widgets/back_button_with_image.dart';
 import '../../../orders/presentation/providers/orders.dart';
 import '../../domain/entities/location_info.dart';
@@ -19,7 +19,7 @@ class TrackingScreen extends StatelessWidget {
       return 'last seen unknown';
     }
 
-    return 'last seen ${wellFormattedDateTime2(lastSeenLocation.time)}';
+    return 'last seen ${wellFormattedDateTime(lastSeenLocation.time)}';
   }
 
   @override

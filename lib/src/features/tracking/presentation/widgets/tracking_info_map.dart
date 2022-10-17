@@ -3,24 +3,27 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:services_app/src/features/tracking/presentation/widgets/journey_info.dart';
+
+import '../../../../core/util/functions/date_time_and_duration.dart';
+import '../../../../core/util/functions/distance_and_speed.dart';
+import '../../../../core/theme/map_styles.dart';
+import '../../../../core/util/builders/custom_snack_bar.dart';
 
 import '../../data/models/road_info_model.dart';
 import '../../domain/entities/previous_locations_info.dart';
 
-import '../../../../core/theme/map_styles.dart';
-import '../../../../core/util/builders/custom_snack_bar.dart';
-import '../../../../core/util/functions/general_functions.dart';
-
 import 'go_to_location_button.dart';
+import 'journey_info.dart';
 
 class TrackingInfoMap extends StatefulWidget {
   const TrackingInfoMap({
     required this.previousLocationsInfo,
+    this.mapType,
     Key? key,
   }) : super(key: key);
 
   final PreviousLocationsInfo previousLocationsInfo;
+  final MapType? mapType;
 
   @override
   State<TrackingInfoMap> createState() => _TrackingInfoMapState();
@@ -30,7 +33,7 @@ class _TrackingInfoMapState extends State<TrackingInfoMap> {
   late GoogleMapController _controller;
   Uint8List? newMarkerIcon;
   // ignore: prefer_final_fields
-  MapType _mapType = MapType.normal;
+  late MapType _mapType = widget.mapType ?? MapType.normal;
   Marker? _midRoadMarker;
 
   void _onMapCreated(GoogleMapController controller) async {
@@ -128,8 +131,7 @@ class _TrackingInfoMapState extends State<TrackingInfoMap> {
               position: firstSeenLocation,
               infoWindow: InfoWindow(
                 title: 'First seen',
-                snippet:
-                    wellFormattedDateTime2(previousLocationsInfo.startTime),
+                snippet: wellFormattedDateTime(previousLocationsInfo.startTime),
               ),
             ),
             if (_midRoadMarker != null) _midRoadMarker!,
@@ -141,7 +143,7 @@ class _TrackingInfoMapState extends State<TrackingInfoMap> {
               position: lastSeenLocation,
               infoWindow: InfoWindow(
                 title: 'Last seen',
-                snippet: wellFormattedDateTime2(previousLocationsInfo.endTime),
+                snippet: wellFormattedDateTime(previousLocationsInfo.endTime),
               ),
             ),
           }, //_markers,

@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../../core/theme/map_styles.dart';
-import '../../domain/entities/location_info.dart';
+import '../../../../core/util/functions/date_time_and_duration.dart';
 
-import '../../../../core/util/functions/general_functions.dart';
+import '../../domain/entities/location_info.dart';
 
 import '../pages/tracking_info_screen.dart';
 import 'change_map_type_button.dart';
@@ -108,6 +108,7 @@ class _ServiceGiverLocationMapState extends State<ServiceGiverLocationMap> {
                       .pushNamed(TrackingInfoScreen.routName, arguments: {
                     'orderId': widget.orderId,
                     'previousLocations': widget.previousLocations,
+                    'mapType': _mapType,
                   });
                 },
               ),

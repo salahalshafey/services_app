@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/util/functions/general_functions.dart';
-
+import '../../../../core/util/functions/date_time_and_duration.dart';
+import '../../../../core/util/functions/string_manipulations_and_search.dart';
 import 'order_cost.dart';
 import 'description.dart';
 
@@ -38,13 +38,16 @@ class OrderDetails extends StatelessWidget {
         OrderInfo(
           title: 'Date Of The Order:',
           icon: const Icon(Icons.date_range),
-          info: wellFormattedDateTime(date),
+          info: wellFormattedDateTime(date, seperateByLine: true),
         ),
         const SizedBox(height: 30),
         OrderInfo(
           title: 'Date of ${wellFormatedString(status)}:',
           icon: const Icon(Icons.date_range),
-          info: wellFormattedDateTime(dateOfFinishedOrCanceled),
+          info: wellFormattedDateTime(
+            dateOfFinishedOrCanceled,
+            seperateByLine: true,
+          ),
         ),
         const SizedBox(height: 30),
         if (reasonIfCanceled != null)

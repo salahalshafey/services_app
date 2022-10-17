@@ -4,7 +4,8 @@ import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/network_info.dart';
 
 import '../../../../core/util/classes/pair_class.dart';
-import '../../../../core/util/functions/general_functions.dart';
+
+import '../../../../core/util/functions/distance_and_speed.dart';
 import '../../domain/entities/location_info.dart';
 import '../../domain/entities/previous_locations_info.dart';
 import '../../domain/entities/tracking_info.dart';

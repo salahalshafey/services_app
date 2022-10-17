@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/util/functions/general_functions.dart';
+import '../../../../../core/util/functions/date_time_and_duration.dart';
 
 import 'audio_message.dart';
 import 'image_message.dart';

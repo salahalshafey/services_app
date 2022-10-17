@@ -12,7 +12,8 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../builders/custom_snack_bar.dart';
-import '../functions/general_functions.dart';
+
+import '../functions/string_manipulations_and_search.dart';
 import 'linkify_text.dart';
 
 class ImageContainer extends StatefulWidget {

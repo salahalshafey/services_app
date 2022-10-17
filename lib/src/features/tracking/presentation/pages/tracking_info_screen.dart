@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:services_app/src/core/util/functions/general_functions.dart';
-import 'package:services_app/src/features/tracking/presentation/providers/tracking.dart';
-import 'package:services_app/src/features/tracking/presentation/widgets/tracking_info_map.dart';
 
+import '../../../../core/util/functions/string_manipulations_and_search.dart';
 import '../../../orders/presentation/providers/orders.dart';
 import '../../domain/entities/location_info.dart';
 import '../../domain/entities/previous_locations_info.dart';
+import '../providers/tracking.dart';
+import '../widgets/tracking_info_map.dart';
 
 class TrackingInfoScreen extends StatelessWidget {
   const TrackingInfoScreen({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class TrackingInfoScreen extends StatelessWidget {
     final orderId = arguments['orderId'] as String;
     final previousLocations =
         arguments['previousLocations'] as List<LocationInfo>?;
+    final mapType = arguments['mapType'] as MapType?;
 
     final order =
         Provider.of<Orders>(context, listen: false).getOrderById(orderId);
@@ -49,7 +51,10 @@ class TrackingInfoScreen extends StatelessWidget {
             );
           }
 
-          return TrackingInfoMap(previousLocationsInfo: snapshot.data!);
+          return TrackingInfoMap(
+            previousLocationsInfo: snapshot.data!,
+            mapType: mapType,
+          );
         },
       ),
     );

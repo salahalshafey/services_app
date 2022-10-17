@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../../core/util/functions/general_functions.dart';
+import '../../../../../core/util/functions/string_manipulations_and_search.dart';
 import '../../../../../core/util/widgets/linkify_text.dart';
 import 'message_bubble.dart';
 

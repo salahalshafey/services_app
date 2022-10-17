@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/util/functions/general_functions.dart';
+import '../../../../core/util/functions/string_manipulations_and_search.dart';
 import '../../../../core/util/widgets/custom_text_button.dart';
 
 import '../providers/tracking.dart';

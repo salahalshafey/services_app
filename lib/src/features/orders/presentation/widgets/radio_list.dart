@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../../core/util/functions/general_functions.dart';
+import '../../../../core/util/functions/string_manipulations_and_search.dart';
 
 class RadioList extends StatefulWidget {
   const RadioList(this.choices, this.onSellected, {Key? key}) : super(key: key);

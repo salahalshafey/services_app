@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/util/functions/general_functions.dart';
-
+import '../../../../../core/util/functions/string_manipulations_and_search.dart';
 import 'location_sender.dart';
 import 'image_sender.dart';
 import 'audio_sender.dart';

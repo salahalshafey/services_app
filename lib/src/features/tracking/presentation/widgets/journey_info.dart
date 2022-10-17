@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:services_app/src/core/util/functions/general_functions.dart';
 
+import '../../../../core/util/functions/date_time_and_duration.dart';
+import '../../../../core/util/functions/distance_and_speed.dart';
 import '../../../../core/util/widgets/custom_card.dart';
 
 class JourneyInfo extends StatelessWidget {

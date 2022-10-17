@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:photo_view/photo_view.dart';
 
+import '../../../../../core/util/functions/string_manipulations_and_search.dart';
 import '../../../../account/presentation/providers/account.dart';
 import '../../providers/chat.dart';
 
 import '../../../../../core/util/builders/custom_alret_dialoge.dart';
 import '../../../../../core/util/builders/image_picker.dart';
-import '../../../../../core/util/functions/general_functions.dart';
 
 class ImageSender extends StatelessWidget {
   const ImageSender(this.orderId, this.slideController, {Key? key})

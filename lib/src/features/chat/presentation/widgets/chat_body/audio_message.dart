@@ -6,8 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:proximity_sensor/proximity_sensor.dart';
 
-import '../../../../../core/util/functions/general_functions.dart';
-
+import '../../../../../core/util/functions/date_time_and_duration.dart';
 import 'message_bubble.dart';
 
 class AudioMessage extends StatefulWidget {
