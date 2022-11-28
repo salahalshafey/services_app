@@ -57,21 +57,26 @@ class _MainScreenState extends State<MainScreen>
         controller: _controler,
       ),
       bottomNavigationBar: ConvexAppBar(
+        style: TabStyle.flip,
         controller: _tabController,
         items: [
           TabItem(
             icon: Icon(Icons.home, color: _color),
-            activeIcon: const Icon(Icons.home, size: 30),
+            activeIcon: Icon(Icons.home, size: 30, color: _color),
             title: 'Home',
           ),
           TabItem(
             icon: Icon(Icons.text_snippet, color: _color),
-            activeIcon: const Icon(Icons.text_snippet, size: 30),
+            activeIcon: Icon(Icons.text_snippet, size: 30, color: _color),
             title: 'Previous Orders',
           ),
           TabItem(
             icon: Icon(Icons.text_snippet_outlined, color: _color),
-            activeIcon: const Icon(Icons.text_snippet_outlined, size: 30),
+            activeIcon: Icon(
+              Icons.text_snippet_outlined,
+              size: 30,
+              color: _color,
+            ),
             title: 'Current Orders',
           ),
         ],

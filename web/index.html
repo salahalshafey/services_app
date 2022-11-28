@@ -97,5 +97,37 @@
       loadMainDartJs();
     }
   </script>
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+    import { getAuth } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js";
+    import { getStorage } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js";
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBLr5_r63_tweYcre5xs0YKtb4-r0mKxq4",
+      authDomain: "servicesapp-e006f.firebaseapp.com",
+      projectId: "servicesapp-e006f",
+      storageBucket: "servicesapp-e006f.appspot.com",
+      messagingSenderId: "711179067079",
+      appId: "1:711179067079:web:72a7e43df48324440628e2",
+      measurementId: "G-VKGQWN02S2"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    // Initialize Firebase Authentication and get a reference to the service
+    const auth = getAuth(app);
+    // Initialize Cloud Firestore and get a reference to the service
+    const db = getFirestore(app);
+    // Initialize Cloud Storage and get a reference to the service
+    const storage = getStorage(app);
+  </script>
+
 </body>
 </html>
