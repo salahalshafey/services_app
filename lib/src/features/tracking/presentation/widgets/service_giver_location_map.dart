@@ -45,7 +45,10 @@ class _ServiceGiverLocationMapState extends State<ServiceGiverLocationMap> {
     _controller = controller;
 
     // if the app is in darke theme set the mapStyle to GOOGLE_MAPS_DARKE_STYLE
-    await _controller.setMapStyle(GOOGLE_MAPS_RETRO_STYLE);
+    await _controller.setMapStyle(
+        Theme.of(context).brightness == Brightness.light
+            ? GOOGLE_MAPS_RETRO_STYLE
+            : GOOGLE_MAPS_DARKE_STYLE);
 
     // to do in the future: change the icon according to the serviceName
     const serviceName = 'artisan';

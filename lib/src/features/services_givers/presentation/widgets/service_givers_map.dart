@@ -4,6 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
 import '../../../../core/location/location_service.dart';
+import '../../../../core/theme/map_styles.dart';
 import '../../../../core/util/builders/custom_alret_dialoge.dart';
 
 import '../providers/services_givers.dart';
@@ -22,6 +23,12 @@ class _ServiceGiversMapState extends State<ServiceGiversMap> {
   Set<Marker> _markers = {};
 
   void _onMapCreated(GoogleMapController controller) async {
+    // if the app is in darke theme set the mapStyle to GOOGLE_MAPS_DARKE_STYLE
+    await controller.setMapStyle(
+        Theme.of(context).brightness == Brightness.light
+            ? GOOGLE_MAPS_RETRO_STYLE
+            : GOOGLE_MAPS_DARKE_STYLE);
+
     final servicesGivers = Provider.of<ServicesGivers>(context, listen: false);
 
     ////// create The Markers /////////////
@@ -61,6 +68,7 @@ class _ServiceGiversMapState extends State<ServiceGiversMap> {
       );
 
       final locationToClosest = distanceAndlocationToCloses.last as LatLng;
+      await Future.delayed(const Duration(milliseconds: 500));
       _goToLocation(controller, locationToClosest);
     }
   }

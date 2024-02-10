@@ -31,6 +31,7 @@
 .pub-cache/
 .pub/
 /build/
+save_changes_and_push_it_to_github.cmd
 
 # Web related
 lib/generated_plugin_registrant.dart

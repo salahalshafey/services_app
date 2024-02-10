@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=3.2.1 <4.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -33,33 +33,32 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  equatable: ^2.0.3
   cupertino_icons: ^1.0.2
-  provider: ^6.0.1
+  equatable: ^2.0.5
+  provider: ^6.1.1
+  get_it: ^7.6.7
+  firebase_core: ^2.25.4
+  cloud_firestore: ^4.15.4
+  firebase_storage: ^11.6.5
+  firebase_auth: ^4.17.4
+  google_maps_flutter: ^2.5.3
+  location: ^5.0.3
+  image_picker: ^1.0.7
+  url_launcher: ^6.2.4
+  map_launcher: ^3.1.0
   photo_view: ^0.14.0
-  firebase_core: ^1.17.1
-  cloud_firestore: ^3.1.17
-  firebase_storage: ^10.2.18
-  google_maps_flutter: ^2.1.8
-  location: ^4.4.0
-  image_picker: ^0.8.5+3
-  url_launcher: ^6.1.4
-  map_launcher: ^2.2.3
   gallery_saver: ^2.3.2
-  dio: ^4.0.6
-  path_provider: ^2.0.11
-  convex_bottom_bar: ^3.0.0
-  package_info_plus: ^1.4.3
-  share_plus: ^4.0.10
-  audioplayers: ^1.0.1
+  dio: ^5.4.0
+  path_provider: ^2.1.2
+  convex_bottom_bar: ^3.2.0
+  package_info_plus: ^5.0.1
+  share_plus: ^7.2.2
+  audioplayers: ^5.2.1
   flutter_sound: ^9.2.13
-  permission_handler: ^10.0.0
-  proximity_sensor: ^1.0.2
-  flutter_config: ^2.0.0
-  get_it: ^7.2.0
-  firebase_auth: ^3.11.2
-  emoji_picker_flutter: ^1.5.1
- 
+  permission_handler: ^11.2.1
+  proximity_sensor: ^1.0.4
+  flutter_config: ^2.0.2
+  emoji_picker_flutter: ^2.0.0
   
 
 dev_dependencies:

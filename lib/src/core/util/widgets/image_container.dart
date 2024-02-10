@@ -739,8 +739,8 @@ class __ShareButtonState extends State<_ShareButton> {
           widget.image, widget.imageSource);
 
       _loadingState(false);
-      await Share.shareFiles(
-        [imagePath],
+      await Share.shareXFiles(
+        [XFile(imagePath)],
         text: widget.caption,
         subject: widget.title,
         //sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,

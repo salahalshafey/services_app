@@ -45,6 +45,8 @@ class MyApp extends StatelessWidget {
         title: 'Services',
         theme: ThemeData(
           primaryColor: _myPrimaryColor,
+          colorScheme: ColorScheme.fromSeed(seedColor: _myPrimaryColor),
+          useMaterial3: false,
           secondaryHeaderColor: _mysecondaryColor,
           appBarTheme: AppBarTheme(
             color: _myPrimaryColor,
@@ -97,6 +99,13 @@ class MyApp extends StatelessWidget {
           progressIndicatorTheme:
               ProgressIndicatorThemeData(color: _myPrimaryColor),
         ),
+        darkTheme: ThemeData.dark().copyWith(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: _myPrimaryColor,
+            brightness: Brightness.dark,
+          ),
+        ),
+        themeMode: ThemeMode.system,
         home: const MainScreen(),
         routes: {
           ServiceGiversScreen.routName: (ctx) => const ServiceGiversScreen(),

@@ -209,7 +209,7 @@ class _RequestServiceFormState extends State<RequestServiceForm> {
             child: const Text(
               'PIC IMAG',
             ),
-            style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
+            style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                   minimumSize:
                       MaterialStateProperty.all<Size>(const Size(150, 40)),
                 ),
@@ -239,7 +239,7 @@ class _RequestServiceFormState extends State<RequestServiceForm> {
                   child: const Text(
                     'REQUEST',
                   ),
-                  style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
+                  style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                         minimumSize: MaterialStateProperty.all<Size>(
                             const Size(double.infinity, 40)),
                       ),

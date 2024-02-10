@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../domain/entities/order.dart';
+import '../../domain/entities/order.dart' as order;
 
-class OrderModel extends Order {
+class OrderModel extends order.Order {
   const OrderModel({
     required String id,
     required String serviceGiverId,
@@ -43,7 +43,7 @@ class OrderModel extends Order {
           dateOfFinishedOrCanceled: dateOfFinishedOrCanceled,
         );
 
-  factory OrderModel.fromOrder(Order order) {
+  factory OrderModel.fromOrder(order.Order order) {
     return OrderModel(
       id: order.id,
       serviceGiverId: order.serviceGiverId,

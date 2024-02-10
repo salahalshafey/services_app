@@ -29,10 +29,20 @@ class _MessageSenderState extends State<MessageSender>
     vsync: this,
   );
 
-  void _toggoleEmojiShoing() {
-    setState(() {
-      emojiShowing = !emojiShowing;
-    });
+  void _toggoleEmojiShoing() async {
+    if (!emojiShowing) {
+      FocusScope.of(context).unfocus();
+      await Future.delayed(const Duration(milliseconds: 100));
+      setState(() {
+        emojiShowing = true;
+      });
+    } else {
+      setState(() {
+        emojiShowing = false;
+      });
+
+      FocusScope.of(context).requestFocus();
+    }
   }
 
   void _forwardAnimations() {
@@ -140,15 +150,7 @@ class _MessageSenderState extends State<MessageSender>
                 bottom: 0,
                 left: 0,
                 child: IconButton(
-                  onPressed: () {
-                    _toggoleEmojiShoing();
-
-                    if (emojiShowing) {
-                      FocusScope.of(context).unfocus();
-                    } else {
-                      FocusScope.of(context).requestFocus();
-                    }
-                  },
+                  onPressed: _toggoleEmojiShoing,
                   tooltip: emojiShowing ? 'Show Keyboard' : 'Pick Emoji',
                   icon: Icon(
                     emojiShowing
@@ -205,37 +207,25 @@ class _MessageSenderState extends State<MessageSender>
               child: EmojiPicker(
                 textEditingController: _controller,
                 config: Config(
-                  columns: 7,
-                  // Issue: https://github.com/flutter/flutter/issues/28894
-                  emojiSizeMax: 32 *
-                      (foundation.defaultTargetPlatform == TargetPlatform.iOS
-                          ? 1.30
-                          : 1.0),
-                  verticalSpacing: 0,
-                  horizontalSpacing: 0,
-                  gridPadding: EdgeInsets.zero,
-                  initCategory: Category.RECENT,
-                  bgColor: const Color(0xFFF2F2F2),
-                  indicatorColor: _primaryColor,
-                  iconColor: Colors.grey,
-                  iconColorSelected: _primaryColor,
-                  backspaceColor: _primaryColor,
-                  skinToneDialogBgColor: Colors.white,
-                  skinToneIndicatorColor: Colors.grey,
-                  enableSkinTones: true,
-                  showRecentsTab: true,
-                  recentsLimit: 28,
-                  replaceEmojiOnLimitExceed: false,
-                  noRecents: const Text(
-                    'No Recents',
-                    style: TextStyle(fontSize: 20, color: Colors.black26),
-                    textAlign: TextAlign.center,
-                  ),
-                  loadingIndicator: const SizedBox.shrink(),
-                  tabIndicatorAnimDuration: kTabScrollDuration,
-                  categoryIcons: const CategoryIcons(),
-                  buttonMode: ButtonMode.MATERIAL,
+                  height: 256,
                   checkPlatformCompatibility: true,
+                  emojiViewConfig: EmojiViewConfig(
+                    // Issue: https://github.com/flutter/flutter/issues/28894
+                    columns: 7,
+                    emojiSizeMax: 28 *
+                        (foundation.defaultTargetPlatform == TargetPlatform.iOS
+                            ? 1.20
+                            : 1.0),
+                  ),
+                  swapCategoryAndBottomBar: false,
+                  skinToneConfig: const SkinToneConfig(),
+                  categoryViewConfig: CategoryViewConfig(
+                    indicatorColor: _primaryColor,
+                    iconColorSelected: _primaryColor,
+                    backspaceColor: _primaryColor,
+                  ),
+                  bottomActionBarConfig: const BottomActionBarConfig(),
+                  searchViewConfig: const SearchViewConfig(),
                 ),
               ),
             ),

@@ -136,8 +136,8 @@ class _AudioMessageState extends State<AudioMessage> {
           usageType: AndroidUsageType.media,
           audioFocus: AndroidAudioFocus.gain,
         ),
-        iOS: AudioContextIOS(
-          defaultToSpeaker: state,
+        iOS: const AudioContextIOS(
+          // defaultToSpeaker: state,
           category: AVAudioSessionCategory.playAndRecord,
           options: [],
         ),
