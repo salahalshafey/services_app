@@ -1,14 +1,16 @@
 import 'dart:convert';
 
-import 'package:flutter_config/flutter_config.dart';
+//import 'package:flutter_config/flutter_config.dart';
 import 'package:http/http.dart' as http;
+
+import 'api_keys.dart';
 
 abstract class ChatMapsService {
   String getImagePreview(String location);
   Future<String?> getGeoCodingData(String location);
 }
 
-final googleMapsAPIkey = FlutterConfig.get('google_maps_API_key');
+//final googleMapsAPIkey = FlutterConfig.get('google_maps_API_key');
 
 class ChatGoogleMapsImpl implements ChatMapsService {
   @override
@@ -19,14 +21,14 @@ class ChatGoogleMapsImpl implements ChatMapsService {
       "&size=400x400"
       "&maptype=roadmap"
       "&markers=color:red%7Clabel:Label%7C$location"
-      "&key=$googleMapsAPIkey";
+      "&key=$googleMapsAPIKey";
 
   @override
   Future<String?> getGeoCodingData(String location) async {
     final url = Uri.parse(
       "https://maps.googleapis.com/maps/api/geocode/json?"
       "latlng=$location"
-      "&key=$googleMapsAPIkey",
+      "&key=$googleMapsAPIKey",
     );
 
     Map<String, dynamic>? resevedData;

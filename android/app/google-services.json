@@ -33,6 +33,35 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:711179067079:android:12a74bb188e02bc80628e2",
+        "android_client_info": {
+          "package_name": "com.salahalshafey.servicesapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "711179067079-sck5pd06l62jps0ost06183eml9tkkk8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpZvZRN5lt1L1645EfG7yCNp7MMjMms2U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "711179067079-sck5pd06l62jps0ost06183eml9tkkk8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

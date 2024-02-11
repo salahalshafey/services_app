@@ -1,18 +1,20 @@
 import 'dart:convert';
 
-import 'package:flutter_config/flutter_config.dart';
+//import 'package:flutter_config/flutter_config.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:services_app/src/core/error/exceptions.dart';
 
 import '../models/response_location_of_roads_api.dart';
 import 'package:http/http.dart' as http;
 
+import 'api_keys.dart';
+
 abstract class TrackingMapsService {
   Future<List<ResponseLocationOfRoadsAPI>> getRoadsLocations(
       List<LatLng> locations);
 }
 
-final googleMapsAPIkey = FlutterConfig.get('google_maps_API_key') as String;
+//final googleMapsAPIkey = FlutterConfig.get('google_maps_API_key') as String;
 
 class TrackingGoogleMapsImpl implements TrackingMapsService {
   @override
@@ -52,7 +54,7 @@ class TrackingGoogleMapsImpl implements TrackingMapsService {
       "https://roads.googleapis.com/v1/snapToRoads"
       "?interpolate=true"
       "&path=${_locationsToPath(locations)}"
-      "&key=$googleMapsAPIkey",
+      "&key=$googleMapsAPIKey",
     );
     final response = await http.get(url);
 
