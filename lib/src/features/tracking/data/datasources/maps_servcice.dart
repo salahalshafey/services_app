@@ -56,6 +56,7 @@ class TrackingGoogleMapsImpl implements TrackingMapsService {
       "&path=${_locationsToPath(locations)}"
       "&key=$googleMapsAPIKey",
     );
+
     final response = await http.get(url);
 
     if (response.statusCode == 200) {

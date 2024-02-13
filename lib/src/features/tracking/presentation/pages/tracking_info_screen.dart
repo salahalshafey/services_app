@@ -11,7 +11,9 @@ import '../widgets/tracking_info_map.dart';
 
 class TrackingInfoScreen extends StatelessWidget {
   const TrackingInfoScreen({Key? key}) : super(key: key);
+
   static const routName = '/tracking-info-screen';
+
   @override
   Widget build(BuildContext context) {
     final arguments =
