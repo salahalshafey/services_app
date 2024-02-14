@@ -20,11 +20,12 @@ class BackButtonWithImage extends StatelessWidget {
             ],
           ),
           style: ButtonStyle(
-            padding: MaterialStateProperty.all(const EdgeInsets.all(4)),
-            elevation: MaterialStateProperty.all(0),
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25))),
-          ),
+              padding: MaterialStateProperty.all(const EdgeInsets.all(4)),
+              elevation: MaterialStateProperty.all(0),
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25))),
+              backgroundColor:
+                  const MaterialStatePropertyAll(Color.fromARGB(0, 2, 1, 1))),
         ),
       ),
     );

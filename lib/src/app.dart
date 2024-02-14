@@ -41,23 +41,30 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => di.sl<Tracking>()),
         ChangeNotifierProvider(create: (ctx) => Account()),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Services',
-        theme: MyTheme.light(_myPrimaryColor, useMaterial3: false),
-        darkTheme: MyTheme.dark(_myPrimaryColor, useMaterial3: true),
-        themeMode: ThemeMode.light,
-        home: const MainScreen(),
-        routes: {
-          ServiceGiversScreen.routName: (ctx) => const ServiceGiversScreen(),
-          RequestServiceScreen.routName: (ctx) => const RequestServiceScreen(),
-          AccountScreen.routName: (ctx) => const AccountScreen(),
-          PreviousOrderDetailScreen.routName: (ctx) =>
-              const PreviousOrderDetailScreen(),
-          CurrentOrderDetailScreen.routName: (ctx) =>
-              const CurrentOrderDetailScreen(),
-          TrackingScreen.routName: (ctx) => const TrackingScreen(),
-          TrackingInfoScreen.routName: (context) => const TrackingInfoScreen(),
+      child: Builder(
+        builder: (newContext) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Services',
+            theme: MyTheme.light(_myPrimaryColor, useMaterial3: false),
+            darkTheme: MyTheme.dark(_myPrimaryColor, useMaterial3: true),
+            themeMode: ThemeMode.dark,
+            home: const MainScreen(),
+            routes: {
+              ServiceGiversScreen.routName: (ctx) =>
+                  const ServiceGiversScreen(),
+              RequestServiceScreen.routName: (ctx) =>
+                  const RequestServiceScreen(),
+              AccountScreen.routName: (ctx) => const AccountScreen(),
+              PreviousOrderDetailScreen.routName: (ctx) =>
+                  const PreviousOrderDetailScreen(),
+              CurrentOrderDetailScreen.routName: (ctx) =>
+                  const CurrentOrderDetailScreen(),
+              TrackingScreen.routName: (ctx) => const TrackingScreen(),
+              TrackingInfoScreen.routName: (context) =>
+                  const TrackingInfoScreen(),
+            },
+          );
         },
       ),
     );

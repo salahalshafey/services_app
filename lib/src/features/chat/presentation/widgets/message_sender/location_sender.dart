@@ -72,7 +72,9 @@ class LocationSender extends StatelessWidget {
         tooltip: 'Send Location',
         icon: Icon(
           Icons.location_on_sharp,
-          color: Colors.grey.shade700,
+          color: Theme.of(context).brightness == Brightness.light
+              ? Colors.grey.shade700
+              : Colors.grey.shade300,
           size: 30,
         ),
       ),

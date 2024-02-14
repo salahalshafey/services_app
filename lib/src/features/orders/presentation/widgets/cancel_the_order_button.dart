@@ -73,10 +73,13 @@ class _CancelTheOrderButtonState extends State<CancelTheOrderButton> {
     final reason = await showCustomBottomSheet<String>(
       context: context,
       title: 'Please select reason',
-      child: RadioList(_choices, (index, otherDetails) {
-        _sellectedIndex = index;
-        _otherDetails = otherDetails;
-      }),
+      child: RadioList(
+        choices: _choices,
+        onSellected: (index, otherDetails) {
+          _sellectedIndex = index;
+          _otherDetails = otherDetails;
+        },
+      ),
       buttonTitle: 'Confirm',
       onButtonPressed: () {
         if (_sellectedIndex == null) {

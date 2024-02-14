@@ -75,6 +75,7 @@ class MyTheme {
       dialogTheme: DialogTheme(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
+      //iconTheme: IconThemeData(color: primaryColor),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
           backgroundColor: MaterialStatePropertyAll(primaryColor),

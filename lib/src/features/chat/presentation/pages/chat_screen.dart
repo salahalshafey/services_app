@@ -74,7 +74,9 @@ class _ReadOnlyContainer extends StatelessWidget {
       width: double.infinity,
       height: 40,
       alignment: Alignment.center,
-      color: Colors.grey,
+      color: Theme.of(context).brightness == Brightness.dark
+          ? Colors.grey.shade700
+          : Colors.grey.shade300,
       child: Text(
         title,
         textAlign: TextAlign.center,

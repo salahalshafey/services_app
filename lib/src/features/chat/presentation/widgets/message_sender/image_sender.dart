@@ -52,7 +52,9 @@ class ImageSender extends StatelessWidget {
         tooltip: 'Send Image',
         icon: Icon(
           Icons.camera_alt,
-          color: Colors.grey.shade700,
+          color: Theme.of(context).brightness == Brightness.light
+              ? Colors.grey.shade700
+              : Colors.grey.shade300,
           size: 30,
         ),
       ),

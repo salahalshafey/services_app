@@ -110,14 +110,18 @@ class MyDrawerHeader extends StatelessWidget {
             shape: BoxShape.circle,
             border: Border.all(color: Colors.white, width: 2.0),
             showHighlight: true,
-            onTap: () =>
-                Navigator.of(context).popAndPushNamed(AccountScreen.routName),
+            onTap: () {
+              Scaffold.of(context).closeDrawer();
+              Navigator.of(context).pushNamed(AccountScreen.routName);
+            },
           ),
 
           //////////// User Name ///////////////////////////
           TextButton(
-            onPressed: () =>
-                Navigator.of(context).popAndPushNamed(AccountScreen.routName),
+            onPressed: () {
+              Scaffold.of(context).closeDrawer();
+              Navigator.of(context).pushNamed(AccountScreen.routName);
+            },
             child: Text(
               userName,
               style: const TextStyle(

@@ -19,29 +19,34 @@ class MessageSender extends StatefulWidget {
 class _MessageSenderState extends State<MessageSender>
     with SingleTickerProviderStateMixin {
   final _controller = TextEditingController();
-  bool emojiShowing = false;
+  final _focusNode = FocusNode();
+  bool _emojiShowing = false;
   var _isSendButtonLoading = false;
   var _textDirection = TextDirection.ltr;
-  late final _primaryColor = Theme.of(context).iconTheme.color!;
+  late final _primaryColor = Theme.of(context).primaryColor;
 
   late final AnimationController _slideController = AnimationController(
     duration: const Duration(milliseconds: 200),
     vsync: this,
   );
 
-  void _toggoleEmojiShoing() async {
-    if (!emojiShowing) {
-      FocusScope.of(context).unfocus();
-      await Future.delayed(const Duration(milliseconds: 100));
-      setState(() {
-        emojiShowing = true;
-      });
-    } else {
-      setState(() {
-        emojiShowing = false;
-      });
+  void _emojiShowingState(bool state) {
+    setState(() {
+      _emojiShowing = state;
+    });
+  }
 
-      FocusScope.of(context).requestFocus();
+  void _toggoleEmojiShoing() async {
+    if (!_emojiShowing) {
+      _focusNode.unfocus();
+
+      await Future.delayed(const Duration(milliseconds: 200));
+
+      _emojiShowingState(true);
+    } else {
+      _emojiShowingState(false);
+
+      _focusNode.requestFocus();
     }
   }
 
@@ -75,6 +80,8 @@ class _MessageSenderState extends State<MessageSender>
   void dispose() {
     _slideController.dispose();
     _controller.dispose();
+    _focusNode.dispose();
+
     super.dispose();
   }
 
@@ -84,7 +91,7 @@ class _MessageSenderState extends State<MessageSender>
         MediaQuery.of(context).orientation == Orientation.portrait;
 
     return Container(
-      color: Colors.grey.shade200,
+      // color: Colors.grey.shade200,
       padding: const EdgeInsets.all(3),
       child: Column(
         children: [
@@ -95,10 +102,9 @@ class _MessageSenderState extends State<MessageSender>
                   Expanded(
                     child: TextField(
                       controller: _controller,
+                      focusNode: _focusNode,
                       onTap: () {
-                        setState(() {
-                          emojiShowing = false;
-                        });
+                        _emojiShowingState(false);
                       },
                       keyboardType: TextInputType.multiline,
                       minLines: 1,
@@ -111,7 +117,7 @@ class _MessageSenderState extends State<MessageSender>
                       decoration: const InputDecoration(
                         alignLabelWithHint: true,
                         filled: true,
-                        fillColor: Colors.white,
+                        //fillColor: Colors.white,
                         contentPadding: EdgeInsets.only(
                           left: 50,
                           right: 5,
@@ -151,12 +157,12 @@ class _MessageSenderState extends State<MessageSender>
                 left: 0,
                 child: IconButton(
                   onPressed: _toggoleEmojiShoing,
-                  tooltip: emojiShowing ? 'Show Keyboard' : 'Pick Emoji',
+                  tooltip: _emojiShowing ? 'Show Keyboard' : 'Pick Emoji',
                   icon: Icon(
-                    emojiShowing
-                        ? Icons.keyboard
-                        : Icons.emoji_emotions_outlined,
-                    color: Colors.grey.shade700,
+                    _emojiShowing ? Icons.keyboard : Icons.tag_faces,
+                    color: Theme.of(context).brightness == Brightness.light
+                        ? Colors.grey.shade700
+                        : Colors.grey.shade300,
                     size: 30,
                   ),
                 ),
@@ -200,37 +206,82 @@ class _MessageSenderState extends State<MessageSender>
               ),
             ],
           ),
-          Offstage(
-            offstage: !emojiShowing,
-            child: SizedBox(
-              height: isPortrait ? 250 : 200,
-              child: EmojiPicker(
-                textEditingController: _controller,
-                config: Config(
-                  height: 256,
-                  checkPlatformCompatibility: true,
-                  emojiViewConfig: EmojiViewConfig(
-                    // Issue: https://github.com/flutter/flutter/issues/28894
-                    columns: 7,
-                    emojiSizeMax: 28 *
-                        (foundation.defaultTargetPlatform == TargetPlatform.iOS
-                            ? 1.20
-                            : 1.0),
-                  ),
-                  swapCategoryAndBottomBar: false,
-                  skinToneConfig: const SkinToneConfig(),
-                  categoryViewConfig: CategoryViewConfig(
-                    indicatorColor: _primaryColor,
-                    iconColorSelected: _primaryColor,
-                    backspaceColor: _primaryColor,
-                  ),
-                  bottomActionBarConfig: const BottomActionBarConfig(),
-                  searchViewConfig: const SearchViewConfig(),
-                ),
+          ShowEmojiPicker(
+            emojiShowing: _emojiShowing,
+            setEmojiShwing: _emojiShowingState,
+            isPortrait: isPortrait,
+            controller: _controller,
+            primaryColor: _primaryColor,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ShowEmojiPicker extends StatelessWidget {
+  const ShowEmojiPicker({
+    super.key,
+    required this.emojiShowing,
+    required this.setEmojiShwing,
+    required this.isPortrait,
+    required this.controller,
+    required this.primaryColor,
+  });
+
+  final bool emojiShowing;
+  final void Function(bool state) setEmojiShwing;
+  final bool isPortrait;
+  final TextEditingController controller;
+  final Color primaryColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Offstage(
+      offstage: !emojiShowing,
+      child: SizedBox(
+        height: isPortrait ? 250 : 200,
+        child: PopScope(
+          canPop: !emojiShowing,
+          onPopInvoked: (didPop) {
+            if (!didPop) {
+              setEmojiShwing(false);
+            }
+          },
+          child: EmojiPicker(
+            textEditingController: controller,
+            config: Config(
+              height: 256,
+              checkPlatformCompatibility: true,
+              emojiViewConfig: EmojiViewConfig(
+                // Issue: https://github.com/flutter/flutter/issues/28894
+                backgroundColor: Theme.of(context).canvasColor,
+                columns: 7,
+                emojiSizeMax: 28 *
+                    (foundation.defaultTargetPlatform == TargetPlatform.iOS
+                        ? 1.20
+                        : 1.0),
+              ),
+              swapCategoryAndBottomBar: true,
+              skinToneConfig: const SkinToneConfig(),
+              categoryViewConfig: CategoryViewConfig(
+                indicatorColor: primaryColor,
+                iconColorSelected: primaryColor,
+                backspaceColor: primaryColor,
+                backgroundColor: Theme.of(context).canvasColor,
+              ),
+              bottomActionBarConfig: const BottomActionBarConfig(
+                backgroundColor: Colors.transparent,
+                buttonColor: Colors.transparent,
+                buttonIconColor: Colors.grey,
+              ),
+              searchViewConfig: SearchViewConfig(
+                backgroundColor: Theme.of(context).canvasColor,
+                buttonIconColor: Colors.grey,
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }

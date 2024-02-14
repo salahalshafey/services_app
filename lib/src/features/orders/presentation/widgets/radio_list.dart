@@ -4,7 +4,12 @@ import 'package:flutter/services.dart';
 import '../../../../core/util/functions/string_manipulations_and_search.dart';
 
 class RadioList extends StatefulWidget {
-  const RadioList(this.choices, this.onSellected, {Key? key}) : super(key: key);
+  const RadioList({
+    Key? key,
+    required this.choices,
+    required this.onSellected,
+  }) : super(key: key);
+
   final List<String> choices;
   final void Function(int? index, String? otherDetails) onSellected;
 
@@ -69,14 +74,14 @@ class _RadioListState extends State<RadioList> {
                         _otherDetailsController.text,
                       );
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Please provide us more details',
-                      fillColor: Colors.grey.shade200,
                       filled: true,
-                      border: const OutlineInputBorder(
+                      border: OutlineInputBorder(
                         borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
-                      contentPadding: const EdgeInsets.all(15),
+                      contentPadding: EdgeInsets.all(15),
                     ),
                   ),
                 )

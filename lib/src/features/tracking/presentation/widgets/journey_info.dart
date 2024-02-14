@@ -56,13 +56,19 @@ class ColorsInfo extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text('Fast', textAlign: TextAlign.center),
+            const Text(
+              'Fast',
+              style: TextStyle(color: Colors.black),
+            ),
             const ColorDetails(color: Colors.blue, speedRange: '[120 - ...]'),
             const ColorDetails(color: Colors.green, speedRange: '[80 - 120]'),
             const ColorDetails(color: Colors.orange, speedRange: '[40 - 80]'),
             const ColorDetails(color: Colors.red, speedRange: '[20 - 40]'),
             ColorDetails(color: Colors.red[900]!, speedRange: '[0 - 20]'),
-            const Text('Slow'),
+            const Text(
+              'Slow',
+              style: TextStyle(color: Colors.black),
+            ),
           ],
         ),
       ),
@@ -96,7 +102,8 @@ class ColorDetails extends StatelessWidget {
           const SizedBox(width: 10),
           Text(
             speedRange,
-            style: const TextStyle(color: Colors.blue, fontSize: 10.4),
+            style: TextStyle(
+                color: Theme.of(context).primaryColor, fontSize: 10.4),
             textAlign: TextAlign.start,
           ),
         ],
@@ -152,13 +159,19 @@ class _TotalInfoState extends State<TotalInfo> {
                 InfoIconButton(onPressed: _toggolShowInfo),
                 Info(
                   title: 'Total Distance:',
-                  icon: const Icon(Icons.swap_calls_rounded),
+                  icon: Icon(
+                    Icons.swap_calls_rounded,
+                    color: Theme.of(context).primaryColor,
+                  ),
                   info: wellFormatedDistance(widget.totalDistance),
                 ),
                 const SizedBox(height: 15),
                 Info(
                   title: 'Total Time:',
-                  icon: const Icon(Icons.date_range),
+                  icon: Icon(
+                    Icons.date_range,
+                    color: Theme.of(context).primaryColor,
+                  ),
                   info: wellFormatedDuration(
                     widget.totalDuration,
                     lineEach: true,
@@ -208,7 +221,8 @@ class Info extends StatelessWidget {
         children: [
           Text(
             title,
-            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+                fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black),
           ),
           Row(
             children: [
@@ -222,6 +236,7 @@ class Info extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w900,
+                    color: Colors.black,
                   ),
                 ),
               ),
