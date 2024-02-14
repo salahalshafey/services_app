@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'core/theme/my_theme.dart';
 import 'features/account/presentation/pages/account_screen.dart';
 import 'features/account/presentation/providers/account.dart';
 
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   Color get _myPrimaryColor => Colors.blue[900]!;
-  Color get _mysecondaryColor => Colors.blue[700]!;
+  // Color get _mysecondaryColor => Colors.blue[700]!;
 
   @override
   Widget build(BuildContext context) {
@@ -43,69 +44,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Services',
-        theme: ThemeData(
-          primaryColor: _myPrimaryColor,
-          colorScheme: ColorScheme.fromSeed(seedColor: _myPrimaryColor),
-          useMaterial3: false,
-          secondaryHeaderColor: _mysecondaryColor,
-          appBarTheme: AppBarTheme(
-            color: _myPrimaryColor,
-            /* shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(25),
-                bottomRight: Radius.circular(25),
-              ),
-            ),*/
-          ),
-          iconTheme: IconThemeData(color: _myPrimaryColor),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all<Color>(_myPrimaryColor),
-              textStyle: MaterialStateProperty.all<TextStyle>(const TextStyle(
-                fontSize: 17,
-              )),
-              shape: MaterialStateProperty.all(
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              ),
-              padding: MaterialStateProperty.all(
-                  const EdgeInsets.symmetric(vertical: 10, horizontal: 15)),
-            ),
-          ),
-          outlinedButtonTheme: OutlinedButtonThemeData(
-            style: ButtonStyle(
-              foregroundColor:
-                  MaterialStateProperty.all<Color>(_myPrimaryColor),
-              textStyle: MaterialStateProperty.all<TextStyle>(const TextStyle(
-                fontSize: 17,
-              )),
-              shape: MaterialStateProperty.all(
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              ),
-              padding: MaterialStateProperty.all(
-                  const EdgeInsets.symmetric(vertical: 10, horizontal: 15)),
-            ),
-          ),
-          textButtonTheme: TextButtonThemeData(
-            style: ButtonStyle(
-              foregroundColor:
-                  MaterialStateProperty.all<Color>(_myPrimaryColor),
-            ),
-          ),
-          dialogTheme: DialogTheme(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          ),
-          progressIndicatorTheme:
-              ProgressIndicatorThemeData(color: _myPrimaryColor),
-        ),
-        darkTheme: ThemeData.dark().copyWith(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: _myPrimaryColor,
-            brightness: Brightness.dark,
-          ),
-        ),
-        themeMode: ThemeMode.system,
+        theme: MyTheme.light(_myPrimaryColor, useMaterial3: false),
+        darkTheme: MyTheme.dark(_myPrimaryColor, useMaterial3: true),
+        themeMode: ThemeMode.light,
         home: const MainScreen(),
         routes: {
           ServiceGiversScreen.routName: (ctx) => const ServiceGiversScreen(),

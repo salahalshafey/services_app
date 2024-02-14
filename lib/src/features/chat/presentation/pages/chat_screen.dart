@@ -78,6 +78,7 @@ class _ReadOnlyContainer extends StatelessWidget {
       child: Text(
         title,
         textAlign: TextAlign.center,
+        style: const TextStyle(color: Colors.black),
       ),
     );
   }

@@ -36,7 +36,7 @@ class ServicesItem extends StatelessWidget {
           name,
           textAlign: TextAlign.center,
           style: const TextStyle(
-            color: Colors.black,
+            //  color: Colors.black,
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),

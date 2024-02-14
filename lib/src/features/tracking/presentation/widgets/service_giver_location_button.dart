@@ -21,28 +21,37 @@ class ServiceGiverLocationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: Provider.of<Tracking>(context, listen: false)
-            .listenToServiceGiverLocations(orderId),
-        builder: (context, AsyncSnapshot<bool> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          final isSharing = Provider.of<Tracking>(context, listen: false)
-              .isServiceGiverSharingLocation;
-
+      stream: Provider.of<Tracking>(context, listen: false)
+          .listenToServiceGiverLocations(orderId),
+      builder: (context, AsyncSnapshot<bool> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting ||
+            snapshot.hasError) {
           return CustomTextButton(
-            text: snapshot.hasError
-                ? "Couldn't get ${firstName(serviceGiverName)} location, ${snapshot.error}"
-                : 'See Where is ${firstName(serviceGiverName)} On The Map',
+            text: 'See Where is ${firstName(serviceGiverName)} On The Map',
             iconActive: Icons.location_on,
             iconDeActive: Icons.location_off,
             onPressed: () {
               Navigator.of(context)
                   .pushNamed(TrackingScreen.routName, arguments: orderId);
             },
-            isActive: snapshot.hasError ? false : isSharing,
+            isActive: false,
           );
-        });
+        }
+
+        final isSharing = Provider.of<Tracking>(context, listen: false)
+            .isServiceGiverSharingLocation;
+
+        return CustomTextButton(
+          text: 'See Where is ${firstName(serviceGiverName)} On The Map',
+          iconActive: Icons.location_on,
+          iconDeActive: Icons.location_off,
+          onPressed: () {
+            Navigator.of(context)
+                .pushNamed(TrackingScreen.routName, arguments: orderId);
+          },
+          isActive: isSharing,
+        );
+      },
+    );
   }
 }

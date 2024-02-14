@@ -59,6 +59,7 @@ dependencies:
   proximity_sensor: ^1.0.4
   #flutter_config: ^2.0.2
   emoji_picker_flutter: ^2.0.0
+  firebase_app_check: ^0.2.1+13
   
 
 dev_dependencies:
