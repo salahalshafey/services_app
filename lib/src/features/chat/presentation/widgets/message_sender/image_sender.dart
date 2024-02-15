@@ -95,7 +95,7 @@ class ImagePreviwScreen extends StatelessWidget {
               maxScale: PhotoViewComputedScale.contained * 3.0,
             ),
           ),
-          Positioned(
+          PositionedDirectional(
             width: MediaQuery.of(context).size.width,
             bottom: 10,
             child: ImageSenderWithCaption(image: image, orderId: orderId),
@@ -125,7 +125,7 @@ class ImageSenderWithCaption extends StatefulWidget {
 class _ImageSenderWithCaptionState extends State<ImageSenderWithCaption> {
   final _controller = TextEditingController();
   var _isLoading = false;
-  var _textDirection = TextDirection.ltr;
+  var _textDirection = getDirectionalityOf("");
 
   void _isLoadingState(bool state) {
     setState(() {
@@ -197,15 +197,9 @@ class _ImageSenderWithCaptionState extends State<ImageSenderWithCaption> {
               ),
               textDirection: _textDirection,
               onChanged: (value) {
-                if (firstCharIsArabic(value)) {
-                  setState(() {
-                    _textDirection = TextDirection.rtl;
-                  });
-                } else {
-                  setState(() {
-                    _textDirection = TextDirection.ltr;
-                  });
-                }
+                setState(() {
+                  _textDirection = getDirectionalityOf(value);
+                });
               },
             ),
           ),

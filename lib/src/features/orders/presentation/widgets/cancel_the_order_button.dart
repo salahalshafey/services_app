@@ -72,7 +72,7 @@ class _CancelTheOrderButtonState extends State<CancelTheOrderButton> {
 
     final reason = await showCustomBottomSheet<String>(
       context: context,
-      title: 'Please select reason',
+      title: 'Please select a reason',
       child: RadioList(
         choices: _choices,
         onSellected: (index, otherDetails) {
@@ -85,7 +85,8 @@ class _CancelTheOrderButtonState extends State<CancelTheOrderButton> {
         if (_sellectedIndex == null) {
           showCustomAlretDialog(
             context: context,
-            title: '',
+            title: 'Select a reason',
+            titleColor: Colors.red,
             content: 'You must sellect a reason',
           );
           return;
@@ -93,7 +94,8 @@ class _CancelTheOrderButtonState extends State<CancelTheOrderButton> {
             _otherDetails!.split(RegExp(' +')).length < 5) {
           showCustomAlretDialog(
             context: context,
-            title: '',
+            title: 'More details',
+            titleColor: Colors.red,
             content: 'Please provide us more details not less than 5 words',
           );
           return;

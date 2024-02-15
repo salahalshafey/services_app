@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
             darkTheme: MyTheme.dark(_myPrimaryColor, useMaterial3: true),
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
-            locale: const Locale("ar"),
+            locale: const Locale("en"),
             home: const MainScreen(),
             routes: {
               ServiceGiversScreen.routName: (ctx) =>

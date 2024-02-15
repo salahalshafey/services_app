@@ -19,7 +19,7 @@ class RadioList extends StatefulWidget {
 
 class _RadioListState extends State<RadioList> {
   int? _sellectedIndex;
-  var _textDirection = TextDirection.ltr;
+  var _textDirection = getDirectionalityOf("");
   final _otherDetailsController = TextEditingController();
 
   @override
@@ -59,15 +59,9 @@ class _RadioListState extends State<RadioList> {
                     maxLines: 5,
                     textDirection: _textDirection,
                     onChanged: (value) {
-                      if (firstCharIsArabic(value)) {
-                        setState(() {
-                          _textDirection = TextDirection.rtl;
-                        });
-                      } else {
-                        setState(() {
-                          _textDirection = TextDirection.ltr;
-                        });
-                      }
+                      setState(() {
+                        _textDirection = getDirectionalityOf(value);
+                      });
 
                       widget.onSellected(
                         widget.choices.length - 1,

@@ -10,7 +10,7 @@ class BackButtonWithImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       child: Padding(
-        padding: const EdgeInsets.only(left: 5),
+        padding: const EdgeInsetsDirectional.only(start: 5),
         child: ElevatedButton(
           onPressed: () => Navigator.of(context).pop(),
           style: ButtonStyle(

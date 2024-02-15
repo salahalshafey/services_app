@@ -131,6 +131,7 @@ class _MessageSenderState extends State<MessageSender>
                         } else {
                           _reverseAnimations();
                         }
+
                         setState(() {
                           _textDirection = getDirectionalityOf(value);
                         });

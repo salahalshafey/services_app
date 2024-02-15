@@ -63,10 +63,10 @@ class ImageMessage extends StatelessWidget {
                 imageCaption: captionOfImage,
               ),
               if (captionOfImage == null)
-                Positioned(
+                PositionedDirectional(
                   child: dateBuilder(date: date, color: Colors.white),
                   bottom: 5,
-                  right: 5,
+                  end: 5,
                 )
             ],
           ),
@@ -106,7 +106,7 @@ class ImageMessage extends StatelessWidget {
             ),
           if (captionOfImage != null)
             Align(
-              alignment: Alignment.bottomRight,
+              alignment: AlignmentDirectional.bottomEnd,
               child: dateBuilder(date: date, color: Colors.black54),
             ),
         ],

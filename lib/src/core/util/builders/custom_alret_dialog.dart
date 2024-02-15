@@ -27,7 +27,7 @@ Future<T?> showCustomAlretDialog<T>({
   Widget? contentWidget,
   Color? titleColor,
   Widget? icon,
-  bool showIconAboveTitle = true,
+  bool showIconAboveTitle = false,
   List<Widget> Function(BuildContext dialogContext)? actionsBuilder,
   BoxConstraints? constraints,
   bool barrierDismissible = true,

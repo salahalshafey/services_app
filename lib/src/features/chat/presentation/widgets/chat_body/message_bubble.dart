@@ -99,11 +99,11 @@ Text dateBuilder({required DateTime date, required Color color}) {
   );
 }
 
-BorderRadius borderRadiusBuilder({required bool isMe}) {
-  return BorderRadius.only(
-    topLeft: const Radius.circular(12),
-    topRight: const Radius.circular(12),
-    bottomLeft: !isMe ? const Radius.circular(0) : const Radius.circular(12),
-    bottomRight: isMe ? const Radius.circular(0) : const Radius.circular(12),
+BorderRadiusDirectional borderRadiusBuilder({required bool isMe}) {
+  return BorderRadiusDirectional.only(
+    topStart: const Radius.circular(20),
+    topEnd: const Radius.circular(20),
+    bottomStart: !isMe ? const Radius.circular(0) : const Radius.circular(20),
+    bottomEnd: isMe ? const Radius.circular(0) : const Radius.circular(20),
   );
 }

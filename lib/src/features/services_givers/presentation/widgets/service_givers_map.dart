@@ -63,6 +63,11 @@ class _ServiceGiversMapState extends State<ServiceGiversMap> {
       showCustomAlretDialog(
         context: context,
         title: 'Awesome!!',
+        icon: Icon(
+          Icons.details_rounded,
+          color: Theme.of(context).primaryColor,
+        ),
+        titleColor: Theme.of(context).primaryColor,
         content:
             'The Closest ${widget.serviceName} is about $distanceToClosest far away',
       );

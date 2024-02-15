@@ -7,6 +7,7 @@ class MyTheme {
       colorScheme: ColorScheme.fromSeed(
         seedColor: primaryColor,
         primary: primaryColor,
+        secondary: primaryColor,
       ),
       useMaterial3: useMaterial3,
       appBarTheme: AppBarTheme(
@@ -67,10 +68,12 @@ class MyTheme {
   static ThemeData dark(Color primaryColor, {required bool useMaterial3}) {
     return ThemeData.dark(useMaterial3: useMaterial3).copyWith(
       primaryColor: primaryColor,
+
       colorScheme: ColorScheme.fromSeed(
         brightness: Brightness.dark,
         seedColor: primaryColor,
         primary: primaryColor,
+        secondary: primaryColor,
       ),
       dialogTheme: DialogTheme(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),

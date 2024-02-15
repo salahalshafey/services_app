@@ -27,7 +27,6 @@ class Description extends StatelessWidget {
       child: Column(
         children: [
           Row(
-            // textDirection: TextDirection.rtl, // for arabic languge
             children: [
               icon,
               const SizedBox(width: 10),
@@ -41,9 +40,7 @@ class Description extends StatelessWidget {
           const SizedBox(height: 15),
           LinkifyText(
             text: description,
-            textDirection: firstCharIsArabic(description)
-                ? TextDirection.rtl
-                : TextDirection.ltr,
+            textDirection: getDirectionalityOf(description),
             textAlign: TextAlign.justify,
             style: TextStyle(
               fontSize: 16,

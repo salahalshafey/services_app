@@ -75,7 +75,7 @@ class ImageContainer extends StatefulWidget {
   final Border? border;
 
   /// Applies only to boxes with rectangular shapes; if [shape] is not [BoxShape.rectangle] error will be thrown.
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
   final bool containingShadow;
   final bool showHighlight;
   final bool showImageDialoge;
@@ -243,7 +243,7 @@ class _ImageContainer extends StatefulWidget {
   final BoxFit? fit;
   final BoxShape shape;
   final Border? border;
-  final BorderRadius? borderRadius;
+  final BorderRadiusGeometry? borderRadius;
   final bool containingShadow;
   final bool showHighlight;
   final bool showImageDialoge;

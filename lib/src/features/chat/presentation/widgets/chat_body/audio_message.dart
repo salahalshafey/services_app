@@ -190,13 +190,16 @@ class _AudioMessageState extends State<AudioMessage> {
                   await audioPlayer.resume();
                 },
               ),
-              Positioned(
-                left: 25,
+              PositionedDirectional(
+                start: 25,
                 bottom: 0,
-                child: Text(formatedDuration(isPlaying ? position : duration)),
+                child: Text(
+                  formatedDuration(isPlaying ? position : duration),
+                  style: const TextStyle(color: Colors.black54),
+                ),
               ),
-              Positioned(
-                right: 3,
+              PositionedDirectional(
+                end: 3,
                 bottom: 0,
                 child: dateBuilder(date: widget.date, color: Colors.black54),
               ),

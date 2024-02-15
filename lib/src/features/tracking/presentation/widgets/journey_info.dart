@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:services_app/src/app.dart';
 
 import '../../../../core/util/functions/date_time_and_duration.dart';
 import '../../../../core/util/functions/distance_and_speed.dart';
@@ -22,19 +23,22 @@ class JourneyInfo extends StatelessWidget {
     return Positioned(
       top: 10,
       left: 10,
-      child: ColumnOrRow(
-        alignType: isPortrait ? AlignType.column : AlignType.row,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const ColorsInfo(),
-          isPortrait
-              ? const SizedBox(height: 5)
-              : const SizedBox(width: 10), // on Row will be width
-          TotalInfo(
-            totalDistance: totalDistance,
-            totalDuration: totalDuration,
-          ),
-        ],
+      child: Directionality(
+        textDirection: TextDirection.ltr,
+        child: ColumnOrRow(
+          alignType: isPortrait ? AlignType.column : AlignType.row,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const ColorsInfo(),
+            isPortrait
+                ? const SizedBox(height: 5)
+                : const SizedBox(width: 10), // on Row will be width
+            TotalInfo(
+              totalDistance: totalDistance,
+              totalDuration: totalDuration,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -137,48 +141,54 @@ class _TotalInfoState extends State<TotalInfo> {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      alignment: Alignment.topLeft,
-      duration: const Duration(milliseconds: 200),
-      width: _showInfo ? 250 : 25,
-      height: _showInfo ? 150 : 25,
-      decoration: BoxDecoration(
-        color: _showInfo ? Colors.white60 : Colors.transparent,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(15),
-          bottomLeft: Radius.circular(5),
-          bottomRight: Radius.circular(5),
-          topRight: Radius.circular(5),
+    return Directionality(
+      textDirection: Directionality.of(navigatorKey.currentContext!),
+      child: AnimatedContainer(
+        alignment: Alignment.topLeft,
+        duration: const Duration(milliseconds: 200),
+        width: _showInfo ? 250 : 25,
+        height: _showInfo ? 150 : 25,
+        decoration: BoxDecoration(
+          color: _showInfo ? Colors.white60 : Colors.transparent,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(15),
+            bottomLeft: Radius.circular(5),
+            bottomRight: Radius.circular(5),
+            topRight: Radius.circular(5),
+          ),
         ),
+        child: !_showInfo
+            ? InfoIconButton(onPressed: _toggolShowInfo)
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: InfoIconButton(onPressed: _toggolShowInfo),
+                  ),
+                  Info(
+                    title: 'Total Distance:',
+                    icon: Icon(
+                      Icons.swap_calls_rounded,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    info: wellFormatedDistance(widget.totalDistance),
+                  ),
+                  const SizedBox(height: 15),
+                  Info(
+                    title: 'Total Time:',
+                    icon: Icon(
+                      Icons.date_range,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    info: wellFormatedDuration(
+                      widget.totalDuration,
+                      lineEach: true,
+                    ),
+                  ),
+                ],
+              ),
       ),
-      child: !_showInfo
-          ? InfoIconButton(onPressed: _toggolShowInfo)
-          : Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                InfoIconButton(onPressed: _toggolShowInfo),
-                Info(
-                  title: 'Total Distance:',
-                  icon: Icon(
-                    Icons.swap_calls_rounded,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  info: wellFormatedDistance(widget.totalDistance),
-                ),
-                const SizedBox(height: 15),
-                Info(
-                  title: 'Total Time:',
-                  icon: Icon(
-                    Icons.date_range,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  info: wellFormatedDuration(
-                    widget.totalDuration,
-                    lineEach: true,
-                  ),
-                ),
-              ],
-            ),
     );
   }
 }

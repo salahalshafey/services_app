@@ -29,7 +29,7 @@ class _RequestServiceFormState extends State<RequestServiceForm> {
   final _formKey = GlobalKey<FormState>();
   final _descriptionFocusNode = FocusNode();
   final descriptionController = TextEditingController();
-  var _textDirection = TextDirection.ltr;
+  var _textDirection = getDirectionalityOf("");
 
   XFile? _image;
   var _editedorder = Order(
@@ -179,15 +179,9 @@ class _RequestServiceFormState extends State<RequestServiceForm> {
             textDirection: _textDirection,
             controller: descriptionController,
             onChanged: (description) {
-              if (firstCharIsArabic(description)) {
-                setState(() {
-                  _textDirection = TextDirection.rtl;
-                });
-              } else {
-                setState(() {
-                  _textDirection = TextDirection.ltr;
-                });
-              }
+              setState(() {
+                _textDirection = getDirectionalityOf(description);
+              });
             },
             validator: (value) {
               value ??= '';

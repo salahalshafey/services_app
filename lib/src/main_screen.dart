@@ -2,6 +2,7 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'core/util/builders/on_will_pop_dialog.dart';
 import 'features/orders/presentation/pages/current_orders_screen.dart';
 import 'features/orders/presentation/pages/previous_orders_screen.dart';
 import 'features/services/presentation/pages/services_screen.dart';
@@ -65,11 +66,11 @@ class _MainScreenState extends State<MainScreen>
         }
 
         // final navigator = Navigator.of(context);
-        //  final shouldPop = await exitWillPopDialog(context);
-        // if (shouldPop) {
-        SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-        // navigator.pop();
-        //  }
+        final shouldPop = await exitWillPopDialog(context);
+        if (shouldPop) {
+          SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+          // navigator.pop();
+        }
       },
       child: Scaffold(
         body: PageView(
