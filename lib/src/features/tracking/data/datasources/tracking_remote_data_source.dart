@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:services_app/src/features/tracking/data/models/tracking_info_model.dart';
 
-import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/exceptions_without_message.dart';
 
 abstract class TrackingRemoteDataSource {
   Stream<TrackingInfoModel> getTrackingLive(String orderId);

@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/error_exceptions_with_message.dart';
+import '../../../../core/error/exceptions_without_message.dart';
 
 import '../../data/models/order_model.dart';
 import '../../domain/entities/order.dart';
@@ -46,11 +47,11 @@ class Orders with ChangeNotifier {
       _orders = await getAllUserOrders(userId);
       notifyListeners();
     } on OfflineException {
-      throw Error('You are currently offline.');
+      throw ErrorMessage('You are currently offline.');
     } on ServerException {
-      throw Error('Something went wrong, please try again later.');
+      throw ErrorMessage('Something went wrong, please try again later.');
     } catch (error) {
-      throw Error('An unexpected error happened.');
+      throw ErrorMessage('An unexpected error happened.');
     }
   }
 
@@ -69,11 +70,11 @@ class Orders with ChangeNotifier {
 
       return order.id;
     } on OfflineException {
-      throw Error('You are currently offline.');
+      throw ErrorMessage('You are currently offline.');
     } on ServerException {
-      throw Error('Something went wrong, please try again later.');
+      throw ErrorMessage('Something went wrong, please try again later.');
     } catch (error) {
-      throw Error('An unexpected error happened.');
+      throw ErrorMessage('An unexpected error happened.');
     }
   }
 
@@ -91,11 +92,11 @@ class Orders with ChangeNotifier {
       _orders[orderIndex] = OrderModel.fromOrder(canceledOrder);
       notifyListeners();
     } on OfflineException {
-      throw Error('You are currently offline.');
+      throw ErrorMessage('You are currently offline.');
     } on ServerException {
-      throw Error('Something went wrong, please try again later.');
+      throw ErrorMessage('Something went wrong, please try again later.');
     } catch (error) {
-      throw Error('An unexpected error happened.');
+      throw ErrorMessage('An unexpected error happened.');
     }
   }
 
@@ -109,11 +110,12 @@ class Orders with ChangeNotifier {
       _orders.removeWhere((order) => order.id == orderId);
       notifyListeners();
     } on OfflineException {
-      throw Error('You are currently offline, order did not get deleted!!!');
+      throw ErrorMessage(
+          'You are currently offline, order did not get deleted!!!');
     } on ServerException {
-      throw Error('Something Went Wrong, order did not get deleted!!!');
+      throw ErrorMessage('Something Went Wrong, order did not get deleted!!!');
     } catch (error) {
-      throw Error('An unexpected error happened.');
+      throw ErrorMessage('An unexpected error happened.');
     }
   }
 }

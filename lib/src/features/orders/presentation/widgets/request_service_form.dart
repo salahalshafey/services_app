@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:services_app/src/core/util/widgets/image_container.dart';
 
-import '../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../../core/util/builders/custom_snack_bar.dart';
 import '../../../../core/util/builders/image_picker.dart';
 

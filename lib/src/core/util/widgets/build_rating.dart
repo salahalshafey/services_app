@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BuildRating extends StatelessWidget {
-  BuildRating(this.rating, {Key? key}) : super(key: key);
+  BuildRating(this.rating, {super.key});
 
   final double rating;
   final List<bool> _isFilled = [false, false, false, false, false];

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:services_app/src/features/orders/data/models/order_model.dart';
 
-import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/exceptions_without_message.dart';
 import '../../../../core/network/network_info.dart';
 
 import '../../domain/entities/order.dart';

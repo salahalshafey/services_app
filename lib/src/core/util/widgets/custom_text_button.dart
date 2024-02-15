@@ -7,8 +7,8 @@ class CustomTextButton extends StatelessWidget {
     required this.iconDeActive,
     required this.onPressed,
     this.isActive = true,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String text;
   final IconData iconActive;

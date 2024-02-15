@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../../core/util/builders/custom_bottom_sheet.dart';
 
 import '../providers/orders.dart';
@@ -39,17 +39,17 @@ class _CancelTheOrderButtonState extends State<CancelTheOrderButton> {
       title: 'Attention',
       titleColor: Colors.red,
       content: 'Are you Sure That You Want To Cancel This Order',
-      actions: <Widget>[
+      actionsBuilder: (dialogContext) => [
         TextButton(
           child: const Text('Yes', style: TextStyle(color: Colors.red)),
           onPressed: () {
-            Navigator.of(context).pop(true);
+            Navigator.of(dialogContext).pop(true);
           },
         ),
         TextButton(
           child: const Text('No'),
           onPressed: () {
-            Navigator.of(context).pop(false);
+            Navigator.of(dialogContext).pop(false);
           },
         ),
       ],

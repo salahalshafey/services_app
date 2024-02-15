@@ -2,8 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:services_app/src/core/error/exceptions.dart';
 
+import '../../../../core/error/error_exceptions_with_message.dart';
+import '../../../../core/error/exceptions_without_message.dart';
 import '../../domain/entities/service_giver.dart';
 import '../../domain/usecases/get_all_sevice_givers.dart';
 
@@ -19,9 +20,9 @@ class ServicesGivers with ChangeNotifier {
       _serviceGivers = await getAllServiceGivers(serviceId);
       notifyListeners();
     } on OfflineException {
-      throw Error('You are currently offline.');
+      throw ErrorMessage('You are currently offline.');
     } on ServerException {
-      throw Error('Something Went Wrong!!!');
+      throw ErrorMessage('Something Went Wrong!!!');
     }
   }
 

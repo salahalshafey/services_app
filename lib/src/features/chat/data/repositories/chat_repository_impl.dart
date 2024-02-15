@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:services_app/src/features/chat/data/models/message_model.dart';
 
-import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/exceptions_without_message.dart';
 import '../../../../core/network/network_info.dart';
 
 import '../../domain/entities/message.dart';

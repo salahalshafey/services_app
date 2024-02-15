@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import '../../../../account/presentation/providers/account.dart';
 import '../../providers/chat.dart';
 
-import '../../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../../../core/util/builders/custom_snack_bar.dart';
 
 class AudioSender extends StatefulWidget {

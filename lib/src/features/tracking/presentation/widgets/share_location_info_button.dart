@@ -28,7 +28,7 @@ class ShareLocationInfoButton extends StatelessWidget {
 
     final date = lastSeenLocation.time;
     final dateString =
-        '${date.day}/${date.month}/${date.year} at ${time24To12HoursFormat(date.hour, date.minute)}';
+        '${date.day}/${date.month}/${date.year} at ${time24To12HoursFormat(date)}';
     final time = "time: " + dateString + "\n";
 
     final speed =

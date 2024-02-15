@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -11,6 +13,9 @@ import 'package:share_plus/share_plus.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../builders/custom_alret_dialog.dart';
 import '../builders/custom_snack_bar.dart';
 
 import '../functions/string_manipulations_and_search.dart';
@@ -21,7 +26,7 @@ class ImageContainer extends StatefulWidget {
     required this.image,
     required this.imageSource,
     required this.radius,
-    this.saveNetworkImageToLocalStorage = true,
+    this.saveNetworkImageToLocalStorage = false,
     this.localStorageType = LocalStorage.applicationDocumentsDirectory,
     this.imageTitle,
     this.imageCaption,
@@ -38,8 +43,8 @@ class ImageContainer extends StatefulWidget {
     this.loadingIndicatorType = LoadingIndicator.circle,
     this.errorBuilder,
     this.onTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   ///  * [image] will represent a url if imageSource is [From.network],
   ///
@@ -227,8 +232,8 @@ class _ImageContainer extends StatefulWidget {
     this.loadingIndicatorType = LoadingIndicator.circle,
     this.errorBuilder,
     this.onTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String image;
   final From imageSource;
@@ -348,7 +353,7 @@ class __ImageContainerState extends State<_ImageContainer> {
                           builder: (context) => ImageScreen(
                             widget.image,
                             widget.imageSource,
-                            widget.imageTitle ?? '',
+                            widget.imageTitle ?? ' ',
                             widget.imageCaption,
                             widget.errorBuilder,
                           ),
@@ -412,6 +417,17 @@ class __ImageContainerState extends State<_ImageContainer> {
   }
 
   void _showImageDialog(BuildContext context, bool showImageScreen) {
+    /*final screenHeight = MediaQuery.of(context).size.height;
+    var imageDialogHeight = 0.0;
+    if (screenHeight < 400) {
+      imageDialogHeight = screenHeight * 0.8;
+    } else {
+      imageDialogHeight = screenHeight * 0.5;
+    }*/
+
+    final isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
+
     Navigator.of(context).push(
       PageRouteBuilder(
           opaque: false,
@@ -422,56 +438,66 @@ class __ImageContainerState extends State<_ImageContainer> {
               body: Column(
                 children: [
                   _popBuilder(context),
-                  Hero(
-                    tag: widget.image,
-                    child: GestureDetector(
-                      onTap: () {
-                        if (!showImageScreen) return;
-                        Navigator.of(context).pop();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ImageScreen(
-                              widget.image,
-                              widget.imageSource,
-                              widget.imageTitle ?? '',
-                              widget.imageCaption,
-                              widget.errorBuilder,
-                            ),
+                  Expanded(
+                    flex: isPortrait ? 1 : 5,
+                    child: Row(
+                      children: [
+                        _popBuilder(context),
+                        Hero(
+                          tag: widget.image,
+                          child: GestureDetector(
+                            onTap: () {
+                              if (!showImageScreen) return;
+                              Navigator.of(context).pop();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ImageScreen(
+                                    widget.image,
+                                    widget.imageSource,
+                                    widget.imageTitle ?? ' ',
+                                    widget.imageCaption,
+                                    widget.errorBuilder,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: widget.imageSource == From.asset
+                                ? Image.asset(
+                                    widget.image,
+                                    fit: widget.fit,
+                                    errorBuilder:
+                                        widget.errorBuilder ?? _errorBuilder,
+                                  )
+                                : widget.imageSource == From.network
+                                    ? Image.network(
+                                        widget.image,
+                                        fit: widget.fit,
+                                        loadingBuilder:
+                                            widget.showLoadingIndicator
+                                                ? _loadingBuilder
+                                                : null,
+                                        errorBuilder: widget.errorBuilder ??
+                                            _errorBuilder,
+                                      )
+                                    : widget.imageSource == From.file
+                                        ? Image.file(
+                                            File(widget.image),
+                                            fit: widget.fit,
+                                            errorBuilder: widget.errorBuilder ??
+                                                _errorBuilder,
+                                          )
+                                        : Image.memory(
+                                            Uint8List.fromList(
+                                                widget.image.codeUnits),
+                                            fit: widget.fit,
+                                            errorBuilder: widget.errorBuilder ??
+                                                _errorBuilder,
+                                          ),
                           ),
-                        );
-                      },
-                      child: widget.imageSource == From.asset
-                          ? Image.asset(
-                              widget.image,
-                              fit: widget.fit,
-                              errorBuilder:
-                                  widget.errorBuilder ?? _errorBuilder,
-                            )
-                          : widget.imageSource == From.network
-                              ? Image.network(
-                                  widget.image,
-                                  fit: widget.fit,
-                                  loadingBuilder: widget.showLoadingIndicator
-                                      ? _loadingBuilder
-                                      : null,
-                                  errorBuilder:
-                                      widget.errorBuilder ?? _errorBuilder,
-                                )
-                              : widget.imageSource == From.file
-                                  ? Image.file(
-                                      File(widget.image),
-                                      fit: widget.fit,
-                                      errorBuilder:
-                                          widget.errorBuilder ?? _errorBuilder,
-                                    )
-                                  : Image.memory(
-                                      Uint8List.fromList(
-                                          widget.image.codeUnits),
-                                      fit: widget.fit,
-                                      errorBuilder:
-                                          widget.errorBuilder ?? _errorBuilder,
-                                    ),
+                        ),
+                        _popBuilder(context),
+                      ],
                     ),
                   ),
                   _popBuilder(context),
@@ -494,8 +520,8 @@ class ImageScreen extends StatefulWidget {
     this.title,
     this.caption,
     this.errorBuilder, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String image;
   final From imageSource;
@@ -526,6 +552,8 @@ class _ImageScreenState extends State<ImageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final captionMaxHeight = MediaQuery.of(context).size.height * 0.4;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
@@ -564,7 +592,7 @@ class _ImageScreenState extends State<ImageScreen> {
                                 Uint8List.fromList(widget.image.codeUnits)),
                 initialScale: PhotoViewComputedScale.contained * 1.0,
                 minScale: PhotoViewComputedScale.contained * 0.5,
-                maxScale: PhotoViewComputedScale.contained * 3.0,
+                maxScale: PhotoViewComputedScale.contained * 4.0, // 3.0
                 errorBuilder: widget.errorBuilder,
               ),
             ),
@@ -576,14 +604,17 @@ class _ImageScreenState extends State<ImageScreen> {
                 color: Colors.black54,
                 padding: const EdgeInsets.all(10),
                 width: MediaQuery.of(context).size.width,
-                height: widget.caption!.length > 700
-                    ? MediaQuery.of(context).size.height * 0.7
+                height: widget.caption!.textHeight(context) > captionMaxHeight
+                    ? captionMaxHeight
                     : null,
+                /*  height: widget.caption!.length > 700
+                    ? MediaQuery.of(context).size.height * 0.6
+                    : null,*/
                 alignment: Alignment.center,
                 child: SelectableLinkifyText(
                   text: widget.caption!,
                   textAlign: TextAlign.justify,
-                  textDirection: firstCharIsArabic(widget.caption!)
+                  textDirection: firstCharIsRtl(widget.caption!)
                       ? TextDirection.rtl
                       : TextDirection.ltr,
                   style: const TextStyle(
@@ -593,7 +624,7 @@ class _ImageScreenState extends State<ImageScreen> {
                   linkStyle: const TextStyle(
                     color: Colors.blue,
                     fontSize: 18,
-                    decoration: TextDecoration.underline,
+                    // decoration: TextDecoration.underline,
                   ),
                   onOpen: (link, linkType) {
                     if (linkType == TextType.phoneNumber) {
@@ -622,8 +653,7 @@ class _ImageScreenState extends State<ImageScreen> {
 }
 
 class DownloadButton extends StatefulWidget {
-  const DownloadButton(this.image, this.imageSource, {Key? key})
-      : super(key: key);
+  const DownloadButton(this.image, this.imageSource, {super.key});
 
   final String image;
   final From imageSource;
@@ -666,19 +696,24 @@ class _DownloadButtonState extends State<DownloadButton> {
       );
     } catch (error) {
       _loadingState(false);
-      showCustomSnackBar(
+      showCustomAlretDialog(
         context: context,
-        content: 'Error happend while saving the image to gallery.',
+        title: AppLocalizations.of(context)!.error,
+        content: AppLocalizations.of(context)!.errorHappenedWhileSavingTheImage,
+        titleColor: Colors.red,
       );
       return;
     }
 
     _loadingState(false);
     if (savedToGallery == null || !savedToGallery) {
-      showCustomSnackBar(
+      showCustomAlretDialog(
         context: context,
-        content: 'Error happend while saving the image to gallery.',
+        title: AppLocalizations.of(context)!.error,
+        content: AppLocalizations.of(context)!.errorHappenedWhileSavingTheImage,
+        titleColor: Colors.red,
       );
+
       return;
     }
 
@@ -696,8 +731,8 @@ class _DownloadButtonState extends State<DownloadButton> {
                 ? const Icon(Icons.download)
                 : const Icon(Icons.download_done, color: Colors.white),
             tooltip: !_imageDownloaded
-                ? 'Save to gallery'
-                : 'image saved to gallery',
+                ? AppLocalizations.of(context)!.saveToGallery
+                : AppLocalizations.of(context)!.imageSavedToGallery,
             onPressed: !_imageDownloaded ? _saveImageToGallery : null,
           );
   }
@@ -709,8 +744,7 @@ class _ShareButton extends StatefulWidget {
     required this.imageSource,
     this.title,
     this.caption,
-    Key? key,
-  }) : super(key: key);
+  });
 
   final String image;
   final From imageSource;
@@ -749,7 +783,8 @@ class __ShareButtonState extends State<_ShareButton> {
       _loadingState(false);
       showCustomSnackBar(
         context: context,
-        content: 'Error happend while trying to share the image.',
+        content: AppLocalizations.of(context)!
+            .errorHappenedWhileTryingToShareTheImage,
       );
     }
   }
@@ -761,7 +796,7 @@ class __ShareButtonState extends State<_ShareButton> {
             child: CircularProgressIndicator(),
           )
         : IconButton(
-            tooltip: 'Share',
+            tooltip: AppLocalizations.of(context)!.share,
             onPressed: _share,
             icon: const Icon(Icons.share),
           );
@@ -812,6 +847,57 @@ extension on Border {
         width: width ?? top.width,
         style: style ?? top.style,
       );
+}
+
+///
+/// this extension used to calculate the the acual height of the text
+/// above the image screen (caption)
+///
+extension on String {
+  Size get textSize {
+    // text style that used inside SelectableLinkifyText
+    TextStyle textStyle = const TextStyle(
+      color: Colors.white,
+      fontSize: 18,
+    );
+
+    // Create a TextPainter
+    TextPainter textPainter = TextPainter(
+      text: TextSpan(text: this, style: textStyle),
+      textAlign: TextAlign.justify,
+      textDirection:
+          firstCharIsRtl(this) ? TextDirection.rtl : TextDirection.ltr,
+    );
+
+    // Layout constraints, if any
+    textPainter.layout();
+
+    return Size(textPainter.width, textPainter.height);
+  }
+
+  /// calculate the the acual height of the text
+  ///
+  double textHeight(BuildContext context) {
+    // 20 is the padding arround the text
+    const padding = 20;
+
+    final availableWidth = MediaQuery.of(context).size.width - padding;
+    final lines = split("\n")..add("\n");
+
+    double totalHeight = 0.0;
+    for (final line in lines) {
+      final lineSize = line.textSize;
+      var actualLineCountNumbers = (lineSize.width / availableWidth).ceil();
+
+      if (actualLineCountNumbers == 0) {
+        actualLineCountNumbers = 1;
+      }
+
+      totalHeight += actualLineCountNumbers * lineSize.height;
+    }
+
+    return totalHeight + padding;
+  }
 }
 
 enum From {

@@ -31,9 +31,7 @@ class TextMessage extends StatelessWidget {
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
-            textDirection: firstCharIsArabic(message)
-                ? TextDirection.rtl
-                : TextDirection.ltr,
+            textDirection: getDirectionalityOf(message),
             linkStyle: const TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.blue,

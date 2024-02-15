@@ -10,8 +10,8 @@ class CustomCard extends StatefulWidget {
     this.margin = EdgeInsets.zero,
     this.elevation,
     this.onTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final Widget child;
   final Color? color;

@@ -22,7 +22,7 @@ class _MessageSenderState extends State<MessageSender>
   final _focusNode = FocusNode();
   bool _emojiShowing = false;
   var _isSendButtonLoading = false;
-  var _textDirection = TextDirection.ltr;
+  var _textDirection = getDirectionalityOf("");
   late final _primaryColor = Theme.of(context).primaryColor;
 
   late final AnimationController _slideController = AnimationController(
@@ -62,12 +62,6 @@ class _MessageSenderState extends State<MessageSender>
     //
     //
     //
-  }
-
-  void changeTextDirectionToLtr() {
-    setState(() {
-      _textDirection = TextDirection.ltr;
-    });
   }
 
   void sendButtonLoadingState(bool state) {
@@ -118,9 +112,9 @@ class _MessageSenderState extends State<MessageSender>
                         alignLabelWithHint: true,
                         filled: true,
                         //fillColor: Colors.white,
-                        contentPadding: EdgeInsets.only(
-                          left: 50,
-                          right: 5,
+                        contentPadding: EdgeInsetsDirectional.only(
+                          start: 50,
+                          end: 5,
                           bottom: 10,
                           top: 10,
                         ),
@@ -137,24 +131,18 @@ class _MessageSenderState extends State<MessageSender>
                         } else {
                           _reverseAnimations();
                         }
-                        if (firstCharIsArabic(value)) {
-                          setState(() {
-                            _textDirection = TextDirection.rtl;
-                          });
-                        } else {
-                          setState(() {
-                            _textDirection = TextDirection.ltr;
-                          });
-                        }
+                        setState(() {
+                          _textDirection = getDirectionalityOf(value);
+                        });
                       },
                     ),
                   ),
                   const SizedBox(width: 60, height: 55),
                 ],
               ),
-              Positioned(
+              PositionedDirectional(
                 bottom: 0,
-                left: 0,
+                start: 0,
                 child: IconButton(
                   onPressed: _toggoleEmojiShoing,
                   tooltip: _emojiShowing ? 'Show Keyboard' : 'Pick Emoji',
@@ -167,9 +155,9 @@ class _MessageSenderState extends State<MessageSender>
                   ),
                 ),
               ),
-              Positioned(
+              PositionedDirectional(
                 bottom: 0,
-                right: 0,
+                end: 0,
                 child: Row(
                   children: [
                     LocationSender(
@@ -197,7 +185,6 @@ class _MessageSenderState extends State<MessageSender>
                       TextSender(
                         widget.orderId,
                         sendButtonLoadingState,
-                        changeTextDirectionToLtr,
                         _controller,
                         _slideController,
                       ),

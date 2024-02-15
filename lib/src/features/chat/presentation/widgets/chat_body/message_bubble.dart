@@ -90,7 +90,7 @@ class MessageBubble extends StatelessWidget {
 
 Text dateBuilder({required DateTime date, required Color color}) {
   return Text(
-    formatedDate(date) + ', ' + time24To12HoursFormat(date.hour, date.minute),
+    formatedDate(date) + ', ' + time24To12HoursFormat(date),
     style: TextStyle(
       color: color,
       fontSize: 12,

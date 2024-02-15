@@ -3,7 +3,7 @@ import 'package:flutter/gestures.dart';
 
 import '../classes/pair_class.dart';
 
-class LinkifyText extends StatelessWidget {
+class LinkifyText extends StatefulWidget {
   const LinkifyText({
     required this.text,
     required this.style,
@@ -11,8 +11,8 @@ class LinkifyText extends StatelessWidget {
     required this.textDirection,
     required this.linkStyle,
     required this.onOpen,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String text;
   final TextStyle style;
@@ -22,32 +22,95 @@ class LinkifyText extends StatelessWidget {
   final void Function(String link, TextType linkType) onOpen;
 
   @override
+  State<LinkifyText> createState() => _LinkifyTextState();
+}
+
+class _LinkifyTextState extends State<LinkifyText> {
+  int? _enteredSpanIndex;
+
+  TapGestureRecognizer _customTapGestureRecognizerOf(int enteredSpanIndex) {
+    return TapGestureRecognizer()
+      ..onTapDown = (details) {
+        setState(() {
+          _enteredSpanIndex = enteredSpanIndex;
+        });
+      }
+      ..onTapCancel = () {
+        setState(() {
+          _enteredSpanIndex = null;
+        });
+      }
+      ..onTapUp = (_) {
+        setState(() {
+          _enteredSpanIndex = null;
+        });
+      };
+  }
+
+  @override
   Widget build(BuildContext context) {
+    int i = 0;
+
     return Text.rich(
       TextSpan(
-        children: getLinksInText(text).map((inlineText) {
-          if (inlineText.second == TextType.normal) {
+        children: getLinksInText(widget.text).map((inlineText) {
+          final currentSpanIndex = i++;
+
+          if (inlineText.second == TextType.url) {
             return TextSpan(
+              recognizer: _customTapGestureRecognizerOf(currentSpanIndex)
+                ..onTap =
+                    () => widget.onOpen(inlineText.first, inlineText.second),
               text: inlineText.first,
-              style: style,
-            );
-          } else {
-            return TextSpan(
-              recognizer: TapGestureRecognizer()
-                ..onTap = () => onOpen(inlineText.first, inlineText.second),
-              text: inlineText.first,
-              style: linkStyle,
+              style: widget.linkStyle.copyWith(
+                backgroundColor: _enteredSpanIndex == currentSpanIndex
+                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                    : null,
+              ),
             );
           }
+
+          if (inlineText.second == TextType.email) {
+            return TextSpan(
+              recognizer: _customTapGestureRecognizerOf(currentSpanIndex)
+                ..onTap =
+                    () => widget.onOpen(inlineText.first, inlineText.second),
+              text: inlineText.first,
+              style: widget.linkStyle.copyWith(
+                backgroundColor: _enteredSpanIndex == currentSpanIndex
+                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                    : null,
+              ),
+            );
+          }
+
+          if (inlineText.second == TextType.phoneNumber) {
+            return TextSpan(
+              recognizer: _customTapGestureRecognizerOf(currentSpanIndex)
+                ..onTap =
+                    () => widget.onOpen(inlineText.first, inlineText.second),
+              text: inlineText.first,
+              style: widget.linkStyle.copyWith(
+                backgroundColor: _enteredSpanIndex == currentSpanIndex
+                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                    : null,
+              ),
+            );
+          }
+
+          return TextSpan(
+            text: inlineText.first,
+            style: widget.style,
+          );
         }).toList(),
       ),
-      textAlign: textAlign,
-      textDirection: textDirection,
+      textAlign: widget.textAlign,
+      textDirection: widget.textDirection,
     );
   }
 }
 
-class SelectableLinkifyText extends StatelessWidget {
+class SelectableLinkifyText extends StatefulWidget {
   const SelectableLinkifyText({
     required this.text,
     required this.style,
@@ -55,8 +118,8 @@ class SelectableLinkifyText extends StatelessWidget {
     required this.textDirection,
     required this.linkStyle,
     required this.onOpen,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final String text;
   final TextStyle style;
@@ -66,27 +129,90 @@ class SelectableLinkifyText extends StatelessWidget {
   final void Function(String link, TextType linkType) onOpen;
 
   @override
+  State<SelectableLinkifyText> createState() => _SelectableLinkifyTextState();
+}
+
+class _SelectableLinkifyTextState extends State<SelectableLinkifyText> {
+  int? _enteredSpanIndex;
+
+  TapGestureRecognizer _customTapGestureRecognizerOf(int enteredSpanIndex) {
+    return TapGestureRecognizer()
+      ..onTapDown = (details) {
+        setState(() {
+          _enteredSpanIndex = enteredSpanIndex;
+        });
+      }
+      ..onTapCancel = () {
+        setState(() {
+          _enteredSpanIndex = null;
+        });
+      }
+      ..onTapUp = (_) {
+        setState(() {
+          _enteredSpanIndex = null;
+        });
+      };
+  }
+
+  @override
   Widget build(BuildContext context) {
+    int i = 0;
+
     return SelectableText.rich(
       TextSpan(
-        children: getLinksInText(text).map((inlineText) {
-          if (inlineText.second == TextType.normal) {
+        children: getLinksInText(widget.text).map((inlineText) {
+          final currentSpanIndex = i++;
+
+          if (inlineText.second == TextType.url) {
             return TextSpan(
+              recognizer: _customTapGestureRecognizerOf(currentSpanIndex)
+                ..onTap =
+                    () => widget.onOpen(inlineText.first, inlineText.second),
               text: inlineText.first,
-              style: style,
-            );
-          } else {
-            return TextSpan(
-              recognizer: TapGestureRecognizer()
-                ..onTap = () => onOpen(inlineText.first, inlineText.second),
-              text: inlineText.first,
-              style: linkStyle,
+              style: widget.linkStyle.copyWith(
+                backgroundColor: _enteredSpanIndex == currentSpanIndex
+                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                    : null,
+              ),
             );
           }
+
+          if (inlineText.second == TextType.email) {
+            return TextSpan(
+              recognizer: _customTapGestureRecognizerOf(currentSpanIndex)
+                ..onTap =
+                    () => widget.onOpen(inlineText.first, inlineText.second),
+              text: inlineText.first,
+              style: widget.linkStyle.copyWith(
+                backgroundColor: _enteredSpanIndex == currentSpanIndex
+                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                    : null,
+              ),
+            );
+          }
+
+          if (inlineText.second == TextType.phoneNumber) {
+            return TextSpan(
+              recognizer: _customTapGestureRecognizerOf(currentSpanIndex)
+                ..onTap =
+                    () => widget.onOpen(inlineText.first, inlineText.second),
+              text: inlineText.first,
+              style: widget.linkStyle.copyWith(
+                backgroundColor: _enteredSpanIndex == currentSpanIndex
+                    ? Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                    : null,
+              ),
+            );
+          }
+
+          return TextSpan(
+            text: inlineText.first,
+            style: widget.style,
+          );
         }).toList(),
       ),
-      textAlign: textAlign,
-      textDirection: textDirection,
+      textAlign: widget.textAlign,
+      textDirection: widget.textDirection,
     );
   }
 }
@@ -94,8 +220,10 @@ class SelectableLinkifyText extends StatelessWidget {
 List<Pair<String, TextType>> getLinksInText(String text) {
   final urlMatcher = RegExp(
       r"(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})");
-  final emailMatcher = RegExp(r"[a-z0-9]+@[a-z]+\.[a-z]{2,3}");
-  final egyptPhoneNumberMatcher = RegExp(r"01[0125][0-9]{8}");
+  final emailMatcher =
+      RegExp(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}");
+  final egyptPhoneNumberMatcher = RegExp(
+      r"(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{2,3}\)?[\s.-]?\d{3,4}[\s.-]?\d{3,5}");
 
   List<Pair<Match, TextType>> allMatches = [];
   String myText = text;

@@ -16,25 +16,28 @@ void showCustomSnackBar({
 
   ScaffoldMessenger.of(context).hideCurrentSnackBar();
 
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    duration: Duration(seconds: durationInSec),
-    content: Text(
-      content,
-      textAlign: textAlign,
-      style: const TextStyle(color: Colors.black),
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      key: UniqueKey(),
+      duration: Duration(seconds: durationInSec),
+      content: Text(
+        content,
+        textAlign: textAlign,
+        style: const TextStyle(color: Colors.black),
+      ),
+      elevation: 0,
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(17)),
+      margin: EdgeInsets.only(
+        bottom: snackBarCenterd ? distanceFromBottom : 0.0,
+        left: distanceFromLeftOrRight,
+        right: distanceFromLeftOrRight,
+      ),
+      padding: const EdgeInsets.all(12),
+      dismissDirection: DismissDirection.none,
+      backgroundColor: Colors.grey.shade300.withOpacity(0.9),
     ),
-    elevation: 0,
-    behavior: SnackBarBehavior.floating,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(17)),
-    margin: EdgeInsets.only(
-      bottom: snackBarCenterd ? distanceFromBottom : 0.0,
-      left: distanceFromLeftOrRight,
-      right: distanceFromLeftOrRight,
-    ),
-    padding: const EdgeInsets.all(12),
-    dismissDirection: DismissDirection.none,
-    backgroundColor: Colors.grey.shade300.withOpacity(0.9),
-  ));
+  );
 }
 
 void showMySnackBar({
@@ -47,6 +50,7 @@ void showMySnackBar({
 
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
+      key: UniqueKey(),
       duration: Duration(seconds: durationInSec ?? 4),
       content: Text(content),
       action: action,

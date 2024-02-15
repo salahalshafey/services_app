@@ -29,6 +29,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: any
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -60,6 +63,7 @@ dependencies:
   #flutter_config: ^2.0.2
   emoji_picker_flutter: ^2.0.0
   firebase_app_check: ^0.2.1+13
+  flutter_animate: ^4.5.0
   
 
 dev_dependencies:
@@ -79,6 +83,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  generate: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

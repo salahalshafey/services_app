@@ -1,0 +1,810 @@
+{
+  "@@locale": "en",
+
+
+
+  "@_LANGAUGES": {},
+  "english": "English",
+  "@english": {
+    "description": "the english language word"
+  },
+  "arabic": "Arabic",
+  "@arabic": {
+    "description": "the arabic language word"
+  },
+  "spanish": "Spanish",
+  "@spanish": {
+    "description": "the spanish language word"
+  },
+  "frensh": "Frensh",
+  "@frensh": {
+    "description": "the frensh language word"
+  },
+  "german": "German",
+  "@german": {
+    "description": "the german language word"
+  },
+  "turkish": "Turkish",
+  "@turkish": {
+    "description": "the turkish language word"
+  },
+
+
+
+
+  "@_CORE": {},
+  "ok": "Ok",
+  "@ok": {
+    "description": "the ok word"
+  },
+  "back": "Back",
+  "@back": {
+    "description": "the back word `for backArrow icon tooltip`"
+  },
+  "openNavigationMenu": "Open navigation menu",
+  "@openNavigationMenu": {
+    "description": "the drawer icon tooltip`"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "the Error word"
+  },
+  "pleaseChoose": "Please Choose",
+  "@pleaseChoose": {
+    "description": "the Please Choose word"
+  },
+  "camera": "Camera",
+  "@camera": {
+    "description": "the Camera word"
+  },
+  "gallery": "Gallery",
+  "@gallery": {
+    "description": "the Gallery word"
+  },
+  "share": "Share",
+  "@share": {
+    "description": "the Share word"
+  },
+  "errorHappenedWhileTryingToShareTheImage": "An error happened while trying to share the image.",
+  "@errorHappenedWhileTryingToShareTheImage": {
+    "description": "the error if Trying To Share did not complete"
+  },
+  "saveToGallery": "Save to gallery",
+  "@saveToGallery": {
+    "description": "the Save to gallery word"
+  },
+  "imageSavedToGallery": "Image saved to gallery",
+  "@imageSavedToGallery": {
+    "description": "the image saved to gallery word, basicly in imageScreen of imageContainer"
+  },
+  "errorHappenedWhileSavingTheImage": "An error happened while saving the image to the gallery.",
+  "@errorHappenedWhileSavingTheImage": {
+    "description": "the error if Trying To save to gallery did not complete"
+  },
+  "attention": "Attention",
+  "@attention": {
+    "description": "the Attention word"
+  },
+  "doYouWantToExit": "Do you want to exit?",
+  "@doYouWantToExit": {
+    "description": "the response if you pressed the system navigation back button ON the scope of homeScreen"
+  },
+  "exit": " Exit ",
+  "@exit": {
+    "description": "the Exit word"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "the Cancel word"
+  },
+  "copyCode": "Copy code",
+  "@copyCode": {
+    "description": "the Copy code word, for code container"
+  },
+  "copid": "Copid!",
+  "@copid": {
+    "description": "the Copid! word"
+  },
+  "km": "km",
+  "@km": {
+    "description": "the km word"
+  },
+  "meter": "meter",
+  "@meter": {
+    "description": "the meter word"
+  },
+  "linkIsNotvalid": "Link is Not valid",
+  "@linkIsNotvalid": {
+    "description": "the response if `web link` is not valid"
+  },
+  "youAreCurrentlyOffline": "You are currently offline",
+  "@youAreCurrentlyOffline": {
+    "description": "the response if no internet connections"
+  },
+  "linkDoesnotPointToImage": "Link doesn't point to an image",
+  "@linkDoesnotPointToImage": {
+    "description": "the response if the linke is valid but not resolve as an image"
+  },
+  "passwordMustBeAtLeastWithDetails": "Password must be at least 8 characters long, with at least 5 alphabet, 2 numbers, and 1 special character like ",
+  "@passwordMustBeAtLeastWithDetails": {
+    "description": "the response if `password formField in SignUp screen` is empty or less than 8 characters."
+  },
+  "fiveAlphabetCharacters": "5 alphabet characters",
+  "@fiveAlphabetCharacters": {
+    "description": "one of possible errors in `password formField in SignUp screen`"
+  },
+  "twoNumbers": "2 numbers",
+  "@twoNumbers": {
+    "description": "one of possible errors in `password formField in SignUp screen`"
+  },
+  "oneSpecialCharachtersLike": "1 special charachters like ",
+  "@oneSpecialCharachtersLike": {
+    "description": "one of possible errors in `password formField in SignUp screen`"
+  },
+  "passwordMustContainAtLeast": "Password must contain at least",
+  "@passwordMustContainAtLeast": {
+    "description": "one of possible errors in `password formField in SignUp screen`"
+  },
+  "comma": ", ",
+  "@comma": {
+    "description": "the comma seperator `,`"
+  },
+  "and": "And ",
+  "@and": {
+    "description": "the and word"
+  },
+  "today": "Today",
+  "@today": {
+    "description": "the Today word"
+  },
+  "yesterday": "Yesterday",
+  "@yesterday": {
+    "description": "the Yesterday word"
+  },
+  "at": "at",
+  "@at": {
+    "description": "the at word `for clocks` like **at 10:33 PM**"
+  },
+  "justNow": "just now",
+  "@justNow": {
+    "description": "the just now word"
+  },
+  "durationAgo": "{durationInString} ago",
+  "@durationAgo": {
+    "description": "used for duration ago like: `3 years ago`",
+    "placeholders": {
+      "durationInString": {
+        "type": "String",
+        "example": "3 years"
+      }
+    }
+  },
+  "durationFromNow": "{durationInString} from now",
+  "@durationFromNow": {
+    "description": "used for duration from now like: `3 years from now`",
+    "placeholders": {
+      "durationInString": {
+        "type": "String",
+        "example": "3 years"
+      }
+    }
+  },
+  "@_CORE_NOUNS_SINGULAR_PLURAL": {},
+  "second": "second",
+  "@second": {
+    "description": "the second word"
+  },
+  "twoSeconds": "2 seconds",
+  "@twoSeconds": {
+    "description": "the 2 seconds word"
+  },
+  "secondsBeteenThreeAndTen": "{numberOfSeconds} seconds",
+  "@secondsBeteenThreeAndTen": {
+    "description": "number of seconds between 3 and 10 like: 3, 5 or 10 seconds",
+    "placeholders": {
+      "numberOfSeconds": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "secondsMoreThanTen": "{numberOfSeconds} seconds",
+  "@secondsMoreThanTen": {
+    "description": "number of seconds more than 10 like: 11 seconds",
+    "placeholders": {
+      "numberOfSeconds": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "minute": "minute",
+  "@minute": {
+    "description": "the minute word"
+  },
+  "twoMinutes": "2 minutes",
+  "@twoMinutes": {
+    "description": "the 2 minutes word"
+  },
+  "minutesBeteenThreeAndTen": "{numberOfMinutes} minutes",
+  "@minutesBeteenThreeAndTen": {
+    "description": "number of minutes between 3 and 10 like: 3, 5 or 10 minutes",
+    "placeholders": {
+      "numberOfMinutes": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "minutesMoreThanTen": "{numberOfMinutes} minutes",
+  "@minutesMoreThanTen": {
+    "description": "number of minutes more than 10 like: 11 minutes",
+    "placeholders": {
+      "numberOfMinutes": {
+        "type": "int",
+        "example": "11"
+      }
+    }
+  },
+  "hour": "hour",
+  "@hour": {
+    "description": "the hour word"
+  },
+  "twoHours": "2 hours",
+  "@twoHours": {
+    "description": "the 2 hours word"
+  },
+  "hoursBeteenThreeAndTen": "{numberOfHours} hours",
+  "@hoursBeteenThreeAndTen": {
+    "description": "number of hours between 3 and 10 like: 3, 5 or 10 hours",
+    "placeholders": {
+      "numberOfHours": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "hoursMoreThanTen": "{numberOfHours} hours",
+  "@hoursMoreThanTen": {
+    "description": "number of hours more than 10 like: 11 hours",
+    "placeholders": {
+      "numberOfHours": {
+        "type": "int",
+        "example": "11"
+      }
+    }
+  },
+  "day": "day",
+  "@day": {
+    "description": "the day word"
+  },
+  "twoDays": "2 days",
+  "@twoDays": {
+    "description": "the 2 days word"
+  },
+  "daysBeteenThreeAndTen": "{numberOfDays} days",
+  "@daysBeteenThreeAndTen": {
+    "description": "number of days between 3 and 10 like: 3, 5 or 10 days",
+    "placeholders": {
+      "numberOfDays": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "daysMoreThanTen": "{numberOfDays} days",
+  "@daysMoreThanTen": {
+    "description": "number of days more than 10 like: 11 days",
+    "placeholders": {
+      "numberOfDays": {
+        "type": "int",
+        "example": "11"
+      }
+    }
+  },
+  "week": "week",
+  "@week": {
+    "description": "the week word"
+  },
+  "twoWeeks": "2 weeks",
+  "@twoWeeks": {
+    "description": "the 2 weeks word"
+  },
+  "weeksBeteenThreeAndTen": "{numberOfWeeks} weeks",
+  "@weeksBeteenThreeAndTen": {
+    "description": "number of weeks between 3 and 10 like: 3, 5 or 10 weeks",
+    "placeholders": {
+      "numberOfWeeks": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "weeksMoreThanTen": "{numberOfWeeks} weeks",
+  "@weeksMoreThanTen": {
+    "description": "number of weeks more than 10 like: 11 weeks",
+    "placeholders": {
+      "numberOfWeeks": {
+        "type": "int",
+        "example": "11"
+      }
+    }
+  },
+  "month": "month",
+  "@month": {
+    "description": "the month word"
+  },
+  "twoMonths": "2 months",
+  "@twoMonths": {
+    "description": "the 2 months word"
+  },
+  "monthsBeteenThreeAndTen": "{numberOfMonths} months",
+  "@monthsBeteenThreeAndTen": {
+    "description": "number of months between 3 and 10 like: 3, 5 or 10 months",
+    "placeholders": {
+      "numberOfMonths": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "monthsMoreThanTen": "{numberOfMonths} months",
+  "@monthsMoreThanTen": {
+    "description": "number of months more than 10 like: 11 months",
+    "placeholders": {
+      "numberOfMonths": {
+        "type": "int",
+        "example": "11"
+      }
+    }
+  },
+  "year": "year",
+  "@year": {
+    "description": "the year word"
+  },
+  "twoYears": "2 years",
+  "@twoYears": {
+    "description": "the 2 years word"
+  },
+  "yearsBeteenThreeAndTen": "{numberOfYears} years",
+  "@yearsBeteenThreeAndTen": {
+    "description": "number of years between 3 and 10 like: 3, 5 or 10 years",
+    "placeholders": {
+      "numberOfYears": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "yearsMoreThanTen": "{numberOfYears} years",
+  "@yearsMoreThanTen": {
+    "description": "number of years more than 10 like: 11 years",
+    "placeholders": {
+      "numberOfYears": {
+        "type": "int",
+        "example": "11"
+      }
+    }
+  },
+  "decade": "decade",
+  "@decade": {
+    "description": "the decade word"
+  },
+  "twoDecades": "2 decades",
+  "@twoDecades": {
+    "description": "the 2 decades word"
+  },
+  "decadesBeteenThreeAndTen": "{numberOfDecades} decades",
+  "@decadesBeteenThreeAndTen": {
+    "description": "number of decades between 3 and 10 like: 3, 5 or 10 decades",
+    "placeholders": {
+      "numberOfDecades": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "decadesMoreThanTen": "{numberOfDecades} decades",
+  "@decadesMoreThanTen": {
+    "description": "number of decades more than 10 like: 11 decades",
+    "placeholders": {
+      "numberOfDecades": {
+        "type": "int",
+        "example": "11"
+      }
+    }
+  },
+
+
+
+  "@_API_ERRORS": {},
+  "somethingWentWrongPleaseTryAgainLater": "Something went wrong, please try again later.",
+  "@somethingWentWrongPleaseTryAgainLater": {
+    "description": "the response if an `API` error"
+  },
+  "errorHappendThereIsNoDataForThatAccount": "Error happened, There is no data for that Account",
+  "@errorHappendThereIsNoDataForThatAccount": {
+    "description": "the response if an `API` error **No data**"
+  },
+  "unexpectedErrorHappened": "An unexpected error happened.",
+  "@unexpectedErrorHappened": {
+    "description": "the response if error not associated with `API` directly"
+  },
+  "somethingWentWrong": "Something went wrong!!",
+  "notAbleToSaveFilesToLocalDeviceStorage": "Not able to save files to local device storage.",
+  "@notAbleToSaveFilesToLocalDeviceStorage": {
+    "description": "the response if error happened while trying to save file to local device storage in"
+  },
+  "notAbleToDeleteFilesFromLocalDeviceStorage": "Not able to delete files from local device storage.",
+  "@notAbleToDeleteFilesFromLocalDeviceStorage": {
+    "description": "the response if error happened while trying to delete file to local device storage"
+  },
+  "notAbleToReadDataFromLocalDevice": "Not Able To read data from Local Device",
+  "@notAbleToReadDataFromLocalDevice": {
+    "description": "the response if error happened while trying to read file from local device storage"
+  },
+  "sorryThereIsNoResultForYourSearch": "Sorry, there is no result for your search, the result has been filtered.",
+  "@sorryThereIsNoResultForYourSearch": {
+    "description": "the response if the result of web search filtered"
+  },
+  "sorryThereIsNoResultForYourSearchWithDetails": "**Sorry, there is no result for your search**\n\n* The result has been filtered.\n* Or you are searching with a **language** that is not supported yet.",
+  "@sorryThereIsNoResultForYourSearchWithDetails": {
+    "description": "the response if the result of AI search filtered"
+  },
+  "notAbleToSaveDataToLocalDevice": "Not Able To Save data To Local Device",
+  "@notAbleToSaveDataToLocalDevice": {
+    "description": "the response if error happened while trying to save data to local device storage"
+  },
+
+
+  
+  "@_MENUE_SCREEN": {},
+  "home": "Home",
+  "@home": {
+    "description": "the home button of menue screen"
+  },
+  "profile": "Profile",
+  "@profile": {
+    "description": "the profile button of menue screen"
+  },
+  "mealsSettings": "Meals Settings",
+  "@mealsSettings": {
+    "description": "title in `_SETTINGS_SCREENS`"
+  },
+  "generalSettings": "General Settings",
+  "@generalSettings": {
+    "description": "title in `_SETTINGS_SCREENS`"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "title of settings screen"
+  },
+  "shareTheApp": "Share",
+  "@shareTheApp": {
+    "description": "the Share The App word"
+  },
+  "shareTheAppText":  "           AI MealMingle App\nDownload from the Play Store\n\nhttps://play.google.com/store/apps/details?id=com.salahalshafey.aimealmingle",
+  "@shareTheAppText": {
+    "description": "share text of share the app button in menue screen"
+  },
+  "about": "About",
+  "@about": {
+    "description": "the about button of menue screen"
+  },
+  "logout": "Log out",
+  "@logout": {
+    "description": "the log out button of menue screen"
+  },
+  "signIn": "Sign In",
+  "@signIn": {
+    "description": "the Sign In button of menue screen 'guest view'"
+  },
+  
+
+
+  "@_SETTINGS_SCREENS": {},
+  "adjustYourMealsSelection": "Adjust your Meals Selection",
+  "@adjustYourMealsSelection": {
+    "description": "the tilte of `meals settings screen`"
+  },
+  "glutenfree": "Gluten-Free",
+  "@glutenfree": {
+    "description": "one setting of `meals settings screen`"
+  },
+  "lactosefree": "Lactose-Free",
+  "@lactosefree": {
+    "description": "one setting of `meals settings screen`"
+  },
+  "vegetarian": "Vegetarian",
+  "@vegetarian": {
+    "description": "one setting of `meals settings screen`"
+  },
+  "vegan": "Vegan",
+  "@vegan": {
+    "description": "one setting of `meals settings screen`"
+  },
+  "displayMealTypeMeals": "Display {mealType} Meals",
+  "@displayMealTypeMeals": {
+    "description": "Display {mealType} meals, like: Display Vegan Meals",
+    "placeholders": {
+      "mealType": {
+        "type": "String",
+        "example": "Vegan"
+      }
+    }
+  },
+  "displayArabicLanguage": "Display Arabic Language",
+  "@displayArabicLanguage": {
+    "description": "subtitle of Language in `_SETTINGS_SCREENS`"
+  },
+  "displayDarkTheme": "Display Dark Theme",
+  "@displayDarkTheme": {
+    "description": "subtitle of ThemeMode in `_SETTINGS_SCREENS`"
+  },
+  "color": "Color",
+  "@color": {
+    "description": "the color word"
+  },
+  "resetToDefault": "Reset to default",
+  "@resetToDefault": {
+  "description": "the reset to default tooltip in `_SETTINGS_SCREEN`"
+  },
+  "theme": "Theme",
+  "@theme": {
+  "description": "theme text of settings screen"
+  },
+  "themeMode": "Theme Mode",
+  "@themeMode": {
+  "description": "theme mode text of settings screen"
+  },
+  "systemDefault": "System default",
+  "@systemDefault": {
+    "description": "System default of theme"
+  },
+  "light": "Light",
+  "@light": {
+    "description": "Light mode of theme"
+  },
+  "dark": "Dark",
+  "@dark": {
+    "description": "Dark mode of theme"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "the language word"
+  },
+  "notifications": "Notifications",
+  "@notifications": {
+    "description": "the notifications word"
+  },
+  "changeLanguage": "Change Language",
+  "@changeLanguage": {
+    "description": "tooltip Change to Language of sign in screen"
+  },
+  "changeToLightMode": "Change to Light Mode",
+  "@changeToLightMode": {
+    "description": "tooltip Change to Light Mode of ToggleThemeButton"
+  },
+  "changeToDarkMode": "Change to Dark Mode",
+  "@changeToDarkMode": {
+    "description": "tooltip Change to Dark Mode of ToggleThemeButton"
+  },
+ 
+  "defaultWord": "default",
+  "@defaultWord": {
+    "description": "the default word"
+  },
+  "allLanguages": "All Languages",
+  "@allLanguages": {
+    "description": "the All Languages word"
+  },
+
+
+  "@_FOOD_SCAN_API": {},
+  "actAsANutritionistWithYearsOfExperienceInTheField": "Act as a nutritionist with 30 years of experience in the field. What is in this image? And how many calories are in it?\n\n",
+  "@actAsANutritionistWithYearsOfExperienceInTheField": {
+    "description": "one of the questions of Food Scanning"
+  },
+  "isThisFoodConsideredHealthyExplainTheBenefits": "Is this food considered Healthy? Explain The benefits of this food in detail and Why?\nIf there is more than one item, \"Give the result in table format for each item\".",
+  "@isThisFoodConsideredHealthyExplainTheBenefits": {
+    "description": "one of the questions of Food Scanning"
+  },
+  "pleaseGiveMeTheFollowingNutritionFacts": "Please give me the following Nutrition Facts: \n-  Calories.\n-  Proteins (g).\n-  Fats (g).\n-  What Vitamins are in it?\n-  Carbohydrates (g).\n-  Sodium (mg).\n-  Potassium (mg).\n-  and more...\n\nIf there is more than one item, \"Give the result in table format for each item and the overall (sum) of the results of all the above\".",
+  "@pleaseGiveMeTheFollowingNutritionFacts": {
+    "description": "one of the questions of Food Scanning"
+  },
+  "pleaseAnswerTheFollowingnDoesThisFoodContain": "Please answer the following:\n-  Does this food contain \"Pork or Alcohol\"?\n-  Does this food contain \"Gluten\"?\n-  Does this food contain Lactose?\n-  Is this food considered \"Vegetarian\"?\n-  Is this food considered \"Vegan\"?\n-  and more...\n\nIf there is more than one item, \"Give the result in table format for each item and the overall (sum) of the results of all the above\".",
+  "@pleaseAnswerTheFollowingnDoesThisFoodContain": {
+    "description": "one of the questions of Food Scanning"
+  },
+  "howToPrepareThisFoodnnifThereIsMoreThanOneItemGiveTheResultForEachItem": "How to prepare this food?\n\nIf there is more than one item, \"Give the result for each item\".",
+  "@howToPrepareThisFoodnnifThereIsMoreThanOneItemGiveTheResultForEachItem": {
+    "description": "one of the questions of Food Scanning"
+  },
+  "@_FOOD_SCAN_SCREENS": {},
+  "scanFoodWithAi": "Scan Food With AI",
+  "@scanFoodWithAi": {
+    "description": "the Scan Food With AI word"
+  },
+  "scanFood": "Scan Food",
+  "@scanFood": {
+    "description": "the Scan Food word"
+  },
+  "favorites": "Favorites",
+  "@favorites": {
+    "description": "the Favorites word"
+  },
+  "getImageToScan": "Get Image to Scan",
+  "@getImageToScan": {
+    "description": "the button in `FOOD_SCAN_SCREEN`"
+  },
+  "youHaveNoFavoritesYetStartAddingSome": "You Have no Favorites yet - Start Adding Some!",
+  "@youHaveNoFavoritesYetStartAddingSome": {
+    "description": "when no favorites yet"
+  },
+  "unveilingContentsAndCaloricBreakdown": "Unveiling Contents and Caloric Breakdown",
+  "@unveilingContentsAndCaloricBreakdown": {
+    "description": "one of the titles of the food scan result"
+  },
+  "healthinessAndBenefitsOfFeaturedFoods": "Healthiness and Benefits of Featured Foods",
+  "@healthinessAndBenefitsOfFeaturedFoods": {
+    "description": "one of the titles of the food scan result"
+  },
+  "factsAndSummaries": "Facts and Summaries",
+  "@factsAndSummaries": {
+    "description": "one of the titles of the food scan result"
+  },
+  "unveilingDietaryPreferencesAndStatus": "Unveiling Dietary Preferences and Status",
+  "@unveilingDietaryPreferencesAndStatus": {
+    "description": "one of the titles of the food scan result"
+  },
+  "howToPrepareItAtHome": "How to Prepare it at Home",
+  "@howToPrepareItAtHome": {
+    "description": "one of the titles of the food scan result"
+  },
+  "overview": "Overview",
+  "@overview": {
+    "description": "the Overview word, one of the taps in `FoodScanScreens`"
+  },
+  "nutritionalEvaluation": "Nutritional Evaluation",
+  "@nutritionalEvaluation": {
+    "description": "one of the taps in `FoodScanScreens`"
+  },
+  "comprehensiveNutritionAnalysis": "Comprehensive Nutrition Analysis",
+  "@comprehensiveNutritionAnalysis": {
+    "description": "one of the taps in `FoodScanScreens`"
+  },
+  "ingredientInquiry": "Ingredient Inquiry",
+  "@ingredientInquiry": {
+    "description": "one of the taps in `FoodScanScreens`"
+  },
+  "howToPrepareIt": "How To Prepare It",
+  "@howToPrepareIt": {
+    "description": "one of the taps in `FoodScanScreens`"
+  },
+  "confirmRemove": "Confirm Remove?",
+  "@confirmRemove": {
+    "description": "the Confirm Remove? word"
+  },
+  "areYouSureYouWantToRemoveThisScanResultFromFavorites": "Are you sure you want to remove this Scan result from Favorites?",
+  "@areYouSureYouWantToRemoveThisScanResultFromFavorites": {
+    "description": "dialog when trying to delete a scan result from favorites"
+  },
+  "remove": "Remove",
+  "@remove": {
+    "description": "the Remove word"
+  },
+  "removeFromFavorites": "Remove from favorites",
+  "@removeFromFavorites": {
+    "description": "tooltip of button"
+  },
+  "saveToFavorites": "Save to favorites",
+  "@saveToFavorites": {
+    "description": "tooltip of button"
+  },
+  "shareAsPdf": "Share as PDF",
+  "@shareAsPdf": {
+    "description": "tooltip of button"
+  },
+  "takingScreenshotsOfTheResults": "Taking screenshots of the results...",
+  "@takingScreenshotsOfTheResults": {
+    "description": "one of the states when sharing the food scan result as a PDF"
+  },
+  "convertingScreenshotsToPdf": "Converting screenshots to PDF...",
+  "@convertingScreenshotsToPdf": {
+    "description": "one of the states when sharing the food scan result as a PDF"
+  },
+  "preparingThePdfToBeSavedAtDesktop": "Preparing the PDF to be saved at Desktop...",
+  "@preparingThePdfToBeSavedAtDesktop": {
+    "description": "one of the states when sharing the food scan result as a PDF"
+  },
+  "preparingThePdfToShare": "Preparing the PDF to Share...",
+  "@preparingThePdfToShare": {
+    "description": "one of the states when sharing the food scan result as a PDF"
+  },
+  "errorHappenedCouldntShareThePdf": "Error happened, Couldn't share the PDF!!!",
+  "@errorHappenedCouldntShareThePdf": {
+    "description": "one of the states when sharing the food scan result as a PDF"
+  },
+
+
+  "@_SEARCH_SCREEN": {},
+  "search": "Search",
+  "@search": {
+    "description": "the Search word"
+  },
+  "searchMealsUsingAi": "Search Meals Using AI",
+  "@searchMealsUsingAi": {
+    "description": "the Scan Food With AI word"
+  },
+  "clear": "Clear",
+  "@clear": {
+    "description": "the Scan Food With AI word"
+  },
+
+
+
+  "@_MEALS_SCREEN": {},
+  "meals": "Meals",
+  "@meals": {
+    "description": "the Meals word"
+  },
+  "ingredients": "INGREDIENTS",
+  "@ingredients": {
+    "description": "the INGREDIENTS word"
+  },
+  "recipe": "RECIPE",
+  "@recipe": {
+    "description": "the RECIPE word"
+  },
+  "hi": "Hi {name} 👋 ",
+  "@hi": {
+    "description": "greeting like: `Hi Ahmed 👋 `",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Ahmed"
+      }
+    }
+  },
+  "whatDoYouWantToEat": "WHAT DO YOU WANT TO EAT ?",
+  "@whatDoYouWantToEat": {
+    "description": "question on the appbar of taps screen"
+  },
+  "categories": "CATEGORIES",
+  "@categories": {
+    "description": "the CATEGORIES word"
+  },
+  "areYouSureYouWantToRemoveThisMealFromFavorites": "Are you sure you want to remove this Meal from Favorites?",
+  "@areYouSureYouWantToRemoveThisMealFromFavorites": {
+    "description": "the in dialog of trying to remove a meal from favorites"
+  },
+
+
+
+  "@_ABOUT_SCREEN": {},
+  "appOverview": "App Overview",
+  "@appOverview": {
+    "description": "title of the about screen"
+  },
+  "appOverviewdetailed": "**Breast Cancer Awareness app** is a comprehensive tool designed to raise awareness and promote early detection of breast cancer. It addresses four key aspects: providing `information and awareness`, facilitating `self-examination` through a symptom checker, assisting doctors with `deep learning models` for detection, and offering support `resources` and `guidance` for patients.\n* **Purpose:** The app was created with the primary goal of empowering individuals to take charge of their breast health. By amalgamating information, self-examination tools, advanced detection models, and supportive resources, we aim to contribute to the early detection and management of breast cancer.\n* **Target Audience:** Our target audience spans a wide range, including individuals of all genders interested in breast health awareness, those performing self-examinations, medical professionals seeking advanced diagnostic tools, and patients in need of support and guidance.\n\n**Key Features**\n* **Information Hub:** Accessible information on breast cancer, its symptoms, risk factors, and preventive measures.\n* **Symptom Checker:** An interactive self-examination tool guiding users through the detection of potential symptoms.\n* **Deep Learning Models:** Advanced AI models for doctors, aiding in the detection of breast cancer from mammogram and histopathology images.\n* **Patient Support:** Nutrition, diet, and exercise guidance, along with a chatbot providing answers and guidance through text-to-speech and speech-to-text capabilities.\n\n**Data and Research**\n* **The Breast Cancer Awareness app** is built on a foundation of thorough research and collaboration with medical professionals. We've incorporated insights from reputable studies and partnered with experts in the field to develop the deep learning models. The app's content is curated based on evidence-based information to ensure accuracy and reliability.\n\n**Contact and App Privacy**",
+  "@appOverviewdetailed": {
+    "description": "the details of the abb Overview in about screen"
+  },
+  "contactUs": "Contact us through this email:",
+  "@contactUs": {
+    "description": "contact Us through email in about screen"
+  },
+  "app": "App ",
+  "@app": {
+    "description": "the app word"
+  },
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": "the privacy Policy word"
+  },
+  "termsOfService": "Terms Of Service",
+  "@termsOfService": {
+    "description": "the terms of service word"
+  }
+}

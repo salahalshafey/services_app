@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../../../core/error/exceptions.dart';
-
+import '../../../../core/error/exceptions_without_message.dart';
 import '../models/message_model.dart';
 
 abstract class ChatRemoteDataSource {

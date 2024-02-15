@@ -5,7 +5,7 @@ import 'package:location/location.dart';
 
 import '../../../../core/location/location_service.dart';
 import '../../../../core/theme/map_styles.dart';
-import '../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../core/util/builders/custom_alret_dialog.dart';
 
 import '../providers/services_givers.dart';
 import 'service_giver_dialog.dart';

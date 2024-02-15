@@ -79,9 +79,7 @@ class ImageMessage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
-                textDirection: firstCharIsArabic(captionOfImage!)
-                    ? TextDirection.rtl
-                    : TextDirection.ltr,
+                textDirection: getDirectionalityOf(captionOfImage!),
                 linkStyle: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.blue,

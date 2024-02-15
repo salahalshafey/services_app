@@ -47,11 +47,11 @@ Future<T?> showCustomBottomSheet<T>({
                 if (containingButton)
                   ElevatedButton(
                     onPressed: onButtonPressed,
-                    child: Text(buttonTitle ?? ''),
                     style: ButtonStyle(
                       minimumSize: MaterialStateProperty.all(
                           Size(screenWidth * 0.9, 20)),
                     ),
+                    child: Text(buttonTitle ?? ''),
                   ),
                 SizedBox(height: keyBoardHeight),
               ],

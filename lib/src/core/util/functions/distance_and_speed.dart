@@ -1,13 +1,18 @@
 import 'dart:math';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import '../../../app.dart';
+
+final _context = navigatorKey.currentContext!;
 
 String wellFormatedDistance(double distanceInMeter) {
   if (distanceInMeter >= 1000) {
-    return (distanceInMeter / 1000).toStringAsFixed(1) + ' km';
+    return '${(distanceInMeter / 1000).toStringAsFixed(1)} ${AppLocalizations.of(_context)!.km}';
   }
 
-  return distanceInMeter.toStringAsFixed(0) + ' meter';
+  return '${distanceInMeter.toStringAsFixed(0)} ${AppLocalizations.of(_context)!.meter}';
 }
 
 String fromMeterPerSecToKPerH(double speed) {

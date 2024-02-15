@@ -46,10 +46,7 @@ class CurrentOrdersItem extends StatelessWidget {
               ),
               _Data(
                 title: 'Time',
-                data: time24To12HoursFormat(
-                  order.date.hour,
-                  order.date.minute,
-                ),
+                data: time24To12HoursFormat(order.date),
               ),
               _Data(
                 title: 'Cost',

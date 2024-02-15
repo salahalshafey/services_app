@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:services_app/src/core/error/exceptions.dart';
+import '../../../../core/error/exceptions_without_message.dart';
 
 abstract class OrderRemoteStorage {
   Future<String> upload(String fileName, File file);

@@ -4,13 +4,12 @@ import 'package:provider/provider.dart';
 import '../../../../account/presentation/providers/account.dart';
 import '../../providers/chat.dart';
 
-import '../../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../../core/util/builders/custom_alret_dialog.dart';
 
 class TextSender extends StatelessWidget {
   const TextSender(
     this.orderId,
     this.sendButtonLoadingState,
-    this.changeTextDirectionToLtr,
     this.controller,
     this.slideController, {
     Key? key,
@@ -18,7 +17,6 @@ class TextSender extends StatelessWidget {
 
   final String orderId;
   final void Function(bool state) sendButtonLoadingState;
-  final void Function() changeTextDirectionToLtr;
   final TextEditingController controller;
   final AnimationController slideController;
 
@@ -43,7 +41,6 @@ class TextSender extends StatelessWidget {
     }
 
     sendButtonLoadingState(false);
-    changeTextDirectionToLtr();
     controller.clear();
     slideController.reverse();
   }

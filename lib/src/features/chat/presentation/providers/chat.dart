@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/error_exceptions_with_message.dart';
+import '../../../../core/error/exceptions_without_message.dart';
 import '../../data/datasources/maps_servcice.dart';
 import '../../domain/entities/message.dart';
 
@@ -34,11 +35,11 @@ class Chat with ChangeNotifier {
         yield chat;
       }
     } on OfflineException {
-      throw Error('You are currently offline.');
+      throw ErrorMessage('You are currently offline.');
     } on ServerException {
-      throw Error('Something went wrong, please try again later.');
+      throw ErrorMessage('Something went wrong, please try again later.');
     } catch (error) {
-      throw Error('An unexpected error happened.');
+      throw ErrorMessage('An unexpected error happened.');
     }
   }
 
@@ -46,11 +47,11 @@ class Chat with ChangeNotifier {
     try {
       return await getChatOnce(orderId);
     } on OfflineException {
-      throw Error('You are currently offline.');
+      throw ErrorMessage('You are currently offline.');
     } on ServerException {
-      throw Error('Something went wrong, please try again later.');
+      throw ErrorMessage('Something went wrong, please try again later.');
     } catch (error) {
-      throw Error('An unexpected error happened.');
+      throw ErrorMessage('An unexpected error happened.');
     }
   }
 
@@ -59,11 +60,11 @@ class Chat with ChangeNotifier {
     try {
       await sendUserTextMessage(orderId, textMessage, senderId);
     } on OfflineException {
-      throw Error('You are currently offline.');
+      throw ErrorMessage('You are currently offline.');
     } on ServerException {
-      throw Error('Something went wrong, please try again later.');
+      throw ErrorMessage('Something went wrong, please try again later.');
     } catch (error) {
-      throw Error('An unexpected error happened.');
+      throw ErrorMessage('An unexpected error happened.');
     }
   }
 
@@ -78,11 +79,11 @@ class Chat with ChangeNotifier {
       await sendUserFileMessage(
           orderId, file, messageType, captionOfImage, senderId);
     } on OfflineException {
-      throw Error('You are currently offline.');
+      throw ErrorMessage('You are currently offline.');
     } on ServerException {
-      throw Error('Something went wrong, please try again later.');
+      throw ErrorMessage('Something went wrong, please try again later.');
     } catch (error) {
-      throw Error('An unexpected error happened.');
+      throw ErrorMessage('An unexpected error happened.');
     }
   }
 
@@ -91,11 +92,11 @@ class Chat with ChangeNotifier {
     try {
       await sendUserLocationMessage(orderId, location, senderId);
     } on OfflineException {
-      throw Error('You are currently offline.');
+      throw ErrorMessage('You are currently offline.');
     } on ServerException {
-      throw Error('Something went wrong, please try again later.');
+      throw ErrorMessage('Something went wrong, please try again later.');
     } catch (error) {
-      throw Error('An unexpected error happened.');
+      throw ErrorMessage('An unexpected error happened.');
     }
   }
 

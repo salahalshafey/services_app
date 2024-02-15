@@ -8,7 +8,7 @@ import '../../../../../core/util/functions/string_manipulations_and_search.dart'
 import '../../../../account/presentation/providers/account.dart';
 import '../../providers/chat.dart';
 
-import '../../../../../core/util/builders/custom_alret_dialoge.dart';
+import '../../../../../core/util/builders/custom_alret_dialog.dart';
 import '../../../../../core/util/builders/image_picker.dart';
 
 class ImageSender extends StatelessWidget {

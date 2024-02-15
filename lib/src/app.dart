@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'core/theme/my_theme.dart';
 import 'features/account/presentation/pages/account_screen.dart';
@@ -24,6 +25,8 @@ import 'features/tracking/presentation/providers/tracking.dart';
 import 'main_screen.dart';
 import 'injection_container.dart' as di;
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -44,11 +47,15 @@ class MyApp extends StatelessWidget {
       child: Builder(
         builder: (newContext) {
           return MaterialApp(
-            debugShowCheckedModeBanner: false,
             title: 'Services',
+            debugShowCheckedModeBanner: false,
+            navigatorKey: navigatorKey,
+            themeMode: ThemeMode.dark,
             theme: MyTheme.light(_myPrimaryColor, useMaterial3: false),
             darkTheme: MyTheme.dark(_myPrimaryColor, useMaterial3: true),
-            themeMode: ThemeMode.dark,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            locale: const Locale("ar"),
             home: const MainScreen(),
             routes: {
               ServiceGiversScreen.routName: (ctx) =>

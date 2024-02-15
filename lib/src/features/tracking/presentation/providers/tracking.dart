@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/error/exceptions.dart';
-
+import '../../../../core/error/error_exceptions_with_message.dart';
+import '../../../../core/error/exceptions_without_message.dart';
 import '../../domain/entities/location_info.dart';
 import '../../domain/entities/previous_locations_info.dart';
 import '../../domain/usecases/get_previous_locations_info.dart';
@@ -31,11 +31,11 @@ class Tracking with ChangeNotifier {
         yield true;
       }
     } on OfflineException {
-      throw Error('You are currently offline.');
+      throw ErrorMessage('You are currently offline.');
     } on ServerException {
-      throw Error('Something went wrong, please try again later.');
+      throw ErrorMessage('Something went wrong, please try again later.');
     } catch (error) {
-      throw Error('An unexpected error happened.');
+      throw ErrorMessage('An unexpected error happened.');
     }
   }
 
@@ -48,13 +48,13 @@ class Tracking with ChangeNotifier {
         previousLocations: previousLocations,
       );
     } on OfflineException {
-      throw Error('You are currently offline.');
+      throw ErrorMessage('You are currently offline.');
     } on ServerException {
-      throw Error('Something went wrong, please try again later.');
+      throw ErrorMessage('Something went wrong, please try again later.');
     } on EmptyDataException {
-      throw Error('There is no data!!!');
+      throw ErrorMessage('There is no data!!!');
     } catch (error) {
-      throw Error('An unexpected error happened.');
+      throw ErrorMessage('An unexpected error happened.');
     }
   }
 
