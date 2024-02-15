@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../src/app.dart';
 
-final context = navigatorKey.currentContext!;
+final _context = navigatorKey.currentContext!;
 
 class L10n {
   static final all = [
@@ -22,6 +22,6 @@ class Strings {
   /// * General Functions, etc...
   /// ### It is useful because the `context` is not required.
   static AppLocalizations get get {
-    return AppLocalizations.of(context)!;
+    return AppLocalizations.of(_context)!;
   }
 }

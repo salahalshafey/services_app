@@ -1,4 +1,4 @@
-# services_app
+# Services app
 
 A new Flutter project.
 
