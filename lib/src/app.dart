@@ -22,7 +22,7 @@ import 'features/tracking/presentation/pages/tracking_info_screen.dart';
 import 'features/tracking/presentation/pages/tracking_screen.dart';
 import 'features/tracking/presentation/providers/tracking.dart';
 
-import 'main_screen.dart';
+import 'features/main_screen.dart';
 import 'injection_container.dart' as di;
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
             title: 'Services',
             debugShowCheckedModeBanner: false,
             navigatorKey: navigatorKey,
-            themeMode: ThemeMode.dark,
+            themeMode: ThemeMode.light,
             theme: MyTheme.light(_myPrimaryColor, useMaterial3: false),
             darkTheme: MyTheme.dark(_myPrimaryColor, useMaterial3: true),
             localizationsDelegates: AppLocalizations.localizationsDelegates,

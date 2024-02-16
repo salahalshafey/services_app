@@ -222,7 +222,7 @@ List<Pair<String, TextType>> getLinksInText(String text) {
       r"(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})");
   final emailMatcher =
       RegExp(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}");
-  final egyptPhoneNumberMatcher = RegExp(
+  final phoneNumberMatcher = RegExp(
       r"(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{2,3}\)?[\s.-]?\d{3,4}[\s.-]?\d{3,5}");
 
   List<Pair<Match, TextType>> allMatches = [];
@@ -242,7 +242,7 @@ List<Pair<String, TextType>> getLinksInText(String text) {
   myText = myText.replaceAllMapped(
       emailMatcher, (match) => ''.padLeft(match.end - match.start));
 
-  final phoneMatches = egyptPhoneNumberMatcher
+  final phoneMatches = phoneNumberMatcher
       .allMatches(myText)
       .map((phoneMatch) => Pair(phoneMatch, TextType.phoneNumber));
   allMatches.addAll(phoneMatches);
