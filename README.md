@@ -29,6 +29,7 @@
   * Using [location](https://pub.dev/packages/location) plugin to get current user location.
   * Using [map_launcher](https://pub.dev/packages/map_launcher) plugin for launching any `location` from Chat.
   * Using [url_launcher](https://pub.dev/packages/url_launcher) plugin for `Linkify Text`: any text containing URLs, email addresses, or phone numbers. Users can seamlessly open or launch these links, emails, or phone calls directly from within the app.
+  * Using [hive](https://pub.dev/packages/hive) as a local Database.
   * The app supports `Localizations`.
   * The app supports `Theming` for `Light` and `Dark`.
   * Using [flutter_sound](https://pub.dev/packages/flutter_sound) package for `recording` and `sound player`.
@@ -77,7 +78,8 @@ lib
     |    │──services/
     |    │──services_givers/
     |    │──tracking/
-    |    └──main_screen.dart
+    |    │──settings/   
+    |    └──main_and_drawer_screens/
     |
     │───app.dart      
     └───injection_container.dart
