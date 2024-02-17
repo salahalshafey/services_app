@@ -18,20 +18,19 @@ import 'features/orders/presentation/providers/orders.dart';
 
 import 'features/chat/presentation/providers/chat.dart';
 
+import 'features/settings/pages/settings_screen.dart';
+import 'features/settings/providers/app_settings.dart';
 import 'features/tracking/presentation/pages/tracking_info_screen.dart';
 import 'features/tracking/presentation/pages/tracking_screen.dart';
 import 'features/tracking/presentation/providers/tracking.dart';
 
-import 'features/main_screen.dart';
+import 'features/main_and_drawer_screens/pages/main_screen.dart';
 import 'injection_container.dart' as di;
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  Color get _myPrimaryColor => Colors.blue[900]!;
-  // Color get _mysecondaryColor => Colors.blue[700]!;
 
   @override
   Widget build(BuildContext context) {
@@ -43,21 +42,31 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => di.sl<Chat>()),
         ChangeNotifierProvider(create: (ctx) => di.sl<Tracking>()),
         ChangeNotifierProvider(create: (ctx) => Account()),
+        ChangeNotifierProvider(create: (ctx) => AppSettings()),
       ],
       child: Builder(
         builder: (newContext) {
+          final provider = Provider.of<AppSettings>(newContext);
+
           return MaterialApp(
             title: 'Services',
             debugShowCheckedModeBanner: false,
             navigatorKey: navigatorKey,
-            themeMode: ThemeMode.light,
-            theme: MyTheme.light(_myPrimaryColor, useMaterial3: false),
-            darkTheme: MyTheme.dark(_myPrimaryColor, useMaterial3: true),
+            themeMode: provider.themeMode,
+            theme: MyTheme.light(
+              provider.currentColor,
+              useMaterial3: provider.useMaterial3,
+            ),
+            darkTheme: MyTheme.dark(
+              provider.currentColor,
+              useMaterial3: provider.useMaterial3,
+            ),
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
-            locale: const Locale("en"),
+            locale: provider.currentLocal,
             home: const MainScreen(),
             routes: {
+              SettingsScreen.routName: (ctx) => const SettingsScreen(),
               ServiceGiversScreen.routName: (ctx) =>
                   const ServiceGiversScreen(),
               RequestServiceScreen.routName: (ctx) =>

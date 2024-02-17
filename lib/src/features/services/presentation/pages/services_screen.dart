@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/services.dart';
 
-import '../../../../core/util/widgets/main_drawer.dart';
+import '../../../main_and_drawer_screens/pages/main_drawer.dart';
 import '../widgets/services_item.dart';
 
 class ServiceScreen extends StatelessWidget {

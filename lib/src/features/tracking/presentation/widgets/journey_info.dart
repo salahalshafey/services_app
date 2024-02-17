@@ -52,7 +52,7 @@ class ColorsInfo extends StatelessWidget {
     return Tooltip(
       message: 'Speeds in km/h',
       child: CustomCard(
-        color: Colors.white60,
+        color: Colors.white70,
         padding: const EdgeInsets.all(8.0),
         borderRadius: BorderRadius.circular(5),
         elevation: 5,
@@ -93,7 +93,7 @@ class ColorDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 60,
+      width: 70,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -149,7 +149,7 @@ class _TotalInfoState extends State<TotalInfo> {
         width: _showInfo ? 250 : 25,
         height: _showInfo ? 150 : 25,
         decoration: BoxDecoration(
-          color: _showInfo ? Colors.white60 : Colors.transparent,
+          color: _showInfo ? Colors.white70 : Colors.transparent,
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(15),
             bottomLeft: Radius.circular(5),

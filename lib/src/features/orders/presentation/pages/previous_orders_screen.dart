@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../account/presentation/providers/account.dart';
 import '../providers/orders.dart';
 
-import '../../../../core/util/widgets/main_drawer.dart';
+import '../../../main_and_drawer_screens/pages/main_drawer.dart';
 import '../widgets/previous_orders_item.dart';
 
 class PreviousOrdersScreen extends StatelessWidget {

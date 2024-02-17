@@ -51,22 +51,22 @@ class CurrentOrdersItem extends StatelessWidget {
               _Data(
                 title: 'Cost',
                 data: '\$' + order.cost.toString(),
-                dataColor: Colors.blue,
+                dataColor: Theme.of(context).primaryColor,
               ),
             ],
           ),
           const SizedBox(height: 16 + 8),
           Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.radio_button_checked,
                 size: 20,
-                color: Colors.blue,
+                color: Theme.of(context).primaryColor,
               ),
               const SizedBox(width: 10),
               Text(
                 wellFormatedString(order.status),
-                style: const TextStyle(color: Colors.blue),
+                style: TextStyle(color: Theme.of(context).primaryColor),
               ),
             ],
           ),

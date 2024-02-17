@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:services_app/l10n/l10n.dart';
 
-import '../../../features/account/presentation/pages/account_screen.dart';
-import '../../../features/account/presentation/providers/account.dart';
-import 'image_container.dart';
+import '../../settings/pages/settings_screen.dart';
+import '../../account/presentation/pages/account_screen.dart';
+
+import '../../account/presentation/providers/account.dart';
+import '../../../core/util/widgets/image_container.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key? key}) : super(key: key);
@@ -19,15 +22,26 @@ class MainDrawer extends StatelessWidget {
         children: [
           MyDrawerHeader(currentUser.image, currentUser.name),
           MenuChoice(
-            icon: const Icon(Icons.language),
-            name: 'Language',
-            onTap: () {},
+            icon: const Icon(Icons.person),
+            name: Strings.of(context).profile,
+            onTap: () {
+              Scaffold.of(context).closeDrawer();
+              Navigator.of(context).pushNamed(AccountScreen.routName);
+            },
           ),
           MenuChoice(
-            icon: const Icon(Icons.details),
+            icon: const Icon(Icons.settings),
+            name: Strings.of(context).settings,
+            onTap: () {
+              Scaffold.of(context).closeDrawer();
+              Navigator.of(context).pushNamed(SettingsScreen.routName);
+            },
+          ),
+          /* MenuChoice(
+            icon: const Icon(Icons.question_mark_rounded),
             name: 'About Us',
             onTap: () {},
-          ),
+          ),*/
           MenuChoice(
             icon: const Icon(Icons.search),
             name: 'Conditions And Terms',
@@ -35,7 +49,7 @@ class MainDrawer extends StatelessWidget {
           ),
           MenuChoice(
             icon: const Icon(Icons.share),
-            name: 'Share',
+            name: Strings.of(context).shareTheApp,
             onTap: () {},
           ),
         ],
@@ -92,10 +106,12 @@ class MyDrawerHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DrawerHeader(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/background_images/blue-background.jpg'),
-          // colorFilter: ColorFilter.linearToSrgbGamma(),
+          image:
+              const AssetImage('assets/background_images/blue-background.jpg'),
+          colorFilter:
+              ColorFilter.mode(Theme.of(context).primaryColor, BlendMode.color),
         ),
       ),
       child: Column(

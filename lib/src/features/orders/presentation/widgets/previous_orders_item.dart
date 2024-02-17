@@ -32,7 +32,10 @@ class PreviousOrdersItem extends StatelessWidget {
           children: [
             Text(
               '\$' + order.cost.toString(),
-              style: const TextStyle(color: Colors.blue, fontSize: 17),
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontSize: 17,
+              ),
             ),
             Text(
               '${order.date.day}/${order.date.month}/${order.date.year}',

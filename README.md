@@ -3,17 +3,17 @@
 
 
 ## A Flutter project is mainly used for 
-* **Service Selection:** Users can choose from various service categories like plumbing, electrical work, painting, etc.
+* **Service Selection:** Users can choose from various `service categories` like plumbing, electrical work, painting, etc.
 
-* **Location-Based Search:** Users can view artisans' locations on a map and select the closest one for their needs.
+* **Location-Based Search:** Users can view artisans' `locations on a map` and select the closest one for their needs.
 
 * **Order Management:** Users can place orders by uploading images and providing descriptions of their issues.
 
-* **Real-Time Chat:** The app offers a WhatsApp-like chat feature supporting text, images, audio recordings, locations, and emojis for communication with artisans.
+* **Real-Time Chat:** The app offers a `WhatsApp-like chat` feature supporting text, images, audio recordings, locations, and emojis for communication with artisans.
 
-* **Live Tracking:** Users can track artisans in real-time on a map, monitor their movements, speed, and activity status.
+* **Live Tracking:** Users can track artisans `in real-time on a map`, monitor their movements, speed, and activity status.
 
-* **Comprehensive Tracking Analysis:** Users have access to detailed tracking data, including speed analysis divided into five different speed ranges. Additionally, users can view total distance covered and time spent during the tracking process. This feature provides valuable insights into the artisan's movements and performance throughout the service.
+* **Comprehensive Tracking Analysis:** Users have access to detailed tracking data, including `speed analysis` divided into five different speed ranges. Additionally, users can view total distance covered and time spent during the tracking process. This feature provides valuable insights into the artisan's `movements` and performance throughout the service.
 
 * **Order Management:** Users can cancel current orders and view past orders along with chat and tracking information.
 
@@ -41,7 +41,7 @@
   * Using `get_it` for Dependency injection.
   * Using the `Clean Architecture` of `Uncle Bob`.
 
-    ![0_zUtZYiJ1bDTugOYY](https://github.com/salahalshafey/breast_cancer_awareness/assets/64344500/b17e7fc7-ddaa-4371-933d-1bff4a577622)
+    ![image](https://github.com/salahalshafey/services_app/assets/64344500/20bcf926-812b-4c53-a2ec-9730fbd0343f)
 
 ## Directory Structure
 ```
