@@ -22,17 +22,17 @@ class ColorPicker extends StatelessWidget {
 
   static final _colors = <Color>[
     Colors.blue[900]!,
-    Colors.purpleAccent,
     Colors.indigo,
-    const Color.fromRGBO(224, 168, 0, 1),
-    const Color.fromRGBO(95, 190, 30, 1),
     Colors.blueGrey,
+    Colors.brown,
+    const Color.fromRGBO(95, 190, 30, 1),
+    Colors.lime,
+    const Color.fromRGBO(224, 168, 0, 1),
+    Colors.teal,
+    Colors.deepOrangeAccent,
     Colors.red,
     Colors.pink,
-    Colors.teal,
-    Colors.lime,
-    Colors.deepOrangeAccent,
-    Colors.brown,
+    Colors.purpleAccent,
   ];
 
   /// ## Don't use this function if [_colors] is not 12 in length.
@@ -189,24 +189,20 @@ class ColorsRow2 extends StatelessWidget {
           .map(
             (color) => Padding(
               padding: EdgeInsets.all(spacingBetweenColorsItems),
-              child: IconButton(
-                onPressed: () => onSelected(color),
-                icon: Container(
-                  decoration: BoxDecoration(
-                    color: color,
-                    shape: BoxShape.circle,
-                  ),
-                  width: double.infinity,
-                  height: double.infinity,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: color,
+                  shape: BoxShape.circle,
+                ),
+                width: colorsCircleRadius,
+                height: colorsCircleRadius,
+                child: InkWell(
+                  onTap: () => onSelected(color),
+                  radius: colorsCircleRadius,
+                  borderRadius: BorderRadius.circular(1000),
                   child: currentColor.value == color.value
                       ? const Icon(Icons.check, color: Colors.white)
                       : null,
-                ),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(color),
-                  fixedSize: MaterialStatePropertyAll(
-                    Size(colorsCircleRadius, colorsCircleRadius),
-                  ),
                 ),
               ),
             ),

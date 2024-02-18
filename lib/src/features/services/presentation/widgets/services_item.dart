@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/util/widgets/custom_card.dart';
-import '../../../../core/util/widgets/image_container.dart';
 
 import '../../../services_givers/presentation/pages/service_givers_screen.dart';
 
@@ -26,11 +25,14 @@ class ServicesItem extends StatelessWidget {
         ); // arguments should be id
       },
       child: GridTile(
-        header: ImageContainer(
-          image: image,
-          imageSource: From.network,
-          radius: 60,
-          shape: BoxShape.circle,
+        header: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(image: NetworkImage(image)),
+            shape: BoxShape.circle,
+          ),
+          clipBehavior: Clip.antiAlias,
+          width: 120,
+          height: 120,
         ),
         footer: Text(
           name,

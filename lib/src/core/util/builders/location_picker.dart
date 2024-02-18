@@ -4,6 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
 import '../../location/location_service.dart';
+import '../../theme/map_styles.dart';
 import 'custom_snack_bar.dart';
 
 Future<LatLng?> myLocationPicker({
@@ -149,7 +150,15 @@ class _MapScreenState extends State<MapScreen> {
           zoom: widget.mapZoom,
         ),
         mapType: MapType.normal,
-        onMapCreated: (controller) => _controller = controller,
+        onMapCreated: (controller) {
+          _controller = controller;
+
+          // if the app is in darke theme set the mapStyle to GOOGLE_MAPS_DARKE_STYLE
+          _controller.setMapStyle(
+              Theme.of(context).brightness == Brightness.light
+                  ? GOOGLE_MAPS_RETRO_STYLE
+                  : GOOGLE_MAPS_DARKE_STYLE);
+        },
         onLongPress: _selectLocation,
         onTap: (_) {
           setState(() {
