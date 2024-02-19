@@ -33,7 +33,7 @@ class LocationSender extends StatelessWidget {
     final location = await myLocationPicker(
       context: context,
       currentLocationChoiceTitle: 'Send Current Location',
-      mapChoiceTitle: 'Sellect Location From The Map',
+      mapChoiceTitle: 'Select Location From The Map',
       loadingState: sendButtonLoadingState,
     );
 
