@@ -133,7 +133,7 @@ lib
 :-------------------------:|:-------------------------:
 ![](https://github.com/salahalshafey/services_app/assets/64344500/a5f84de9-efb9-40e9-aaa7-65826ff9f5af)|![](https://github.com/salahalshafey/services_app/assets/64344500/69b3fa7f-6c51-4b73-a233-03a056584684)
 
-### Users can see detailes of tracking data, including `speed analysis` divided into five different `speed ranges`. Additionally, users can view `total distance` covered and` time spent` during the tracking process
+**Users can see detailes of tracking data, including `speed analysis` divided into five different `speed ranges`. Additionally, users can view `total distance` covered and` time spent` during the tracking process**
   1 | 2 | 3
 :-------------------------:|:-------------------------:|:-------------------------:
 ![](https://github.com/salahalshafey/services_app/assets/64344500/f1ddd2c8-0df4-4217-934f-d0bedd81f1ad)|![](https://github.com/salahalshafey/services_app/assets/64344500/51aaaf3e-eaaf-4c00-9190-eb8346e9735b)|![](https://github.com/salahalshafey/services_app/assets/64344500/8477af8e-b50f-4ba0-9389-0d91024ecb1d)
@@ -152,18 +152,7 @@ lib
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
 ![](https://github.com/salahalshafey/services_app/assets/64344500/cc7a5d80-e506-4d4f-8c24-a417bffbbaf2)|![](https://github.com/salahalshafey/services_app/assets/64344500/ea0f089a-e332-4167-80a8-7c36ca311227)|![](https://github.com/salahalshafey/services_app/assets/64344500/494865cf-5009-4877-af2f-4775e92b3f6e)|![](https://github.com/salahalshafey/services_app/assets/64344500/29900b35-05c8-45ba-ae16-467655914259)
 
-### Some screens with `dark theme`
+**Some screens with a `dark theme`**
   1 | 2 | 3 | 4
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
 ![](https://github.com/salahalshafey/services_app/assets/64344500/54e8a9be-3f1f-4e64-a15f-928612454fcb)|![](https://github.com/salahalshafey/services_app/assets/64344500/a174c80d-043f-443e-9030-e2358daa5ec5)|![](https://github.com/salahalshafey/services_app/assets/64344500/37de3ba0-7b2d-4473-b345-530fbcdfae3a)|![](https://github.com/salahalshafey/services_app/assets/64344500/ea377a6e-f8fc-4986-adc3-dcefd3afba16)
-
-
-
-
-
-
-
-
-
-
-

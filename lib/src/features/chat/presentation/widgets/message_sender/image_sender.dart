@@ -1,6 +1,8 @@
 import 'dart:io';
-
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:photo_view/photo_view.dart';
 
@@ -25,16 +27,16 @@ class ImageSender extends StatelessWidget {
         parent: slideController,
         curve: Curves.linear,
       ));
-
+  // Future<Uint8List> fileToUint8List(File image) async {
+  //   return await image.readAsBytes();
+  // }
   Future<void> _sendImageMessage(BuildContext context) async {
     FocusScope.of(context).unfocus();
 
     final image = await myImagePicker(context);
-
     if (image == null) {
       return;
     }
-
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -42,6 +44,16 @@ class ImageSender extends StatelessWidget {
               ImagePreviwScreen(image: File(image.path), orderId: orderId),
         ));
   }
+  // Future<dynamic> ImageEdite(BuildContext context, File image) async {
+  //   Uint8List bytesImage = await fileToUint8List(image);
+  //   Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //           builder: (context) =>  ImageEditor(image: bytesImage,)
+  //       )
+  //     //  ImagePreviwScreen(image: File(image.path),),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -68,11 +80,48 @@ class ImageSender extends StatelessWidget {
 
 class ImagePreviwScreen extends StatelessWidget {
   const ImagePreviwScreen(
-      {required this.image, required this.orderId, Key? key})
-      : super(key: key);
+      {required this.image, required this.orderId, Key? key}) : super(key: key);
 
   final File image;
   final String orderId;
+
+  Future <void>  cropImage(BuildContext context) async {
+    if (image != null) {
+      CroppedFile? cropped = await ImageCropper().cropImage(
+          sourcePath: image.path,
+          aspectRatioPresets:
+          [
+            CropAspectRatioPreset.square,
+            CropAspectRatioPreset.ratio3x2,
+            CropAspectRatioPreset.original,
+            CropAspectRatioPreset.ratio4x3,
+            CropAspectRatioPreset.ratio16x9
+          ] ,
+
+          uiSettings: [
+            AndroidUiSettings(
+              toolbarColor: Colors.white,
+              toolbarTitle: '',
+              cropGridColor: Colors.black,
+              initAspectRatio: CropAspectRatioPreset.original,
+              lockAspectRatio: false ,
+            ),
+            IOSUiSettings(title: 'Crop')
+          ]);
+
+      if (cropped != null) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  ImagePreviwScreen(image: File(cropped.path),orderId: orderId,),
+            ));
+
+      }
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,6 +132,13 @@ class ImagePreviwScreen extends StatelessWidget {
           icon: const Icon(Icons.clear),
           onPressed: () => Navigator.of(context).pop(),
         ),
+          actions:<Widget> [
+            IconButton(
+                color: Colors.white,
+                onPressed: ()  =>  cropImage(context),
+                //navigateToImageEdite(context,image),
+                icon: Icon(Icons.crop_rotate))
+          ],
       ),
       body: Stack(
         children: [
