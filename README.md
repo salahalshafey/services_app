@@ -4,17 +4,11 @@
 
 ## A Flutter project is mainly used for 
 * **Service Selection:** Users can choose from various `service categories` like plumbing, electrical work, painting, etc.
-
 * **Location-Based Search:** Users can view artisans' `locations on a map` and select the closest one for their needs.
-
 * **Order Management:** Users can place orders by uploading images and providing descriptions of their issues.
-
 * **Real-Time Chat:** The app offers a `WhatsApp-like chat` feature supporting text, images, audio recordings, locations, and emojis for communication with artisans.
-
 * **Live Tracking:** Users can track artisans `in real-time on a map`, monitor their movements, speed, and activity status.
-
 * **Comprehensive Tracking Analysis:** Users have access to detailed tracking data, including `speed analysis` divided into five different speed ranges. Additionally, users can view total distance covered and time spent during the tracking process. This feature provides valuable insights into the artisan's `movements` and performance throughout the service.
-
 * **Order Management:** Users can cancel current orders and view past orders along with chat and tracking information.
 
 
