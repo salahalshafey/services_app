@@ -129,12 +129,12 @@ class _MapScreenState extends State<MapScreen> {
           icon: const Icon(Icons.clear),
           onPressed: () => Navigator.of(context).pop(null),
         ),
-        title: const FittedBox(child: Text('Long Press To Sellect a Location')),
+        title: const FittedBox(child: Text('Long Press To Select a Location')),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.check),
             tooltip: _pickedLocation == null
-                ? 'Please sellect a location'
+                ? 'Please select a location'
                 : 'Send this location',
             onPressed: _pickedLocation == null
                 ? null
