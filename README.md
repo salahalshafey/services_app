@@ -141,7 +141,7 @@ lib
 :-------------------------:|:-------------------------:
 ![](https://github.com/salahalshafey/services_app/assets/64344500/097d7c2f-de95-4f74-9f88-a67b4eda0378)|![](https://github.com/salahalshafey/services_app/assets/64344500/2499a1f5-f42c-47a9-b318-8862d8d89ce8)
 
-## Menue & settings screen
+## Menue & settings screens
   Menue | settings | Language | Apearance
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
 ![](https://github.com/salahalshafey/services_app/assets/64344500/cc7a5d80-e506-4d4f-8c24-a417bffbbaf2)|![](https://github.com/salahalshafey/services_app/assets/64344500/ea0f089a-e332-4167-80a8-7c36ca311227)|![](https://github.com/salahalshafey/services_app/assets/64344500/494865cf-5009-4877-af2f-4775e92b3f6e)|![](https://github.com/salahalshafey/services_app/assets/64344500/29900b35-05c8-45ba-ae16-467655914259)
