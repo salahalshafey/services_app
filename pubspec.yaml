@@ -62,7 +62,6 @@ dependencies:
   flutter_sound: ^9.2.13
   permission_handler: ^11.2.1
   proximity_sensor: ^1.0.4
-  #flutter_config: ^2.0.2
   emoji_picker_flutter: ^2.0.0
   firebase_app_check: ^0.2.1+13
   flutter_animate: ^4.5.0
