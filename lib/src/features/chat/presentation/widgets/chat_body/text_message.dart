@@ -30,12 +30,13 @@ class TextMessage extends StatelessWidget {
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.black,
+              fontSize: 14,
             ),
             textDirection: getDirectionalityOf(message),
             linkStyle: const TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.blue,
-              decoration: TextDecoration.underline,
+              fontSize: 15,
             ),
             onOpen: (link, linkType) {
               if (linkType == TextType.phoneNumber) {

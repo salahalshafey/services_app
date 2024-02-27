@@ -1,23 +1,20 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import 'package:audioplayers/audioplayers.dart';
-import 'package:proximity_sensor/proximity_sensor.dart';
+import 'package:flutter_sound/flutter_sound.dart';
 
 import '../../../../../core/util/functions/date_time_and_duration.dart';
 import 'message_bubble.dart';
 
 class AudioMessage extends StatefulWidget {
   const AudioMessage({
+    super.key,
     required this.audio,
     required this.date,
     required this.currentUserImage,
     required this.otherPersonImage,
     required this.isMe,
-    Key? key,
-  }) : super(key: key);
+  });
 
   final String audio;
   final DateTime date;
@@ -30,119 +27,125 @@ class AudioMessage extends StatefulWidget {
 }
 
 class _AudioMessageState extends State<AudioMessage> {
-  final audioPlayer = AudioPlayer();
-
-  late StreamSubscription<PlayerState> playerStateSubscription;
-  late StreamSubscription<void> onPlayerCompleteSubscription;
-  late StreamSubscription<Duration> durationChangedSubscription;
-  late StreamSubscription<Duration> positionChangeSubscription;
-  late StreamSubscription<int> proximitySensorSubscription;
+  final FlutterSoundPlayer _audioPlayer = FlutterSoundPlayer();
+  late StreamSubscription<PlaybackDisposition> _playerStateSubscription;
 
   final color = Colors.grey.shade800;
-  bool isPlaying = false;
-  Duration duration = Duration.zero;
-  Duration position = Duration.zero;
-  double playbackRate = 1;
+  bool _isStarted = false;
+  bool _isPlaying = false;
+  Duration _duration = Duration.zero;
+  Duration _position = Duration.zero;
+  double _playbackRate = 1;
 
-  void togglePlaybackRate() {
-    if (playbackRate == 1) {
-      audioPlayer.setPlaybackRate(1.5);
+  @override
+  void didChangeDependencies() {
+    _initTheAudioPlayer();
+
+    super.didChangeDependencies();
+  }
+
+  Future<void> _initTheAudioPlayer() async {
+    await _audioPlayer.openPlayer();
+    await _audioPlayer
+        .setSubscriptionDuration(const Duration(milliseconds: 50));
+
+    _playerStateSubscription = _audioPlayer.onProgress!.listen((event) {
       setState(() {
-        playbackRate = 1.5;
+        _duration = event.duration;
+        _position = event.position;
       });
-    } else if (playbackRate == 1.5) {
-      audioPlayer.setPlaybackRate(2);
+    });
+
+    final duration = await _audioPlayer.startPlayer(
+      fromURI: widget.audio,
+      whenFinished: () {
+        _audioPlayer.stopPlayer();
+        setState(() {
+          _isStarted = false;
+          _isPlaying = false;
+          _position = Duration.zero;
+        });
+      },
+    );
+
+    await _audioPlayer.pausePlayer();
+
+    setState(() {
+      _isStarted = true;
+      _duration = duration ?? Duration.zero;
+    });
+  }
+
+  Future<void> _startAudio() async {
+    await _audioPlayer.startPlayer(
+      fromURI: widget.audio,
+      whenFinished: () {
+        _audioPlayer.stopPlayer();
+        setState(() {
+          _isStarted = false;
+          _isPlaying = false;
+          _position = Duration.zero;
+        });
+      },
+    );
+
+    setState(() {
+      _isStarted = true;
+      _isPlaying = true;
+    });
+  }
+
+  Future<void> _pauseAudio() async {
+    await _audioPlayer.pausePlayer();
+
+    setState(() {
+      _isPlaying = false;
+    });
+  }
+
+  Future<void> _resumeAudio() async {
+    await _audioPlayer.resumePlayer();
+
+    setState(() {
+      _isPlaying = true;
+    });
+  }
+
+  Future<void> _toggoleAudioPlaying() async {
+    if (_isStarted && _isPlaying) {
+      await _pauseAudio();
+    } else if (_isStarted && !_isPlaying) {
+      await _resumeAudio();
+    } else {
+      await _startAudio();
+    }
+  }
+
+  void _togglePlaybackRate() {
+    if (_playbackRate == 1) {
+      _audioPlayer.setSpeed(1.5);
       setState(() {
-        playbackRate = 2;
+        _playbackRate = 1.5;
+      });
+    } else if (_playbackRate == 1.5) {
+      _audioPlayer.setSpeed(2);
+      setState(() {
+        _playbackRate = 2;
       });
     } else {
-      audioPlayer.setPlaybackRate(1);
+      _audioPlayer.setSpeed(1);
       setState(() {
-        playbackRate = 1;
+        _playbackRate = 1;
       });
     }
   }
 
   @override
-  void initState() {
-    audioPlayer.setSourceUrl(widget.audio);
-
-    playerStateSubscription = audioPlayer.onPlayerStateChanged.listen((state) {
-      setState(() {
-        isPlaying = state == PlayerState.playing;
-      });
-    });
-
-    onPlayerCompleteSubscription = audioPlayer.onPlayerComplete.listen((_) {
-      setState(() {
-        position = Duration.zero;
-        isPlaying = false;
-      });
-    });
-
-    durationChangedSubscription =
-        audioPlayer.onDurationChanged.listen((newDuration) {
-      setState(() {
-        duration = newDuration;
-      });
-    });
-
-    positionChangeSubscription =
-        audioPlayer.onPositionChanged.listen((newPosition) {
-      setState(() {
-        position = newPosition;
-      });
-    });
-
-    listenSensor();
-
-    super.initState();
-  }
-
-  Future<void> listenSensor() async {
-    FlutterError.onError = (FlutterErrorDetails details) {
-      if (kDebugMode) {
-        FlutterError.dumpErrorToConsole(details);
-      }
-    };
-    proximitySensorSubscription = ProximitySensor.events.listen((int event) {
-      if (event > 0) /*isNear */ {
-        isSpeakerOn(false);
-      } else {
-        isSpeakerOn(true);
-      }
-    });
-  }
-
-  @override
   void dispose() {
-    playerStateSubscription.cancel();
-    onPlayerCompleteSubscription.cancel();
-    durationChangedSubscription.cancel();
-    positionChangeSubscription.cancel();
-    proximitySensorSubscription.cancel();
+    _playerStateSubscription.cancel();
+    _audioPlayer.closePlayer();
 
-    audioPlayer.dispose();
     super.dispose();
-  }
-
-  void isSpeakerOn(bool state) {
-    audioPlayer.setAudioContext(
-      AudioContext(
-        android: AudioContextAndroid(
-          isSpeakerphoneOn: state,
-          contentType: AndroidContentType.speech,
-          stayAwake: true,
-          usageType: AndroidUsageType.media,
-          audioFocus: AndroidAudioFocus.gain,
-        ),
-        iOS: const AudioContextIOS(
-          // defaultToSpeaker: state,
-          category: AVAudioSessionCategory.playAndRecord,
-          options: [],
-        ),
-      ),
-    );
   }
 
   @override
@@ -153,28 +156,24 @@ class _AudioMessageState extends State<AudioMessage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          if (widget.isMe && isPlaying)
+          if (widget.isMe && _isPlaying)
             TogglePlaybackRateButton(
-              playbackRate: playbackRate,
-              togglePlaybackRate: togglePlaybackRate,
+              playbackRate: _playbackRate,
+              togglePlaybackRate: _togglePlaybackRate,
               color: color,
             ),
-          if (widget.isMe && !isPlaying)
+          if (widget.isMe && !_isPlaying)
             CircleAvatar(
               backgroundImage: AssetImage(widget.currentUserImage),
               radius: 23,
             ),
           IconButton(
             color: color,
-            onPressed: () async {
-              if (isPlaying) {
-                await audioPlayer.pause();
-              } else {
-                await audioPlayer.resume();
-              }
-            },
-            splashRadius: 5,
-            icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow, size: 40),
+            onPressed: _toggoleAudioPlaying,
+            icon: Icon(
+              _isPlaying ? Icons.pause : Icons.play_arrow,
+              size: 40,
+            ),
           ),
           Stack(
             children: [
@@ -183,18 +182,23 @@ class _AudioMessageState extends State<AudioMessage> {
                 activeColor: color,
                 thumbColor: color,
                 min: 0,
-                max: duration.inSeconds.toDouble(),
-                value: position.inSeconds.toDouble(),
+                max: _duration.inMilliseconds.toDouble(),
+                value: _position.inMilliseconds.toDouble(),
                 onChanged: (value) async {
-                  await audioPlayer.seek(Duration(seconds: value.toInt()));
-                  await audioPlayer.resume();
+                  final newPosition = Duration(milliseconds: value.toInt());
+
+                  await _audioPlayer.seekToPlayer(newPosition);
+
+                  setState(() {
+                    _position = newPosition;
+                  });
                 },
               ),
               PositionedDirectional(
                 start: 25,
                 bottom: 0,
                 child: Text(
-                  formatedDuration(isPlaying ? position : duration),
+                  formatedDuration(_isPlaying ? _position : _duration),
                   style: const TextStyle(color: Colors.black54),
                 ),
               ),
@@ -205,13 +209,13 @@ class _AudioMessageState extends State<AudioMessage> {
               ),
             ],
           ),
-          if (!widget.isMe && isPlaying)
+          if (!widget.isMe && _isPlaying)
             TogglePlaybackRateButton(
-              playbackRate: playbackRate,
-              togglePlaybackRate: togglePlaybackRate,
+              playbackRate: _playbackRate,
+              togglePlaybackRate: _togglePlaybackRate,
               color: color,
             ),
-          if (!widget.isMe && !isPlaying)
+          if (!widget.isMe && !_isPlaying)
             CircleAvatar(
               backgroundImage: NetworkImage(widget.otherPersonImage),
               radius: 23,
@@ -221,6 +225,10 @@ class _AudioMessageState extends State<AudioMessage> {
     );
   }
 }
+
+///////////////////////////////////////////////////////
+/////////
+///
 
 class TogglePlaybackRateButton extends StatelessWidget {
   const TogglePlaybackRateButton({
