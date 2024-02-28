@@ -82,13 +82,13 @@ class ImagePreviwScreen extends StatelessWidget {
   const ImagePreviwScreen(
       {required this.image, required this.orderId, Key? key}) : super(key: key);
 
-  final File image;
+  final File ? image;
   final String orderId;
 
   Future <void>  cropImage(BuildContext context) async {
     if (image != null) {
       CroppedFile? cropped = await ImageCropper().cropImage(
-          sourcePath: image.path,
+          sourcePath: image!.path,
           aspectRatioPresets:
           [
             CropAspectRatioPreset.square,
@@ -145,7 +145,7 @@ class ImagePreviwScreen extends StatelessWidget {
           Container(
             color: Colors.black,
             child: PhotoView(
-              imageProvider: FileImage(image),
+              imageProvider: FileImage(image!),
               initialScale: PhotoViewComputedScale.contained * 1.0,
               minScale: PhotoViewComputedScale.contained * 0.5,
               maxScale: PhotoViewComputedScale.contained * 3.0,
@@ -154,7 +154,7 @@ class ImagePreviwScreen extends StatelessWidget {
           PositionedDirectional(
             width: MediaQuery.of(context).size.width,
             bottom: 10,
-            child: ImageSenderWithCaption(image: image, orderId: orderId),
+            child: ImageSenderWithCaption(image: image!, orderId: orderId),
           ),
         ],
       ),
@@ -170,7 +170,6 @@ class ImageSenderWithCaption extends StatefulWidget {
   const ImageSenderWithCaption(
       {required this.image, required this.orderId, Key? key})
       : super(key: key);
-
   final File image;
   final String orderId;
 
@@ -191,7 +190,6 @@ class _ImageSenderWithCaptionState extends State<ImageSenderWithCaption> {
 
   Future<void> _sendImageWithCaption() async {
     FocusScope.of(context).unfocus();
-
     final caption =
         _controller.value.text.trim().isEmpty ? null : _controller.value.text;
 
@@ -217,8 +215,13 @@ class _ImageSenderWithCaptionState extends State<ImageSenderWithCaption> {
     }
     _isLoadingState(false);
 
+
     _controller.clear();
 
+    //Navigator.pushNamed(context, '/chat-screen');
+   //
+    // Navigator.popUntil(context, ModalRoute.withName('/chat-screen'));
+    Navigator.of(context).pop();
     Navigator.of(context).pop();
   }
 
