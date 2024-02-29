@@ -187,8 +187,9 @@ class _ImageSenderWithCaptionState extends State<ImageSenderWithCaption> {
               decoration: const InputDecoration(
                 alignLabelWithHint: true,
                 filled: true,
-                // fillColor: Colors.white,
+                fillColor: Colors.white,
                 hintText: 'Add a caption...',
+                hintStyle: TextStyle(color: Colors.black54),
                 contentPadding: EdgeInsets.all(10),
                 border: OutlineInputBorder(
                   borderSide: BorderSide.none,
