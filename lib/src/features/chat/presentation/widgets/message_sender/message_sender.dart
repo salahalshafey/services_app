@@ -3,6 +3,7 @@ import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/foundation.dart' as foundation;
 
 import '../../../../../core/util/functions/string_manipulations_and_search.dart';
+
 import 'location_sender.dart';
 import 'image_sender.dart';
 import 'audio_sender.dart';
