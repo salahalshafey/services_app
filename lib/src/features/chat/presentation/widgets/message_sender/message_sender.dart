@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:flutter/foundation.dart' as foundation;
 
 import '../../../../../core/util/functions/string_manipulations_and_search.dart';
 
 import 'location_sender.dart';
 import 'image_sender.dart';
-import 'audio_sender.dart';
+import 'audio_sender/audio_sender.dart';
+import 'message_sender_widgets.dart';
 import 'text_sender.dart';
 
 class MessageSender extends StatefulWidget {
@@ -21,15 +20,22 @@ class _MessageSenderState extends State<MessageSender>
     with SingleTickerProviderStateMixin {
   final _controller = TextEditingController();
   final _focusNode = FocusNode();
-  bool _emojiShowing = false;
-  var _isSendButtonLoading = false;
-  var _textDirection = getDirectionalityOf("");
-  late final _primaryColor = Theme.of(context).primaryColor;
 
+  var _textDirection = getDirectionalityOf("");
+  bool _emojiShowing = false;
+  bool _isSendButtonLoading = false;
+
+  late final _primaryColor = Theme.of(context).primaryColor;
   late final AnimationController _slideController = AnimationController(
     duration: const Duration(milliseconds: 200),
     vsync: this,
   );
+
+  void _updateTextDirection(String value) {
+    setState(() {
+      _textDirection = getDirectionalityOf(value);
+    });
+  }
 
   void _emojiShowingState(bool state) {
     setState(() {
@@ -37,7 +43,7 @@ class _MessageSenderState extends State<MessageSender>
     });
   }
 
-  void _toggoleEmojiShoing() async {
+  void _toggoleEmojiShowing() async {
     if (!_emojiShowing) {
       _focusNode.unfocus();
 
@@ -91,62 +97,22 @@ class _MessageSenderState extends State<MessageSender>
       child: Column(
         children: [
           Stack(
+            alignment: Alignment.center,
             children: [
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextField(
-                      controller: _controller,
-                      focusNode: _focusNode,
-                      onTap: () {
-                        _emojiShowingState(false);
-                      },
-                      keyboardType: TextInputType.multiline,
-                      minLines: 1,
-                      maxLines: isPortrait ? 6 : 2,
-                      cursorHeight: 30,
-                      cursorColor: Theme.of(context).primaryColor,
-                      textCapitalization: TextCapitalization.sentences,
-                      autocorrect: true,
-                      enableSuggestions: true,
-                      decoration: const InputDecoration(
-                        alignLabelWithHint: true,
-                        filled: true,
-                        //fillColor: Colors.white,
-                        contentPadding: EdgeInsetsDirectional.only(
-                          start: 50,
-                          end: 5,
-                          bottom: 10,
-                          top: 10,
-                        ),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.all(Radius.circular(25)),
-                        ),
-                        hintText: 'Send a message...',
-                      ),
-                      textDirection: _textDirection,
-                      onChanged: (value) {
-                        if (value.trim().isNotEmpty) {
-                          _forwardAnimations();
-                        } else {
-                          _reverseAnimations();
-                        }
-
-                        setState(() {
-                          _textDirection = getDirectionalityOf(value);
-                        });
-                      },
-                    ),
-                  ),
-                  const SizedBox(width: 60, height: 55),
-                ],
+              MessageSenderTextField(
+                controller: _controller,
+                focusNode: _focusNode,
+                textDirection: _textDirection,
+                isPortrait: isPortrait,
+                updateTextDirection: _updateTextDirection,
+                emojiShowingState: _emojiShowingState,
+                forwardAnimations: _forwardAnimations,
+                reverseAnimations: _reverseAnimations,
               ),
               PositionedDirectional(
-                bottom: 0,
                 start: 0,
                 child: IconButton(
-                  onPressed: _toggoleEmojiShoing,
+                  onPressed: _toggoleEmojiShowing,
                   tooltip: _emojiShowing ? 'Show Keyboard' : 'Pick Emoji',
                   icon: Icon(
                     _emojiShowing ? Icons.keyboard : Icons.tag_faces,
@@ -158,20 +124,28 @@ class _MessageSenderState extends State<MessageSender>
                 ),
               ),
               PositionedDirectional(
-                bottom: 0,
+                end: 113,
+                child: LocationSender(
+                  widget.orderId,
+                  sendButtonLoadingState,
+                  _slideController,
+                ),
+              ),
+              PositionedDirectional(
+                end: 65,
+                child: ImageSender(
+                  widget.orderId,
+                  _slideController,
+                ),
+              ),
+              const PositionedDirectional(
+                end: 0,
+                child: SlideToCancelContainer(),
+              ),
+              PositionedDirectional(
                 end: 0,
                 child: Row(
                   children: [
-                    LocationSender(
-                      widget.orderId,
-                      sendButtonLoadingState,
-                      _slideController,
-                    ),
-                    ImageSender(
-                      widget.orderId,
-                      _slideController,
-                    ),
-                    const SizedBox(width: 10),
                     if (_isSendButtonLoading)
                       const SizedBox(
                         width: 55,
@@ -203,74 +177,6 @@ class _MessageSenderState extends State<MessageSender>
             primaryColor: _primaryColor,
           ),
         ],
-      ),
-    );
-  }
-}
-
-class ShowEmojiPicker extends StatelessWidget {
-  const ShowEmojiPicker({
-    super.key,
-    required this.emojiShowing,
-    required this.setEmojiShwing,
-    required this.isPortrait,
-    required this.controller,
-    required this.primaryColor,
-  });
-
-  final bool emojiShowing;
-  final void Function(bool state) setEmojiShwing;
-  final bool isPortrait;
-  final TextEditingController controller;
-  final Color primaryColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return Offstage(
-      offstage: !emojiShowing,
-      child: SizedBox(
-        height: isPortrait ? 250 : 200,
-        child: PopScope(
-          canPop: !emojiShowing,
-          onPopInvoked: (didPop) {
-            if (!didPop) {
-              setEmojiShwing(false);
-            }
-          },
-          child: EmojiPicker(
-            textEditingController: controller,
-            config: Config(
-              height: 256,
-              checkPlatformCompatibility: true,
-              emojiViewConfig: EmojiViewConfig(
-                // Issue: https://github.com/flutter/flutter/issues/28894
-                backgroundColor: Theme.of(context).canvasColor,
-                columns: 7,
-                emojiSizeMax: 28 *
-                    (foundation.defaultTargetPlatform == TargetPlatform.iOS
-                        ? 1.20
-                        : 1.0),
-              ),
-              swapCategoryAndBottomBar: true,
-              skinToneConfig: const SkinToneConfig(),
-              categoryViewConfig: CategoryViewConfig(
-                indicatorColor: primaryColor,
-                iconColorSelected: primaryColor,
-                backspaceColor: primaryColor,
-                backgroundColor: Theme.of(context).canvasColor,
-              ),
-              bottomActionBarConfig: const BottomActionBarConfig(
-                backgroundColor: Colors.transparent,
-                buttonColor: Colors.transparent,
-                buttonIconColor: Colors.grey,
-              ),
-              searchViewConfig: SearchViewConfig(
-                backgroundColor: Theme.of(context).canvasColor,
-                buttonIconColor: Colors.grey,
-              ),
-            ),
-          ),
-        ),
       ),
     );
   }

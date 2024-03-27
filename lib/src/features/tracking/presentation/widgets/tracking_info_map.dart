@@ -39,12 +39,6 @@ class _TrackingInfoMapState extends State<TrackingInfoMap> {
   void _onMapCreated(GoogleMapController controller) async {
     _controller = controller;
 
-    // if the app is in darke theme set the mapStyle to GOOGLE_MAPS_DARKE_STYLE
-    await _controller.setMapStyle(
-        Theme.of(context).brightness == Brightness.light
-            ? GOOGLE_MAPS_RETRO_STYLE
-            : GOOGLE_MAPS_DARKE_STYLE);
-
     // to do in the future: change the icon according to the serviceName
     const serviceName = 'artisan';
     newMarkerIcon = (await rootBundle.load('assets/icons/$serviceName.png'))
@@ -114,6 +108,9 @@ class _TrackingInfoMapState extends State<TrackingInfoMap> {
             target: midLocation,
             zoom: distanceInMeterToZoomLevel(totalDistance),
           ),
+          style: Theme.of(context).brightness == Brightness.light
+              ? GOOGLE_MAPS_RETRO_STYLE
+              : GOOGLE_MAPS_DARKE_STYLE,
           mapType: _mapType,
           onMapCreated: _onMapCreated,
           onTap: (_) => _hidMideRoadMarker(),
