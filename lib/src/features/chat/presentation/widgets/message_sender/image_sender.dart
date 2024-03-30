@@ -1,8 +1,12 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:image_painter/image_painter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:photo_view/photo_view.dart';
 
@@ -44,16 +48,6 @@ class ImageSender extends StatelessWidget {
               ImagePreviwScreen(image: File(image.path), orderId: orderId),
         ));
   }
-  // Future<dynamic> ImageEdite(BuildContext context, File image) async {
-  //   Uint8List bytesImage = await fileToUint8List(image);
-  //   Navigator.push(
-  //       context,
-  //       MaterialPageRoute(
-  //           builder: (context) =>  ImageEditor(image: bytesImage,)
-  //       )
-  //     //  ImagePreviwScreen(image: File(image.path),),
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -78,17 +72,25 @@ class ImageSender extends StatelessWidget {
 ///
 ///
 
-class ImagePreviwScreen extends StatelessWidget {
-  const ImagePreviwScreen(
+
+class ImagePreviwScreen extends StatefulWidget {
+   ImagePreviwScreen(
       {required this.image, required this.orderId, Key? key}) : super(key: key);
 
-  final File ? image;
+   File  image;
   final String orderId;
 
+
+  @override
+  State<ImagePreviwScreen> createState() => _ImagePreviwScreenState();
+}
+
+class _ImagePreviwScreenState extends State<ImagePreviwScreen> {
+
   Future <void>  cropImage(BuildContext context) async {
-    if (image != null) {
+    if (widget.image != null){
       CroppedFile? cropped = await ImageCropper().cropImage(
-          sourcePath: image!.path,
+          sourcePath:widget.image.path ,
           aspectRatioPresets:
           [
             CropAspectRatioPreset.square,
@@ -100,28 +102,22 @@ class ImagePreviwScreen extends StatelessWidget {
 
           uiSettings: [
             AndroidUiSettings(
-              toolbarColor: Colors.white,
+              toolbarColor: Colors.black12,
               toolbarTitle: '',
-              cropGridColor: Colors.black,
+              cropGridColor: Colors.white,
               initAspectRatio: CropAspectRatioPreset.original,
-              lockAspectRatio: false ,
+              lockAspectRatio: false,
             ),
             IOSUiSettings(title: 'Crop')
           ]);
 
-      if (cropped != null) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  ImagePreviwScreen(image: File(cropped.path),orderId: orderId,),
-            ));
-
-      }
+      setState(() {
+        widget.image = File(cropped!.path);
+      });
     }
+
+
   }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -132,20 +128,31 @@ class ImagePreviwScreen extends StatelessWidget {
           icon: const Icon(Icons.clear),
           onPressed: () => Navigator.of(context).pop(),
         ),
-          actions:<Widget> [
-            IconButton(
-                color: Colors.white,
-                onPressed: ()  =>  cropImage(context),
-                //navigateToImageEdite(context,image),
-                icon: Icon(Icons.crop_rotate))
-          ],
+        actions:<Widget> [
+          IconButton(
+              color: Colors.white,
+              onPressed: ()  =>  cropImage(context),
+              //navigateToImageEdite(context,image),
+              icon: const Icon(Icons.crop_rotate)),
+          IconButton(
+              color: Colors.white,
+              onPressed: ()async {
+                final newImage = await  Navigator.push<File>(context,
+                  MaterialPageRoute(builder: (context) => imagePainte(image: widget.image,orderId: widget.orderId,)) );
+                setState(() {
+                  widget.image = newImage! ;
+                });
+              },
+              //navigateToImageEdite(context,image),
+              icon: Icon(Icons.edit))
+        ],
       ),
       body: Stack(
         children: [
           Container(
             color: Colors.black,
             child: PhotoView(
-              imageProvider: FileImage(image!),
+              imageProvider: FileImage(widget.image),
               initialScale: PhotoViewComputedScale.contained * 1.0,
               minScale: PhotoViewComputedScale.contained * 0.5,
               maxScale: PhotoViewComputedScale.contained * 3.0,
@@ -154,11 +161,109 @@ class ImagePreviwScreen extends StatelessWidget {
           PositionedDirectional(
             width: MediaQuery.of(context).size.width,
             bottom: 10,
-            child: ImageSenderWithCaption(image: image!, orderId: orderId),
+            child: ImageSenderWithCaption(image: widget.image, orderId: widget.orderId),
           ),
         ],
       ),
     );
+  }
+}
+
+class imagePainte extends StatelessWidget {
+  imagePainte({required this.image,required this.orderId , Key? key})  : super(key: key);
+  final File image;
+  final String orderId;
+  final _imageKey = GlobalKey<ImagePainterState>();
+  Future<File?> uint8ListToFile(Uint8List? uint8List) async {
+    if (uint8List == null) {
+      return null;
+    }
+
+    Directory tempDir = await getTemporaryDirectory();
+    String tempPath = tempDir.path;
+    String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
+    String tempFileName = 'image_$timestamp.jpg'; // Example filename: image_1646257878000.jpg
+    File tempFile = File('$tempPath/$tempFileName');
+
+    await tempFile.writeAsBytes(uint8List);
+
+    return tempFile;
+  }
+
+  Future<void> _capturePaintedImage(BuildContext context) async {
+    final paintedImage = await _imageKey.currentState?.exportImage();
+    final File ?  BackePaintedImage = await uint8ListToFile(paintedImage);
+    if (paintedImage != null) {
+      Navigator.of(context).pop(BackePaintedImage);
+    }
+
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return
+      Scaffold(
+        backgroundColor: Colors.black12,
+          body: Container(
+      margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+            child: Column(
+              children: [
+                Expanded(
+                  child: ImagePainter.file(
+                    File(image.path),
+                    key: _imageKey,
+                   controlsBackgroundColor: Colors.black12,
+                   optionColor: Colors.white,
+                   scalable: true,
+
+                  ),
+
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black12 ,
+                            shape:  const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(8))),
+                            //  side: BorderSide(color: Colors.yellow.withAlpha(5)),
+                          ),
+                          child: const Text('Cancel', style:TextStyle(
+                              color: Colors.white
+                          ) ,)
+
+                      ),
+                    ),
+                    Expanded(
+                      child: ElevatedButton(
+                          onPressed: () {
+                            _capturePaintedImage(context);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black12 ,
+                            shape:  const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(8))),
+                            //  side: BorderSide(color: Colors.yellow.withAlpha(5)),
+                          ),
+                          child: const Text('Done', style:TextStyle(
+                              color: Colors.white
+                          ) ,)
+
+                      ),
+                    ),
+                  ],
+                )
+
+              ],
+            ),
+    )
+
+    );
+
   }
 }
 
@@ -214,14 +319,9 @@ class _ImageSenderWithCaptionState extends State<ImageSenderWithCaption> {
       return;
     }
     _isLoadingState(false);
-
-
     _controller.clear();
-
     //Navigator.pushNamed(context, '/chat-screen');
-   //
     // Navigator.popUntil(context, ModalRoute.withName('/chat-screen'));
-    Navigator.of(context).pop();
     Navigator.of(context).pop();
   }
 

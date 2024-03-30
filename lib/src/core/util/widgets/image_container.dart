@@ -563,7 +563,7 @@ class _ImageScreenState extends State<ImageScreen> {
               backgroundColor: Colors.black54,
               elevation: 0,
               actions: [
-                DownloadButton(widget.image, widget.imageSource),
+               DownloadButton(widget.image, widget.imageSource),
                 _ShareButton(
                   image: widget.image,
                   imageSource: widget.imageSource,

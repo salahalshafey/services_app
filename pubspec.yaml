@@ -67,6 +67,7 @@ dependencies:
   firebase_app_check: ^0.2.1+13
   flutter_animate: ^4.5.0
   image_cropper: ^4.0.1
+  image_painter: ^0.6.1
   
 
 dev_dependencies:
