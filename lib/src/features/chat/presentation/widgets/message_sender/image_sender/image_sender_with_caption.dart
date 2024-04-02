@@ -83,6 +83,7 @@ class _ImageSenderWithCaptionState extends State<ImageSenderWithCaption> {
               minLines: 1,
               maxLines: isPortrait ? 6 : 2,
               keyboardType: TextInputType.multiline,
+              style: const TextStyle(color: Colors.black),
               decoration: const InputDecoration(
                 alignLabelWithHint: true,
                 filled: true,
