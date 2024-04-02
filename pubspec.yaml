@@ -38,34 +38,33 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   equatable: ^2.0.5
-  provider: ^6.1.1
+  provider: ^6.1.2
   get_it: ^7.6.7
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  firebase_core: ^2.25.4
-  cloud_firestore: ^4.15.4
-  firebase_storage: ^11.6.5
-  firebase_auth: ^4.17.4
-  google_maps_flutter: ^2.5.3
+  firebase_core: ^2.27.2
+  cloud_firestore: ^4.15.10
+  firebase_storage: ^11.6.11
+  firebase_auth: ^4.18.0
+  google_maps_flutter: ^2.6.0
   location: ^5.0.3
   image_picker: ^1.0.7
-  url_launcher: ^6.2.4
-  map_launcher: ^3.1.0
+  url_launcher: ^6.2.5
+  map_launcher: ^3.2.0
   photo_view: ^0.14.0
   gallery_saver: ^2.3.2
-  dio: ^5.4.0
+  dio: ^5.4.2
   path_provider: ^2.1.2
   convex_bottom_bar: ^3.2.0
-  package_info_plus: ^5.0.1
-  share_plus: ^7.2.2
-  audioplayers: ^5.2.1
+  package_info_plus: any
+  share_plus: ^7.2.2 #^8.0.2
   flutter_sound: ^9.2.13
-  permission_handler: ^11.2.1
-  proximity_sensor: ^1.0.4
-  #flutter_config: ^2.0.2
-  emoji_picker_flutter: ^2.0.0
-  firebase_app_check: ^0.2.1+13
+  permission_handler: ^11.3.0
+  emoji_picker_flutter: ^2.1.1
+  firebase_app_check: ^0.2.1+19
   flutter_animate: ^4.5.0
+  just_audio: ^0.9.36
+  wakelock_plus: ^1.1.4
   image_cropper: ^4.0.1
   image_painter: ^0.6.1
   

@@ -6,7 +6,6 @@ import 'core/theme/my_theme.dart';
 import 'features/account/presentation/pages/account_screen.dart';
 import 'features/account/presentation/providers/account.dart';
 
-import 'features/chat/presentation/pages/chat_screen.dart';
 import 'features/services/presentation/providers/services.dart';
 
 import 'features/services_givers/presentation/pages/service_givers_screen.dart';
@@ -33,8 +32,6 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -52,7 +49,6 @@ class MyApp extends StatelessWidget {
           final provider = Provider.of<AppSettings>(newContext);
 
           return MaterialApp(
-
             title: 'Services',
             debugShowCheckedModeBanner: false,
             navigatorKey: navigatorKey,

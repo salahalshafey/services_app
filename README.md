@@ -4,17 +4,11 @@
 
 ## A Flutter project is mainly used for 
 * **Service Selection:** Users can choose from various `service categories` like plumbing, electrical work, painting, etc.
-
 * **Location-Based Search:** Users can view artisans' `locations on a map` and select the closest one for their needs.
-
 * **Order Management:** Users can place orders by uploading images and providing descriptions of their issues.
-
 * **Real-Time Chat:** The app offers a `WhatsApp-like chat` feature supporting text, images, audio recordings, locations, and emojis for communication with artisans.
-
 * **Live Tracking:** Users can track artisans `in real-time on a map`, monitor their movements, speed, and activity status.
-
 * **Comprehensive Tracking Analysis:** Users have access to detailed tracking data, including `speed analysis` divided into five different speed ranges. Additionally, users can view total distance covered and time spent during the tracking process. This feature provides valuable insights into the artisan's `movements` and performance throughout the service.
-
 * **Order Management:** Users can cancel current orders and view past orders along with chat and tracking information.
 
 
@@ -147,7 +141,7 @@ lib
 :-------------------------:|:-------------------------:
 ![](https://github.com/salahalshafey/services_app/assets/64344500/097d7c2f-de95-4f74-9f88-a67b4eda0378)|![](https://github.com/salahalshafey/services_app/assets/64344500/2499a1f5-f42c-47a9-b318-8862d8d89ce8)
 
-## Menue & settings screen
+## Menue & settings screens
   Menue | settings | Language | Apearance
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
 ![](https://github.com/salahalshafey/services_app/assets/64344500/cc7a5d80-e506-4d4f-8c24-a417bffbbaf2)|![](https://github.com/salahalshafey/services_app/assets/64344500/ea0f089a-e332-4167-80a8-7c36ca311227)|![](https://github.com/salahalshafey/services_app/assets/64344500/494865cf-5009-4877-af2f-4775e92b3f6e)|![](https://github.com/salahalshafey/services_app/assets/64344500/29900b35-05c8-45ba-ae16-467655914259)

@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
+import 'package:flutter_sound/flutter_sound.dart';
 
 import '../../../../../core/util/functions/date_time_and_duration.dart';
 import 'message_bubble.dart';
 
-class AudioMessage extends StatefulWidget {
-  const AudioMessage({
+class AudioMessageOld extends StatefulWidget {
+  const AudioMessageOld({
     super.key,
     required this.audio,
     required this.date,
@@ -23,30 +23,19 @@ class AudioMessage extends StatefulWidget {
   final bool isMe;
 
   @override
-  State<AudioMessage> createState() => _AudioMessageState();
+  State<AudioMessageOld> createState() => _AudioMessageOldState();
 }
 
-class _AudioMessageState extends State<AudioMessage> {
-  final AudioPlayer _audioPlayer = AudioPlayer();
-
-  // late StreamSubscription<PlayerState> _playerStateSubscription;
-  // late StreamSubscription<bool> _playingSubscription;
-  // late StreamSubscription<Duration?> _durationSubscription;
-  // late StreamSubscription<Duration> _positionSubscription;
-  // late StreamSubscription<double> _speedSubscription;
+class _AudioMessageOldState extends State<AudioMessageOld> {
+  final FlutterSoundPlayer _audioPlayer = FlutterSoundPlayer();
+  late StreamSubscription<PlaybackDisposition> _playerStateSubscription;
 
   final color = Colors.grey.shade800;
+  bool _isStarted = false;
   bool _isPlaying = false;
   Duration _duration = Duration.zero;
   Duration _position = Duration.zero;
   double _playbackRate = 1;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-
-  //   _initTheAudioPlayer();
-  // }
 
   @override
   void didChangeDependencies() {
@@ -56,88 +45,107 @@ class _AudioMessageState extends State<AudioMessage> {
   }
 
   Future<void> _initTheAudioPlayer() async {
-    try {
-      final duration = await _audioPlayer.setUrl(widget.audio);
+    await _audioPlayer.openPlayer();
+    await _audioPlayer
+        .setSubscriptionDuration(const Duration(milliseconds: 50));
+
+    _playerStateSubscription = _audioPlayer.onProgress!.listen((event) {
       setState(() {
-        _duration = duration ?? Duration.zero;
+        _duration = event.duration;
+        _position = event.position;
       });
+    });
 
-      /*_playerStateSubscription =*/ _audioPlayer.playerStateStream
-          .listen((event) {
-        if (event.processingState == ProcessingState.completed) {
-          _audioPlayer.stop().then((_) {
-            _audioPlayer.seek(Duration.zero);
-          });
-        }
-      });
+    final duration = (await _audioPlayer.getProgress())['duration'];
 
-      /*_playingSubscription =*/ _audioPlayer.playingStream.listen((event) {
-        if (mounted) {
-          setState(() {
-            _isPlaying = event;
-          });
-        }
-      });
+    /*final duration = await _audioPlayer.startPlayer(
+      fromURI: widget.audio,
+      whenFinished: () {
+        _audioPlayer.stopPlayer();
+        setState(() {
+          _isStarted = false;
+          _isPlaying = false;
+          _position = Duration.zero;
+        });
+      },
+    );
 
-      /*_durationSubscription = */ _audioPlayer.durationStream.listen(
-        (event) {
-          if (mounted) {
-            setState(() {
-              _duration = event ?? Duration.zero;
-            });
-          }
-        },
-      );
+    await _audioPlayer.pausePlayer();*/
 
-      /*_positionSubscription =*/ _audioPlayer.positionStream.listen(
-        (event) {
-          if (mounted) {
-            setState(() {
-              _position = event;
-            });
-          }
-        },
-      );
+    setState(() {
+      // _isStarted = true;
+      _duration = duration ?? Duration.zero;
+    });
+  }
 
-      /*_speedSubscription =*/ _audioPlayer.speedStream.listen((event) {
-        if (mounted) {
-          setState(() {
-            _playbackRate = event;
-          });
-        }
-      });
-    } catch (error) {
-      //
-    }
+  Future<void> _startAudio() async {
+    await _audioPlayer.startPlayer(
+      fromURI: widget.audio,
+      whenFinished: () {
+        _audioPlayer.stopPlayer();
+        setState(() {
+          _isStarted = false;
+          _isPlaying = false;
+          _position = Duration.zero;
+        });
+      },
+    );
+
+    setState(() {
+      _isStarted = true;
+      _isPlaying = true;
+    });
+  }
+
+  Future<void> _pauseAudio() async {
+    await _audioPlayer.pausePlayer();
+
+    setState(() {
+      _isPlaying = false;
+    });
+  }
+
+  Future<void> _resumeAudio() async {
+    await _audioPlayer.resumePlayer();
+
+    setState(() {
+      _isPlaying = true;
+    });
   }
 
   Future<void> _toggoleAudioPlaying() async {
-    if (_isPlaying) {
-      await _audioPlayer.pause();
+    if (_isStarted && _isPlaying) {
+      await _pauseAudio();
+    } else if (_isStarted && !_isPlaying) {
+      await _resumeAudio();
     } else {
-      await _audioPlayer.play();
+      await _startAudio();
     }
   }
 
   void _togglePlaybackRate() {
     if (_playbackRate == 1) {
       _audioPlayer.setSpeed(1.5);
+      setState(() {
+        _playbackRate = 1.5;
+      });
     } else if (_playbackRate == 1.5) {
       _audioPlayer.setSpeed(2);
+      setState(() {
+        _playbackRate = 2;
+      });
     } else {
       _audioPlayer.setSpeed(1);
+      setState(() {
+        _playbackRate = 1;
+      });
     }
   }
 
   @override
   void dispose() {
-    // _playerStateSubscription.cancel();
-    // _playingSubscription.cancel();
-    // _durationSubscription.cancel();
-    // _positionSubscription.cancel();
-    // _speedSubscription.cancel();
-
-    _audioPlayer.dispose();
+    _playerStateSubscription.cancel();
+    _audioPlayer.closePlayer();
 
     super.dispose();
   }
@@ -181,7 +189,7 @@ class _AudioMessageState extends State<AudioMessage> {
                 onChanged: (value) async {
                   final newPosition = Duration(milliseconds: value.toInt());
 
-                  await _audioPlayer.seek(newPosition);
+                  await _audioPlayer.seekToPlayer(newPosition);
 
                   setState(() {
                     _position = newPosition;

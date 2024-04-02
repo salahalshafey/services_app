@@ -1,15 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_sound/flutter_sound.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../account/presentation/providers/account.dart';
-import '../../providers/chat.dart';
+import '../../../../../account/presentation/providers/account.dart';
+import '../../../providers/chat.dart';
 
-import '../../../../../core/util/builders/custom_alret_dialog.dart';
-import '../../../../../core/util/builders/custom_snack_bar.dart';
+import '../../../../../../core/util/builders/custom_alret_dialog.dart';
+import '../../../../../../core/util/builders/custom_snack_bar.dart';
+import '../../../providers/recording_provider.dart';
 
 class AudioSender extends StatefulWidget {
   const AudioSender(this.orderId, this.sendButtonLoadingState, {Key? key})
@@ -23,43 +23,40 @@ class AudioSender extends StatefulWidget {
 }
 
 class _AudioSenderState extends State<AudioSender> {
-  final recorder = FlutterSoundRecorder();
+  late RecordingProvider provider;
+
+  bool _isDeleted = false;
+  //bool _isContinueRecordingFromBottomSheet = false;
 
   @override
-  void initState() {
-    initTheRecorder();
-    super.initState();
+  void didChangeDependencies() {
+    provider = Provider.of<RecordingProvider>(context, listen: false);
+
+    provider.initTheRecorder(context);
+
+    super.didChangeDependencies();
   }
 
-  Future<void> initTheRecorder() async {
-    final status = await Permission.microphone.request();
+  Future<void> _startTheRecorder() async {
+    _isDeleted = false;
+    provider.startTheRecorder();
 
-    if (status != PermissionStatus.granted) {
-      showCustomSnackBar(
-        context: context,
-        content: 'We need microphone permission to send the recorder.',
-      );
+    provider.recordingFromTextField = true;
+  }
+
+  Future<void> _stopAndSendTheRecorder() async {
+    if (_isDeleted || provider.recordingFrombottomSheet) {
       return;
     }
 
-    await recorder.openRecorder();
-  }
-
-  Future<void> startTheRecorder() async {
-    await recorder.startRecorder(
-      toFile: 'audio.aac',
-    );
-  }
-
-  Future<void> stopAndSendTheRecorder() async {
-    final path = await recorder.stopRecorder();
+    final path = await provider.stopTheRecorder();
 
     final currentUser = Provider.of<Account>(context, listen: false);
     try {
       widget.sendButtonLoadingState(true);
       await Provider.of<Chat>(context, listen: false).sendFileMessage(
         widget.orderId,
-        File(path!),
+        File(path),
         'audio',
         null,
         currentUser.id,
@@ -80,18 +77,30 @@ class _AudioSenderState extends State<AudioSender> {
 
   @override
   void dispose() {
-    recorder.closeRecorder();
+    provider.closeTheRecorder();
+
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<RecordingProvider>(context);
+
     return GestureDetector(
       onLongPressMoveUpdate: (details) {
-        details.localPosition;
+        // trigger to continue recording on dialog
+        if (details.localPosition.dy < -100 && !_isDeleted) {
+          provider.recordingFrombottomSheet = true;
+
+          // trigger to delete the recording
+        } else if (details.localPosition.dx < -150 ||
+            details.localPosition.dx > 150) {
+          _isDeleted = true;
+          provider.deleteRecording();
+        }
       },
-      onLongPress: startTheRecorder,
-      onLongPressEnd: (_) => stopAndSendTheRecorder(),
+      onLongPress: _startTheRecorder,
+      onLongPressEnd: (_) => _stopAndSendTheRecorder(),
       child: ElevatedButton(
         onPressed: () {
           showCustomSnackBar(
@@ -106,7 +115,9 @@ class _AudioSenderState extends State<AudioSender> {
               borderRadius: BorderRadius.all(Radius.circular(50)))),
           minimumSize: MaterialStateProperty.all(const Size(55, 55)),
         ),
-      ),
+      )
+          .animate(target: provider.recordingFromTextField ? 1 : 0)
+          .scaleXY(begin: 1, end: 1.7, duration: 50.ms),
     );
   }
 }

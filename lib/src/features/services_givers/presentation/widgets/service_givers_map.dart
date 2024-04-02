@@ -23,12 +23,6 @@ class _ServiceGiversMapState extends State<ServiceGiversMap> {
   Set<Marker> _markers = {};
 
   void _onMapCreated(GoogleMapController controller) async {
-    // if the app is in darke theme set the mapStyle to GOOGLE_MAPS_DARKE_STYLE
-    await controller.setMapStyle(
-        Theme.of(context).brightness == Brightness.light
-            ? GOOGLE_MAPS_RETRO_STYLE
-            : GOOGLE_MAPS_DARKE_STYLE);
-
     final servicesGivers = Provider.of<ServicesGivers>(context, listen: false);
 
     ////// create The Markers /////////////
@@ -92,6 +86,9 @@ class _ServiceGiversMapState extends State<ServiceGiversMap> {
         target: _locationOfHighestRating,
         zoom: 11,
       ),
+      style: Theme.of(context).brightness == Brightness.light
+          ? GOOGLE_MAPS_RETRO_STYLE
+          : GOOGLE_MAPS_DARKE_STYLE,
       onMapCreated: _onMapCreated,
       markers: _markers, //_markers,
       myLocationEnabled: true,

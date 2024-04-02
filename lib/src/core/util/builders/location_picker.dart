@@ -149,15 +149,12 @@ class _MapScreenState extends State<MapScreen> {
           target: widget.initialMapPosition,
           zoom: widget.mapZoom,
         ),
+        style: Theme.of(context).brightness == Brightness.light
+            ? GOOGLE_MAPS_RETRO_STYLE
+            : GOOGLE_MAPS_DARKE_STYLE,
         mapType: MapType.normal,
         onMapCreated: (controller) {
           _controller = controller;
-
-          // if the app is in darke theme set the mapStyle to GOOGLE_MAPS_DARKE_STYLE
-          _controller.setMapStyle(
-              Theme.of(context).brightness == Brightness.light
-                  ? GOOGLE_MAPS_RETRO_STYLE
-                  : GOOGLE_MAPS_DARKE_STYLE);
         },
         onLongPress: _selectLocation,
         onTap: (_) {
