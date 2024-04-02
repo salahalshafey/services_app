@@ -87,31 +87,14 @@ class _AudioSenderState extends State<AudioSender> {
     Provider.of<RecordingProvider>(context);
 
     return GestureDetector(
-      // onTapDown: (_) {
-      //   setState(() {
-      //     _isScaled = true;
-      //   });
-      // },
-      // onTapUp: (_) {
-      //   setState(() {
-      //     _isScaled = false;
-      //   });
-      // },
-      // onTapCancel: () {
-      //   setState(() {
-      //     _isScaled = false;
-      //   });
-      // },
       onLongPressMoveUpdate: (details) {
-        //print(details.localPosition);
-        if (details.localPosition.dy < -100) {
-          // print("trigger to continue recording on dialog");
-
+        // trigger to continue recording on dialog
+        if (details.localPosition.dy < -100 && !_isDeleted) {
           provider.recordingFrombottomSheet = true;
+
+          // trigger to delete the recording
         } else if (details.localPosition.dx < -150 ||
             details.localPosition.dx > 150) {
-          // print("trigger to delete the recording");
-
           _isDeleted = true;
           provider.deleteRecording();
         }

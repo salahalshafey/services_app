@@ -228,8 +228,10 @@ class _RecordingIconState extends State<RecordingIcon> {
 
   @override
   Widget build(BuildContext context) {
-    return Icon(Icons.keyboard_voice,
-        color: _showIcon ? Colors.red : Colors.transparent);
+    return Icon(
+      Icons.keyboard_voice,
+      color: _showIcon ? Colors.red : Colors.transparent,
+    );
   }
 }
 

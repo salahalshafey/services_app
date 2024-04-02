@@ -81,7 +81,7 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
           // recorder | pause button and delete recorder button and save button
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            textDirection: TextDirection.ltr,
+            // textDirection: TextDirection.ltr,
             children: [
               IconButton(
                 onPressed: provider.deleteRecording,
