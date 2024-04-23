@@ -35,12 +35,18 @@ Future<LatLng?> myLocationPicker({
                   TextButton.icon(
                     onPressed: () => Navigator.of(context).pop(true),
                     icon: const Icon(Icons.location_on),
-                    label: Text(currentLocationChoiceTitle),
+                    label: Text(
+                      currentLocationChoiceTitle,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                   TextButton.icon(
                     onPressed: () => Navigator.of(context).pop(false),
                     icon: const Icon(Icons.map),
-                    label: Text(mapChoiceTitle),
+                    label: Text(
+                      mapChoiceTitle,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ],
               ),

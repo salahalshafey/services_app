@@ -85,7 +85,7 @@ class AppSettings extends ChangeNotifier {
   bool get useMaterial3 {
     final material3 = _settingsBox.get(_useMaterial3) as bool?;
 
-    return material3 ?? true;
+    return material3 ?? false;
   }
 
   void setuseMaterial3(bool? useMaterial3) {
@@ -98,6 +98,7 @@ class AppSettings extends ChangeNotifier {
     _settingsBox.put(_languageCode, null);
     _settingsBox.put(_themeIsDark, null);
     _settingsBox.put(_color, null);
+    _settingsBox.put(_useMaterial3, null);
 
     notifyListeners();
   }
