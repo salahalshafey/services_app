@@ -114,12 +114,10 @@ class _ImageSenderWithCaptionState extends State<ImageSenderWithCaption> {
               : ElevatedButton(
                   onPressed: _sendImageWithCaption,
                   child: const Icon(Icons.send, color: Colors.white),
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all(
-                        const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(50)))),
-                    minimumSize: MaterialStateProperty.all(const Size(55, 55)),
+                  style: const ButtonStyle(
+                    shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(50)))),
+                    minimumSize: WidgetStatePropertyAll(Size(55, 55)),
                   ),
                 ),
         ],

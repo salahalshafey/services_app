@@ -204,8 +204,7 @@ class _RequestServiceFormState extends State<RequestServiceForm> {
               'PIC IMAG',
             ),
             style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                  minimumSize:
-                      MaterialStateProperty.all<Size>(const Size(150, 40)),
+                  minimumSize: const WidgetStatePropertyAll(Size(150, 40)),
                 ),
           ),
           const SizedBox(height: 10),
@@ -234,8 +233,8 @@ class _RequestServiceFormState extends State<RequestServiceForm> {
                     'REQUEST',
                   ),
                   style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                        minimumSize: MaterialStateProperty.all<Size>(
-                            const Size(double.infinity, 40)),
+                        minimumSize: const WidgetStatePropertyAll<Size>(
+                            Size(double.infinity, 40)),
                       ),
                 ),
         ],

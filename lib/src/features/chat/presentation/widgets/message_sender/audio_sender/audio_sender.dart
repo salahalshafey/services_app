@@ -110,10 +110,10 @@ class _AudioSenderState extends State<AudioSender> {
           );
         },
         child: const Icon(Icons.keyboard_voice),
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all(const RoundedRectangleBorder(
+        style: const ButtonStyle(
+          shape: WidgetStatePropertyAll(RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(50)))),
-          minimumSize: MaterialStateProperty.all(const Size(55, 55)),
+          minimumSize: WidgetStatePropertyAll(Size(55, 55)),
         ),
       )
           .animate(target: provider.recordingFromTextField ? 1 : 0)

@@ -99,13 +99,12 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
               ElevatedButton(
                 onPressed: provider.toggoleAudioRecording,
                 style: ButtonStyle(
-                    fixedSize: const MaterialStatePropertyAll(Size(70, 70)),
-                    shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                    fixedSize: const WidgetStatePropertyAll(Size(70, 70)),
+                    shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(1000))),
-                    padding:
-                        const MaterialStatePropertyAll(EdgeInsets.all(8.0)),
-                    elevation: const MaterialStatePropertyAll(0),
-                    backgroundColor: MaterialStatePropertyAll(
+                    padding: const WidgetStatePropertyAll(EdgeInsets.all(8.0)),
+                    elevation: const WidgetStatePropertyAll(0),
+                    backgroundColor: WidgetStatePropertyAll(
                         getTextFieldFilledColor(context))),
                 child: AnimatedSwitcher(
                   duration: 300.ms,
@@ -156,10 +155,10 @@ class _RecordAndPlayVoiceState extends State<RecordAndPlayVoice> {
                   // widget.sendButtonLoadingState(false);
                 },
                 child: const Icon(Icons.send),
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all(const RoundedRectangleBorder(
+                style: const ButtonStyle(
+                  shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(50)))),
-                  minimumSize: MaterialStateProperty.all(const Size(55, 55)),
+                  minimumSize: WidgetStatePropertyAll(Size(55, 55)),
                 ),
               ),
             ],

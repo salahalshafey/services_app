@@ -85,7 +85,7 @@ class ResetApearanceButton extends StatelessWidget {
               provider.setuseMaterial3(null);
             },
             style: const ButtonStyle(
-                padding: MaterialStatePropertyAll(
+                padding: WidgetStatePropertyAll(
                     EdgeInsets.symmetric(horizontal: 40))),
             child: const Text("Reset"),
           ),

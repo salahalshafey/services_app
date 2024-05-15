@@ -13,7 +13,8 @@ class ImagePainterScreen extends StatelessWidget {
 
   final File image;
   final String orderId;
-  final _imageKey = GlobalKey<ImagePainterState>();
+
+  final _controller = ImagePainterController();
 
   Future<File?> _uint8ListToFile(Uint8List? uint8List) async {
     if (uint8List == null) {
@@ -33,7 +34,7 @@ class ImagePainterScreen extends StatelessWidget {
   }
 
   Future<void> _capturePaintedImage(BuildContext context) async {
-    final paintedImage = await _imageKey.currentState?.exportImage();
+    final paintedImage = await _controller.exportImage();
     final File? backePaintedImage = await _uint8ListToFile(paintedImage);
     if (paintedImage != null) {
       Navigator.of(context).pop(backePaintedImage);
@@ -51,7 +52,7 @@ class ImagePainterScreen extends StatelessWidget {
             Expanded(
               child: ImagePainter.file(
                 File(image.path),
-                key: _imageKey,
+                controller: _controller,
                 controlsBackgroundColor: Colors.black12,
                 optionColor: Colors.white,
                 scalable: true,
@@ -94,7 +95,7 @@ class ImagePainterScreen extends StatelessWidget {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

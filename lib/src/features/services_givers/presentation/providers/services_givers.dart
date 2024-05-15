@@ -15,9 +15,10 @@ class ServicesGivers with ChangeNotifier {
 
   List<ServiceGiver> _serviceGivers = [];
 
-  Future<void> getAndFetchServicesGiver(String serviceId) async {
+  Future<void> getAndFetchServicesGivers(String serviceId) async {
     try {
       _serviceGivers = await getAllServiceGivers(serviceId);
+
       notifyListeners();
     } on OfflineException {
       throw ErrorMessage('You are currently offline.');

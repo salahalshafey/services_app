@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:wakelock_plus/wakelock_plus.dart';
+//import 'package:wakelock_plus/wakelock_plus.dart';
 
 import '../../../../core/util/builders/custom_snack_bar.dart';
 
@@ -74,7 +74,7 @@ class RecordingProvider with ChangeNotifier {
   Future<void> startTheRecorder() async {
     await _recorder.startRecorder(toFile: _toFilePath);
 
-    WakelockPlus.enable();
+    //WakelockPlus.enable();
 
     _isRecording = true;
     _isStarted = true;
@@ -86,7 +86,7 @@ class RecordingProvider with ChangeNotifier {
   Future<String> stopTheRecorder() async {
     final path = await _recorder.stopRecorder();
 
-    WakelockPlus.disable();
+    //WakelockPlus.disable();
 
     _isRecording = false;
     _isStarted = false;
@@ -140,7 +140,7 @@ class RecordingProvider with ChangeNotifier {
   Future<void> deleteRecording() async {
     await _recorder.stopRecorder();
 
-    WakelockPlus.disable();
+    //WakelockPlus.disable();
 
     _isRecording = false;
     _isStarted = false;
@@ -156,6 +156,6 @@ class RecordingProvider with ChangeNotifier {
   void closeTheRecorder() {
     _recorder.closeRecorder();
 
-    WakelockPlus.disable();
+    //WakelockPlus.disable();
   }
 }

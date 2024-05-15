@@ -53,6 +53,8 @@ class LocationMessage extends StatelessWidget {
       title: geoCodingData ?? '',
       zoom: zoom,
     );
+
+    // launchUrl(Uri.parse("https://maps.google.com/?q=$location"));
   }
 
   @override
@@ -85,7 +87,7 @@ class LocationMessage extends StatelessWidget {
               ),
             ),
             style: ButtonStyle(
-                overlayColor: MaterialStateProperty.all(Colors.blue.shade200)),
+                overlayColor: WidgetStatePropertyAll(Colors.blue.shade200)),
           ),
           Align(
             alignment: Alignment.bottomRight,

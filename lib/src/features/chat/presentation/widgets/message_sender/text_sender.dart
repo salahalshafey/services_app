@@ -50,10 +50,10 @@ class TextSender extends StatelessWidget {
     return ElevatedButton(
       onPressed: () => _sendTextMessage(context),
       child: const Icon(Icons.send),
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all(const RoundedRectangleBorder(
+      style: const ButtonStyle(
+        shape: WidgetStatePropertyAll(RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(50)))),
-        minimumSize: MaterialStateProperty.all(const Size(55, 55)),
+        minimumSize: WidgetStatePropertyAll(Size(55, 55)),
       ),
     );
   }

@@ -20,45 +20,45 @@ class MyTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(primaryColor),
-          shape: MaterialStateProperty.all(
+          backgroundColor: WidgetStatePropertyAll(primaryColor),
+          shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(useMaterial3 ? 20 : 10)),
           ),
-          textStyle: const MaterialStatePropertyAll(TextStyle(
+          textStyle: const WidgetStatePropertyAll(TextStyle(
             fontSize: 17,
           )),
-          foregroundColor: const MaterialStatePropertyAll(Colors.white),
-          padding: const MaterialStatePropertyAll(
+          foregroundColor: const WidgetStatePropertyAll(Colors.white),
+          padding: const WidgetStatePropertyAll(
               EdgeInsets.symmetric(vertical: 10, horizontal: 15)),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
-          foregroundColor: MaterialStatePropertyAll(primaryColor),
-          textStyle: MaterialStateProperty.all<TextStyle>(const TextStyle(
+          foregroundColor: WidgetStatePropertyAll(primaryColor),
+          textStyle: const WidgetStatePropertyAll(TextStyle(
             fontSize: 17,
           )),
-          shape: MaterialStateProperty.all(
+          shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(useMaterial3 ? 20 : 10)),
           ),
-          side: MaterialStatePropertyAll(BorderSide(color: primaryColor)),
-          padding: const MaterialStatePropertyAll(
+          side: WidgetStatePropertyAll(BorderSide(color: primaryColor)),
+          padding: const WidgetStatePropertyAll(
               EdgeInsets.symmetric(vertical: 10, horizontal: 15)),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
-          textStyle: const MaterialStatePropertyAll(TextStyle(
+          textStyle: const WidgetStatePropertyAll(TextStyle(
             fontSize: 17,
           )),
-          shape: MaterialStateProperty.all(
+          shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(useMaterial3 ? 20 : 10)),
           ),
-          foregroundColor: MaterialStatePropertyAll(primaryColor),
-          padding: const MaterialStatePropertyAll(
+          foregroundColor: WidgetStatePropertyAll(primaryColor),
+          padding: const WidgetStatePropertyAll(
               EdgeInsets.symmetric(vertical: 10, horizontal: 15)),
         ),
       ),
@@ -80,45 +80,45 @@ class MyTheme {
       iconTheme: IconThemeData(color: primaryColor),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(primaryColor),
-          textStyle: const MaterialStatePropertyAll(TextStyle(
+          backgroundColor: WidgetStatePropertyAll(primaryColor),
+          textStyle: const WidgetStatePropertyAll(TextStyle(
             fontSize: 17,
           )),
-          shape: MaterialStateProperty.all(
+          shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(useMaterial3 ? 20 : 10)),
           ),
-          foregroundColor: const MaterialStatePropertyAll(Colors.white),
-          padding: const MaterialStatePropertyAll(
+          foregroundColor: const WidgetStatePropertyAll(Colors.white),
+          padding: const WidgetStatePropertyAll(
               EdgeInsets.symmetric(vertical: 10, horizontal: 15)),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
-          foregroundColor: MaterialStatePropertyAll(primaryColor),
-          textStyle: MaterialStateProperty.all<TextStyle>(const TextStyle(
+          foregroundColor: WidgetStatePropertyAll(primaryColor),
+          textStyle: const WidgetStatePropertyAll<TextStyle>(TextStyle(
             fontSize: 17,
           )),
-          shape: MaterialStateProperty.all(
+          shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(useMaterial3 ? 20 : 10)),
           ),
-          side: MaterialStatePropertyAll(BorderSide(color: primaryColor)),
-          padding: const MaterialStatePropertyAll(
+          side: WidgetStatePropertyAll(BorderSide(color: primaryColor)),
+          padding: const WidgetStatePropertyAll(
               EdgeInsets.symmetric(vertical: 10, horizontal: 15)),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
-          textStyle: const MaterialStatePropertyAll(TextStyle(
+          textStyle: const WidgetStatePropertyAll(TextStyle(
             fontSize: 17,
           )),
-          shape: MaterialStateProperty.all(
+          shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(useMaterial3 ? 20 : 10)),
           ),
-          foregroundColor: MaterialStatePropertyAll(primaryColor),
-          padding: const MaterialStatePropertyAll(
+          foregroundColor: WidgetStatePropertyAll(primaryColor),
+          padding: const WidgetStatePropertyAll(
               EdgeInsets.symmetric(vertical: 10, horizontal: 15)),
         ),
       ),

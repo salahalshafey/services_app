@@ -11,7 +11,7 @@ void serviceGiverDialog(
     BuildContext context, String serviceName, ServiceGiver serviceGiver) {
   showDialog(
     context: context,
-    builder: (ctx) => Dialog(
+    builder: (dialogContext) => Dialog(
       child: Container(
         height: 500,
         padding: const EdgeInsets.all(15),
@@ -64,7 +64,8 @@ void serviceGiverDialog(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ElevatedButton(
-                    onPressed: () => Navigator.of(context).popAndPushNamed(
+                    onPressed: () =>
+                        Navigator.of(dialogContext).popAndPushNamed(
                       RequestServiceScreen.routName,
                       arguments: {
                         'serviceGiver': serviceGiver,
@@ -74,7 +75,7 @@ void serviceGiverDialog(
                     child: const Text('REQUEST'),
                   ),
                   OutlinedButton(
-                    onPressed: () => Navigator.of(context).pop(),
+                    onPressed: () => Navigator.of(dialogContext).pop(),
                     child: const Text(
                       'DISCARD',
                       // style: TextStyle(

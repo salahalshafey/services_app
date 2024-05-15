@@ -145,8 +145,8 @@ class ColorsRow extends StatelessWidget {
                     ? const Icon(Icons.check, color: Colors.white)
                     : const SizedBox(),
                 style: ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(color),
-                  fixedSize: MaterialStatePropertyAll(
+                  backgroundColor: WidgetStatePropertyAll(color),
+                  fixedSize: WidgetStatePropertyAll(
                     Size(colorsCircleRadius, colorsCircleRadius),
                   ),
                 ),
@@ -267,7 +267,7 @@ class ColorPickerFromGrid extends StatelessWidget {
                           onPressed: () {},
                           icon: const SizedBox(),
                           style: ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(color)),
+                              backgroundColor: WidgetStatePropertyAll(color)),
                         ))
                     .toList(),
               ),

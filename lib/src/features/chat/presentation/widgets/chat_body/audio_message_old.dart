@@ -260,11 +260,11 @@ class TogglePlaybackRateButton extends StatelessWidget {
       ),
       style: ButtonStyle(
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        elevation: MaterialStateProperty.all(0),
-        backgroundColor: MaterialStateProperty.all(color),
-        minimumSize: MaterialStateProperty.all(const Size(50, 30)),
-        padding: MaterialStateProperty.all(EdgeInsets.zero),
-        shape: MaterialStateProperty.all(const RoundedRectangleBorder(
+        elevation: const WidgetStatePropertyAll(0),
+        backgroundColor: WidgetStatePropertyAll(color),
+        minimumSize: const WidgetStatePropertyAll(Size(50, 30)),
+        padding: const WidgetStatePropertyAll(EdgeInsets.zero),
+        shape: const WidgetStatePropertyAll(RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20)))),
       ),
     );
