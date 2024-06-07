@@ -9,8 +9,8 @@ import 'package:photo_view/photo_view.dart';
 import 'package:dio/dio.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
-//import 'package:share_plus/share_plus.dart';
-//import 'package:package_info_plus/package_info_plus.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -203,8 +203,7 @@ class _ImageContainerState extends State<ImageContainer> {
       await Dio().download(networkImage, docPath);
       await GallerySaver.saveImage(
         docPath,
-        albumName:
-            "Services App" /*(await PackageInfo.fromPlatform()).appName*/,
+        albumName: (await PackageInfo.fromPlatform()).appName,
       );
       return docPath;
     } catch (_) {
@@ -693,8 +692,7 @@ class _DownloadButtonState extends State<DownloadButton> {
 
       savedToGallery = await GallerySaver.saveImage(
         path,
-        albumName:
-            "Services App" /*(await PackageInfo.fromPlatform()).appName*/,
+        albumName: (await PackageInfo.fromPlatform()).appName,
       );
     } catch (error) {
       _loadingState(false);
@@ -771,16 +769,16 @@ class __ShareButtonState extends State<_ShareButton> {
 
     try {
       _loadingState(true);
-      // final imagePath = await _saveAnySourceOfImageToTempDir(
-      //     widget.image, widget.imageSource);
+      final imagePath = await _saveAnySourceOfImageToTempDir(
+          widget.image, widget.imageSource);
 
-      // _loadingState(false);
-      // await Share.shareXFiles(
-      //   [XFile(imagePath)],
-      //   text: widget.caption,
-      //   subject: widget.title,
-      //   //sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
-      // );
+      _loadingState(false);
+      await Share.shareXFiles(
+        [XFile(imagePath)],
+        text: widget.caption,
+        subject: widget.title,
+        //sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+      );
     } catch (error) {
       _loadingState(false);
       showCustomSnackBar(
