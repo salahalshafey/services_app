@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/util/functions/date_time_and_duration.dart';
 
-import 'audio_message.dart';
+import 'audio_message/audio_message.dart';
 import 'image_message.dart';
 import 'location_message.dart';
 import 'text_message.dart';

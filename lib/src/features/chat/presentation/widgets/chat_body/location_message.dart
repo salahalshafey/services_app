@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:map_launcher/map_launcher.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../data/datasources/maps_servcice.dart';
 
@@ -29,32 +32,35 @@ class LocationMessage extends StatelessWidget {
 
   void _openAvailableMapApp(BuildContext context) async {
     const zoom = 12;
-    if ((await MapLauncher.isMapAvailable(MapType.google))!) {
-      await MapLauncher.showMarker(
-        mapType: MapType.google,
+
+    if (Platform.isAndroid || Platform.isIOS) {
+      if ((await MapLauncher.isMapAvailable(MapType.google))!) {
+        await MapLauncher.showMarker(
+          mapType: MapType.google,
+          coords: _toCoords(),
+          title: geoCodingData ?? '',
+          zoom: zoom,
+        );
+        return;
+      }
+
+      final availableMaps = await MapLauncher.installedMaps;
+      if (availableMaps.isEmpty) {
+        showCustomSnackBar(
+          context: context,
+          content: 'There is no Map Application on your System',
+        );
+        return;
+      }
+
+      await availableMaps.first.showMarker(
         coords: _toCoords(),
         title: geoCodingData ?? '',
         zoom: zoom,
       );
-      return;
     }
 
-    final availableMaps = await MapLauncher.installedMaps;
-    if (availableMaps.isEmpty) {
-      showCustomSnackBar(
-        context: context,
-        content: 'There is no Map Application on your System',
-      );
-      return;
-    }
-
-    await availableMaps.first.showMarker(
-      coords: _toCoords(),
-      title: geoCodingData ?? '',
-      zoom: zoom,
-    );
-
-    // launchUrl(Uri.parse("https://maps.google.com/?q=$location"));
+    launchUrl(Uri.parse("https://maps.google.com/?q=$location"));
   }
 
   @override

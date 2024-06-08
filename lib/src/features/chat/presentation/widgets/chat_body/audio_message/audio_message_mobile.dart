@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
-import '../../../../../core/util/functions/date_time_and_duration.dart';
-import 'message_bubble.dart';
+import '../../../../../../core/util/functions/date_time_and_duration.dart';
+import '../message_bubble.dart';
 
-class AudioMessage extends StatefulWidget {
-  const AudioMessage({
+class AudioMessageMobile extends StatefulWidget {
+  const AudioMessageMobile({
     super.key,
     required this.audio,
     required this.date,
@@ -23,10 +23,10 @@ class AudioMessage extends StatefulWidget {
   final bool isMe;
 
   @override
-  State<AudioMessage> createState() => _AudioMessageState();
+  State<AudioMessageMobile> createState() => _AudioMessageMobileState();
 }
 
-class _AudioMessageState extends State<AudioMessage> {
+class _AudioMessageMobileState extends State<AudioMessageMobile> {
   final AudioPlayer _audioPlayer = AudioPlayer();
 
   // late StreamSubscription<PlayerState> _playerStateSubscription;

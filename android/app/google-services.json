@@ -7,36 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:711179067079:android:382d24ff3e9424920628e2",
-        "android_client_info": {
-          "package_name": "com.example.services_app"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "711179067079-sck5pd06l62jps0ost06183eml9tkkk8.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCpZvZRN5lt1L1645EfG7yCNp7MMjMms2U"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "711179067079-sck5pd06l62jps0ost06183eml9tkkk8.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:711179067079:android:12a74bb188e02bc80628e2",
+        "mobilesdk_app_id": "1:711179067079:android:41216a435ffb57680628e2",
         "android_client_info": {
           "package_name": "com.salahalshafey.servicesapp"
         }
@@ -49,7 +20,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCpZvZRN5lt1L1645EfG7yCNp7MMjMms2U"
+          "current_key": "AIzaSyAUu3Ngv7O4BmRpJTWVpFYMpgMeNnUtSjY"
         }
       ],
       "services": {
