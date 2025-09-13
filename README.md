@@ -1,5 +1,7 @@
 # Services app
 
+## License
+This project is licensed under the MIT License © 2025 [Salah Alshafey](https://github.com/salahalshafey).
 
 
 ## A Flutter project is mainly used for 
